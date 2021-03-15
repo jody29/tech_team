@@ -1,19 +1,13 @@
-const express = require('express')
-const process = require('process')
+const dotenv = require('dotenv')
+const dotenvExpand = require('dotenv-expand')
+const myEnv = dotenv.config()
+dotenvExpand(myEnv)
 
+const express = require('express')
 const app = express()
-require('dotenv').config()
 const bodyParser = require('body-parser')
 const path = require('path')
-
-const port = process.env.PORT || 8080
-
-//const router = require("./router/route.js")
-
-const db = require('./conecction/db')
-
-const dbName = process.env.DB_NAME
-const collectionName = process.env.COLLECTION_NAME
+const PORT = process.env.PORT || 8000
 
 // EJS setup
 app.set('view engine', 'ejs')
@@ -21,5 +15,8 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 // Use static files from public folder
 app.use(express.static(__dirname + '/public'))
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+
+// Express listens to PORT 8000
+app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}`)
+})
