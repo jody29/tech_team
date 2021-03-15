@@ -1,0 +1,41 @@
+{
+  "name": "team1bloktech",
+  "version": "1.0.0",
+  "description": "team 1 blok tech 2021",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jody29/tech_team.git"
+  },
+  "keywords": [
+    "nodejs",
+    "mongoDB",
+    "matching",
+    "application"
+  ],
+  "author": "Team 1",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jody29/tech_team/issues"
+  },
+  "homepage": "https://github.com/jody29/tech_team#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "dotenv-expand": "^5.1.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.4",
+    "session": "^0.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1"
+  }
+}
