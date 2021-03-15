@@ -16,6 +16,11 @@ app.set('views', path.join(__dirname, 'views'))
 // Use static files from public folder
 app.use(express.static(__dirname + '/public'))
 
+// Set Routers
+const mainRoute = require('./routers/mainRoute')
+
+app.use('/', mainRoute)
+
 // Express listens to PORT 8000
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`)
