@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+</head>
+<body>
+
+    <article class="messageField">
+
+
+    </article>
+
+    <form action="/chat" method="POST">
+    <p id="feedback"></p>
+
+    <fieldset>
+        <input type="hidden" name="c">
+        <input type="text" name="message">
+        <button type="submit">Send</button>
+    </fieldset>
+    </form>
+    
+</body>
+</html>

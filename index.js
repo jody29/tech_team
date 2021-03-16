@@ -18,8 +18,10 @@ app.use(express.static(__dirname + '/public'))
 
 // Set Routers
 const mainRoute = require('./routers/mainRoute')
+const chatRoute = require('./routers/chatRoute')
 
 app.use('/', mainRoute)
+app.use('/', chatRoute)
 
 // Express listens to PORT 8000
 app.listen(PORT, () => {
