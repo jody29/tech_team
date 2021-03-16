@@ -13,13 +13,14 @@ body{
 
 main{
     padding: 4em 0 6em 0;
-    z-index: -10;
 }
 
 header {
     box-shadow: 0px 0px 6px lightgrey;
     padding: 0.5em 1em;
     background-color: white;
+
+    z-index: 10;
 
     position: fixed;
     top: 0;
