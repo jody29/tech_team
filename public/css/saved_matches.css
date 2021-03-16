@@ -1,0 +1,114 @@
+/* css for saved_matches.ejs */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Helvetica;
+}
+
+
+/* ----------------- main ----------------*/
+main {
+    position: relative;
+    padding: 1.5em 0 1.5em 0;
+  }
+  
+  /* all ul li's in the main*/
+  main ul li {
+    list-style-type: none;
+  }
+  
+  /* list item of liked match */
+  main > ul > li a:first-of-type {
+    display: flex;
+  
+    width: 92%;
+    box-shadow: 0 0 6px lightgrey;
+    border-radius: 1em;
+  
+    padding: 1em;
+    margin: 0 auto 1em auto;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+  }
+  
+  /*profile picture*/
+  main > ul > li a:first-of-type img {
+    background-color: #52c9c2;
+    width: 100px;
+    height: 100px;
+  }
+  
+  main ul li a:first-of-type div {
+    width: 70%;
+    margin-left: 0.5em;
+    margin-bottom: 1.5em;
+  }
+
+  main > ul > li a:first-of-type h2{
+      font-size: 1.25em;
+  }
+  
+  /* list of genres*/
+  main ul li a:first-of-type div ul {
+    margin: 1em 0;
+    display: flex;
+    width: 100%;
+    overflow: scroll;
+  }
+  
+  main ul li a:first-of-type div ul li {
+    margin: 0 0.25em;
+    padding: 0.5em 1em;
+    width: auto;
+    white-space: nowrap;
+    text-align: center;
+  
+    color: white;
+    background-image: linear-gradient(to bottom right, #71ebe3, #52c9c2);
+    border-radius: 1em;
+  }
+  
+  main ul li{
+    position: relative;
+  }
+  
+  /*remove button*/
+  main ul li form button.remove {
+    color: #484692;
+    font-size: 1em;
+  
+    background-color: transparent;
+    border: none;
+  
+    position: absolute;
+    bottom:0.5em;
+    right: 5em;
+
+
+    padding: 0.25em 0.75em ;
+    border: 1px solid #484692;
+    border-radius: 5px;
+  }
+
+  /* chat link */
+  main ul li a:last-of-type{
+    position: absolute;
+    bottom: 0.5em;
+    left: 5em;
+    text-decoration: none;
+
+    padding: 0.25em 0.75em ;
+    border: 1px solid #484692;
+    border-radius: 5px;
+  }
+
+  
+  /* p 'end of list'*/
+  main > p {
+    width: 100%;
+    text-align: center;
+  }

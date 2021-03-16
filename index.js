@@ -18,10 +18,19 @@ app.use(express.static(__dirname + '/public'))
 
 // Set Routers
 const mainRoute = require('./routers/mainRoute')
+const savedMatchesRoute = require('./routers/saved_matches')
 const chatRoute = require('./routers/chatRoute')
 
 app.use('/', mainRoute)
+app.use('/', savedMatchesRoute)
 app.use('/', chatRoute)
+
+// Error
+app.use((req, res, next) => {
+    res.status(404).render('pages/404_not_found', {
+        title: 'ERROR404',
+    })
+})
 
 // Express listens to PORT 8000
 app.listen(PORT, () => {
