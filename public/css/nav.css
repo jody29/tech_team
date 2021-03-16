@@ -25,7 +25,7 @@ header h1 {
 
 header nav{
     box-shadow: 0px 0px 6px lightgrey;
-    padding: 1em;
+    padding: 0.5em 0;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -39,7 +39,7 @@ header nav ul{
 
 header nav ul li{
     list-style-type: none;
-    width: 30%;
+    width: 33%;
 }
 
 header nav ul li a{
@@ -53,10 +53,11 @@ header nav ul li a{
 }
 
 header nav ul li a img{
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
 }
 
 header nav ul li a p{
     text-align: center;
+    padding-top: 3px;
 }
