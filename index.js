@@ -23,6 +23,13 @@ const savedMatchesRoute = require('./routers/saved_matches')
 app.use('/', mainRoute)
 app.use('/', savedMatchesRoute)
 
+// Error
+app.use( (req, res, next) => {
+    res.status(404).render('pages/404_not_found', {
+        title:'ERROR404'
+    });
+  })
+
 // Express listens to PORT 8000
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`)
