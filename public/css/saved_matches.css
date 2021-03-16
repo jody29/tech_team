@@ -1,8 +1,18 @@
 /* css for saved_matches.ejs */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Helvetica;
+}
+
 
 /* ----------------- main ----------------*/
 main {
     position: relative;
+    padding: 1.5em 0 1.5em 0;
   }
   
   /* all ul li's in the main*/
@@ -20,6 +30,8 @@ main {
   
     padding: 1em;
     margin: 0 auto 1em auto;
+    text-decoration: none;
+    color: black;
   }
   
   /*profile picture*/
@@ -76,64 +88,4 @@ main {
   main > p {
     width: 100%;
     text-align: center;
-  }
-  
-  /* pop up that show when the user clicks on the remove button */
-  main article.invisible {
-    display: none;
-  }
-  
-  main article.popup {
-    width: 80vw;
-    height: 30vh;
-  
-    box-shadow: 0px 0px 6px grey;
-    border-radius: 25px;
-    margin: 0 auto;
-    background-color: white;
-  
-    position: absolute;
-    top: calc(30%);
-    left: calc(50% - 40vw);
-  }
-  
-  main article.popup div {
-    display: flex;
-    width: 90%;
-    margin: 2em auto 1.5em auto;
-  }
-  
-  main article.popup div img {
-    width: 30%;
-  }
-  
-  main article.popup div h3 {
-    width: 70%;
-    font-size: 1.25em;
-  }
-  
-  main article.popup button {
-    display: block;
-  }
-  
-  main article.popup button:first-of-type {
-    width: 70%;
-    padding: 0.5em 1.5em;
-    border: none;
-    border-radius: 20px;
-  
-    font-size: 1em;
-    color: white;
-    background-image: linear-gradient(to bottom right, #7e7bc9, #484692);
-    margin: 0.5em auto;
-  }
-  
-  main article.popup button:last-of-type {
-    width: 40%;
-    border: none;
-  
-    font-size: 1em;
-    color: grey;
-    background-color: white;
-    margin: 0.5em auto;
   }
