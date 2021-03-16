@@ -11,6 +11,18 @@ body{
     position: relative;
 }
 
+header {
+    box-shadow: 0px 0px 6px lightgrey;
+    padding: 0.5em 1em;
+}
+
+header h1 {
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 1.5em;
+}
+
 header nav{
     box-shadow: 0px 0px 6px lightgrey;
     padding: 1em;
@@ -43,4 +55,8 @@ header nav ul li a{
 header nav ul li a img{
     width: 20px;
     height: 20px;
+}
+
+header nav ul li a p{
+    text-align: center;
 }

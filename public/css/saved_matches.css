@@ -45,6 +45,10 @@ main {
     width: 70%;
     margin-left: 0.5em;
   }
+
+  main > ul > li a h2{
+      font-size: 1.25em;
+  }
   
   /* list of genres*/
   main ul li a div ul {
