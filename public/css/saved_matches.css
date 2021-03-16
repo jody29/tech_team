@@ -1,0 +1,139 @@
+/* css for saved_matches.ejs */
+
+/* ----------------- main ----------------*/
+main {
+    position: relative;
+  }
+  
+  /* all ul li's in the main*/
+  main ul li {
+    list-style-type: none;
+  }
+  
+  /* list item of liked match */
+  main > ul > li a {
+    display: flex;
+  
+    width: 92%;
+    box-shadow: 0 0 6px lightgrey;
+    border-radius: 1em;
+  
+    padding: 1em;
+    margin: 0 auto 1em auto;
+  }
+  
+  /*profile picture*/
+  main > ul > li a img {
+    background-color: #52c9c2;
+    width: 100px;
+    height: 100px;
+  }
+  
+  main ul li a div {
+    width: 70%;
+    margin-left: 0.5em;
+  }
+  
+  /* list of genres*/
+  main ul li a div ul {
+    margin: 1em 0;
+    display: flex;
+    width: 100%;
+    overflow: scroll;
+  }
+  
+  main ul li a div ul li {
+    margin: 0 0.25em;
+    padding: 0.5em 1em;
+    width: auto;
+    white-space: nowrap;
+    text-align: center;
+  
+    color: white;
+    background-image: linear-gradient(to bottom right, #71ebe3, #52c9c2);
+    border-radius: 1em;
+  }
+  
+  main ul li {
+    position: relative;
+  }
+  
+  /*remove button*/
+  main ul li form button.remove {
+    color: #484692;
+    text-decoration: underline;
+    font-size: 1em;
+  
+    background-color: transparent;
+    border: none;
+  
+    position: absolute;
+    bottom: 0.5em;
+    right: 2em;
+  }
+  
+  /* p 'end of list'*/
+  main > p {
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* pop up that show when the user clicks on the remove button */
+  main article.invisible {
+    display: none;
+  }
+  
+  main article.popup {
+    width: 80vw;
+    height: 30vh;
+  
+    box-shadow: 0px 0px 6px grey;
+    border-radius: 25px;
+    margin: 0 auto;
+    background-color: white;
+  
+    position: absolute;
+    top: calc(30%);
+    left: calc(50% - 40vw);
+  }
+  
+  main article.popup div {
+    display: flex;
+    width: 90%;
+    margin: 2em auto 1.5em auto;
+  }
+  
+  main article.popup div img {
+    width: 30%;
+  }
+  
+  main article.popup div h3 {
+    width: 70%;
+    font-size: 1.25em;
+  }
+  
+  main article.popup button {
+    display: block;
+  }
+  
+  main article.popup button:first-of-type {
+    width: 70%;
+    padding: 0.5em 1.5em;
+    border: none;
+    border-radius: 20px;
+  
+    font-size: 1em;
+    color: white;
+    background-image: linear-gradient(to bottom right, #7e7bc9, #484692);
+    margin: 0.5em auto;
+  }
+  
+  main article.popup button:last-of-type {
+    width: 40%;
+    border: none;
+  
+    font-size: 1em;
+    color: grey;
+    background-color: white;
+    margin: 0.5em auto;
+  }
