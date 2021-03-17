@@ -6,6 +6,8 @@ dotenvExpand(myEnv)
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 const path = require('path')
 const PORT = process.env.PORT || 8000
 
@@ -20,10 +22,12 @@ app.use(express.static(__dirname + '/public'))
 const mainRoute = require('./routers/mainRoute')
 const savedMatchesRoute = require('./routers/saved_matches')
 const chatRoute = require('./routers/chatRoute')
+const loginRoute = require('./routers/loginRoute')
 
 app.use('/', mainRoute)
 app.use('/', savedMatchesRoute)
 app.use('/', chatRoute)
+app.use('/', loginRoute)
 
 // Error
 app.use((req, res, next) => {
