@@ -9,7 +9,7 @@
 <body id="chatPage">
     <header>
 
-        <a href="#">terug</a>
+        <a href="/savedmatches">terug</a>
 
         <a href="#">
             <img src="" alt="">
@@ -27,11 +27,12 @@
 
         </section>
         
-    <form action="/chat" method="POST">
+    <form action="/message" method="POST">
         <p id="feedback"></p>
         
         <fieldset>
-            <input type="hidden" name="c">
+            <input type="hidden" name="userId">
+            <input type="hidden" name="chatId">
             <input type="text" name="message" placeholder="type your message...">
             <button type="submit">Send</button>
         </fieldset>

@@ -13,6 +13,8 @@
 main {
     position: relative;
     padding: 1.5em 0 1.5em 0;
+    height: 100vh;
+    overflow-y: scroll;
   }
   
   /* all ul li's in the main*/
