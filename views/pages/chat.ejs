@@ -2,23 +2,42 @@
 <html lang="en">
 <head>
     <%- include('../partials/head') %>
+    <link href="../css/default.css" rel="stylesheet" type="text/css">
+    <link href="../css/nav.css" rel="stylesheet" type="text/css" />
+    <link href="../css/chat.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body id="chatPage">
+    <header>
 
-    <article class="messageField">
+        <a href="#">terug</a>
 
+        <a href="#">
+            <img src="" alt="">
+            <p>User</p>
+        </a>
 
-    </article>
+        <a href=""></a>
+        
+    </header>
 
+    <article class="chatField">
+
+        <section class="messageField">
+            
+
+        </section>
+        
     <form action="/chat" method="POST">
-    <p id="feedback"></p>
-
-    <fieldset>
-        <input type="hidden" name="c">
-        <input type="text" name="message">
-        <button type="submit">Send</button>
-    </fieldset>
+        <p id="feedback"></p>
+        
+        <fieldset>
+            <input type="hidden" name="c">
+            <input type="text" name="message" placeholder="type your message...">
+            <button type="submit">Send</button>
+        </fieldset>
     </form>
+    </article>
     
+    <script src="../scripts/chat.js"></script>
 </body>
 </html>
