@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+<%- include('../partials/head') %>
+<link href="../css/default.css" rel="stylesheet" type="text/css">
+<link href="../css/saved_matches.css" rel="stylesheet" type="text/css" />
+<link href="../css/nav.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <header>
+    <%- include('../partials/header') %>
+    <%- include('../partials/nav') %>
+  </header>
+  <main>
+    <ul>
+      <% for(var i=0; i < data.length; i++) {%>
+      <li>
+        <a href="/profile/<%= data[i]._id%>">
+          <img src="<%= data[i].imgSource %>" />
+          <div>
+            <h2><%= data[i].Firstname %> <%= data[i].Lastname %></h2>
+            <p>Age: <%= data[i].age %></p>
+            <ul>
+              <li><%= data[i].FavGenre1 %></li>
+              <li><%= data[i].FavGenre2 %></li>
+              <li><%= data[i].FavGenre3 %></li>
+            </ul>
+          </div>
+        </a>
+        <form method="POST" action="/?_method=DELETE">
+          <input value="<%= data[i]._id%>" type="hidden" name="userId" />
+          <button type="submit" class="remove">Remove</button>
+        </form>
+        <a href="/chat">Chat!</a>
+      </li>
+      <% } %>
+    </ul>
+    <p>This is the end of the list!</p>
+  </main>
+  <%- include('../partials/footer') %>
+</body>
+</html>
