@@ -3,6 +3,7 @@ const router = express.Router()
 const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const mongo = require("mongodb")
 
 // Database variables
 const db = require('../connection/db')
@@ -25,10 +26,10 @@ db.initialize(
         })
     
         router.delete('/savedmatches', (req, res) => {
-                console.log("DELETE1");
+                console.log("DELETE")
                 dbCollection.deleteOne({_id: mongo.ObjectId(req.body.userId)})
                     .then(() => {
-                    res.redirect('/savedmatch')
+                    res.redirect('/savedmatches')
                     });
             })
     },

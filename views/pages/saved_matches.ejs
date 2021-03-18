@@ -25,7 +25,7 @@
             </ul>
           </div>
         </a>
-        <form method="POST" action="/?_method=DELETE">
+        <form method="POST" action="/savedmatches?_method=DELETE">
           <input value="<%= data[i]._id%>" type="hidden" name="userId" />
           <button type="submit" class="remove">Remove</button>
         </form>
@@ -36,5 +36,6 @@
     <p>This is the end of the list!</p>
   </main>
   <%- include('../partials/footer') %>
+  <script src="/scripts/saved_matches_fe.js"></script>
 </body>
 </html>
