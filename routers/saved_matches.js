@@ -37,23 +37,26 @@ db.initialize(
                getLikedProfiles(matches);
                 
             })
-        })
+       })
     
         router.delete('/savedmatches', (req, res) => {
-                console.log("DELETE")
-                dbCollection.updateOne(
-                    {_id: mongo.ObjectId(/* _id of logged-in user */)}, 
-                    {$pull: LikedProfiles.indexOf(req.body.userId)})
-                    .then(() => {
-                    res.redirect('/savedmatches')
-                    });
+            console.log("DELETE")
+            dbCollection.findOne({_id: mongo.ObjectId("6050c6bf045c6e48d4785d0f")}) //id van 'ingelogde persoon'
+            .then(results => {
+                let matches = results.LikedProfiles
+                let index = matches.indexOf(req.body.userId)
+
+                console.log(index)
+
+                //matches.splice(index, 1)
+
+                console.log(matches)
+
+                res.redirect('/savedmatches')
                 
-                // Old version
-                dbCollection.deleteOne({_id: mongo.ObjectId(req.body.userId)})
-                    .then(() => {
-                    res.redirect('/savedmatches')
-                    });
-            })
+            }); 
+            
+        })
     },
     (err) => {
         throw err
