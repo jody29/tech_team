@@ -15,6 +15,9 @@ db.initialize(
     dbName,
     collectionName,
     (dbCollection) => {
+        router.get('/newprofile', (req, res) => {
+            res.render('pages/register.ejs');
+        });
        router.post("/newProfileSubmit", (res, req) => {
 
        }),
