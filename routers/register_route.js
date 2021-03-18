@@ -11,16 +11,29 @@ const db = require('../connection/db')
 const dbName = process.env.DB_NAME
 const collectionName = 'users'
 
+const spotAPI = require("../public/scripts/convertMusic");
+
+router.get('/newprofile', (req, res) => {
+    res.render('pages/register.ejs');
+});
+
+router.post('/newProfileSubmit', (req, res) => {
+console.log(req.body);
+let userProfile = req.body;
+let userSongs = userProfile.FavSongs;
+async function loopSongs(inputQuery) {
+    userProfile.FavSongs = await spotAPI.inputLoop(inputQuery);
+    console.log(userProfile);
+    res.render("newHome.ejs", {data:userProfile});
+}
+loopSongs(userSongs);
+});
+
 db.initialize(
     dbName,
     collectionName,
     (dbCollection) => {
-        router.get('/newprofile', (req, res) => {
-            res.render('pages/register.ejs');
-        });
-       router.post("/newProfileSubmit", (res, req) => {
-
-       }),
+        
     (err) => {
         throw err
     }
