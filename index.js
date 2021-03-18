@@ -21,6 +21,11 @@ const mainRoute = require('./routers/mainRoute')
 
 app.use('/', mainRoute)
 
+// Errors
+app.use( (req, res, next) => {
+    res.status(404).render('pages/404_not_found');
+  })
+
 // Express listens to PORT 8000
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`)
