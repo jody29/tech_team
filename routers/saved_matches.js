@@ -16,17 +16,39 @@ db.initialize(
     (dbCollection) => {
         
         router.get('/savedmatches', (req, res) => {
-            dbCollection.find().toArray()
+            dbCollection.findOne({_id: mongo.ObjectId("6050c6bf045c6e48d4785d0f")}) //id van 'ingelogde persoon'
             .then(results => {
-                res.render("pages/saved_matches", {
-                data: results,
-                title:"Saved matches"
-                });
-            });
+                let matches = results.LikedProfiles;
+                let foundProfiles = []
+
+                async function getLikedProfiles (matches){
+                    for (i = 0; i < matches.length; i++){
+                        const pullProfile = await dbCollection.findOne({_id: mongo.ObjectId(matches[i])})
+                        foundProfiles.push(pullProfile)
+                    }
+
+                    // Render saved_matches with filtered array
+                    res.render("pages/saved_matches", {
+                    data: foundProfiles,
+                    title:"Saved matches"
+                    })
+                } 
+
+               getLikedProfiles(matches);
+                
+            })
         })
     
         router.delete('/savedmatches', (req, res) => {
                 console.log("DELETE")
+                dbCollection.updateOne(
+                    {_id: mongo.ObjectId(/* _id of logged-in user */)}, 
+                    {$pull: LikedProfiles.indexOf(req.body.userId)})
+                    .then(() => {
+                    res.redirect('/savedmatches')
+                    });
+                
+                // Old version
                 dbCollection.deleteOne({_id: mongo.ObjectId(req.body.userId)})
                     .then(() => {
                     res.redirect('/savedmatches')
