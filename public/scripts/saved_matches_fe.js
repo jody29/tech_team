@@ -1,7 +1,7 @@
 // Frontend JavaScript for saved_matches.ejs
 "use strict";
 
-var form = document.querySelectorAll("main ul li form, main article div form");
+var form = document.querySelectorAll("main ul li form");
 
 for (var i=0; i < form.length; i++){
   form[i].addEventListener('submit', function(e) {
