@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/form.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
+            rel="stylesheet"
+        />
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <h1>New profile</h1>
+        </header>
+        <main>
+            <form action="/addNewProfile" method="POST">
+                <label for="Firstname">What's your name?</label>
+                <div class="container">
+                    <input
+                        type="text"
+                        placeholder="First name"
+                        id="Firstname"
+                        name="Firstname"
+                    />
+                    <input
+                        type="text"
+                        placeholder="Last name"
+                        id="Lastname"
+                        name="Lastname"
+                    />
+                </div>
+                <label for="Username">Choose a username</label>
+                <input
+                    type="text"
+                    placeholder="Example: Shady Shay"
+                    id="Username"
+                    name="Username"
+                />
+                <label for="Birthday">Please let us know your birthday</label>
+                <input
+                    type="date"
+                    placeholder="dd-mm-jj"
+                    id="Birthday"
+                    name="Birthday"
+                />
+                <label for="myGender">My gender</label>
+                <select name="Gender" id="myGender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="nonBin">Non-binary</option>
+                </select>
+
+                <label for="genreInput">
+                    I want to macth on the following genres</label
+                >
+                <div id="genreContainer" class="dynamicList">
+                    <input
+                        type="text"
+                        id="genreInput"
+                        placeholder="Add your favourite Genre"
+                    />
+                    <button
+                        for="genreInput"
+                        id="genreInputButton"
+                        type="button"
+                    >
+                        +
+                    </button>
+                    <ul id="genreContainer">
+                        <li class="matchGenre"></li>
+                    </ul>
+                </div>
+                <label for="songInput"
+                    >I want to match on the following songs</label
+                >
+                <div id="songContainer" class="dynamicList">
+                    <input
+                        type="text"
+                        id="songInput"
+                        placeholder="Search on artist + title"
+                    />
+                    <button id="songInputButton" type="button">+</button>
+                    <ul id="musicContainer">
+                        <li class="matchSong"></li>
+                    </ul>
+                </div>
+                <label for="Email">Enter in your email</label>
+                <input
+                    type="email"
+                    name="Email"
+                    id="Email"
+                    placeholder="someone@mailadres.com"
+                />
+                <label for="userPassword">Secure your account</label>
+                <input
+                    type="password"
+                    name="Password"
+                    id="Password"
+                    placeholder="Set a password"
+                />
+                <button type="submit" id="formSubmit">
+                    Create my profile!
+                </button>
+            </form>
+        </main>
+        <footer></footer>
+    </body>
+    <script src="./scripts/addGenre.js"></script>
+    <script src="./scripts/addSong.js"></script>
+</html>

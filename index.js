@@ -34,6 +34,7 @@ app.use(
 
 // Set Routers
 const mainRoute = require('./routers/mainRoute')
+const regRoute = require('./routers/register_route')
 const savedMatchesRoute = require('./routers/saved_matches')
 const chatRoute = require('./routers/chatRoute')
 const loginRoute = require('./routers/loginRoute')
@@ -50,6 +51,7 @@ app.use('/', loginRoute)
 app.use('/', logOutRoute)
 app.use('/', likeRoute)
 app.use('/', dislikeRoute)
+app.use('/', regRoute)
 
 // Error
 app.use((req, res, next) => {
@@ -57,6 +59,7 @@ app.use((req, res, next) => {
         title: 'ERROR404',
     })
 })
+
 
 // Express listens to PORT 8000
 app.listen(PORT, () => {
