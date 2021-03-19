@@ -9,6 +9,8 @@
 
 body{
     position: relative;
+    height: 100vh;
+    overflow-y: hidden;
 }
 
 main{
@@ -19,13 +21,10 @@ header {
     box-shadow: 0px 0px 6px lightgrey;
     padding: 0.5em 1em;
     background-color: white;
-
-    z-index: 10;
-
     position: fixed;
+    z-index: 100;
     top: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
 }
 
 header h1 {

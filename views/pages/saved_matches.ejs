@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 <%- include('../partials/head') %>
+<link href="../css/default.css" rel="stylesheet" type="text/css">
 <link href="../css/saved_matches.css" rel="stylesheet" type="text/css" />
 <link href="../css/nav.css" rel="stylesheet" type="text/css" />
 </head>
@@ -29,7 +30,7 @@
           <input value="<%= data[i]._id%>" type="hidden" name="userId" />
           <button type="submit" class="remove">Remove</button>
         </form>
-        <a href="">Chat!</a>
+        <a href="/chat:id">Chat!</a>
       </li>
       <% } %>
     </ul>

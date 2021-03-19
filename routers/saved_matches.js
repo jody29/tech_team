@@ -8,15 +8,13 @@ const mongo = require("mongodb")
 // Database variables
 const db = require('../connection/db')
 const dbName = process.env.DB_NAME
-const collectionName = 'users'
 
 db.initialize(
     dbName,
-    collectionName,
-    (dbCollection) => {
-        
+    (dbObject) => {
         router.get('/savedmatches', (req, res) => {
-            dbCollection.findOne({_id: mongo.ObjectId("6050c6bf045c6e48d4785d0f")}) //id van 'ingelogde persoon'
+
+            dbObject.collection('users').findOne({_id: mongo.ObjectId("6050c6bf045c6e48d4785d0f")}) //id van 'ingelogde persoon'
             .then(results => {
                 let matches = results.LikedProfiles;
                 let foundProfiles = []
@@ -41,12 +39,25 @@ db.initialize(
     
         router.delete('/savedmatches', (req, res) => {
             console.log("Delete request")
-            dbCollection.updateOne(
+            dbObject.collection('users').updateOne(
                 {_id: mongo.ObjectId("6050c6bf045c6e48d4785d0f")}, //id of 'logged in person'
                 {$pull: {LikedProfiles: req.body.userId}})  // wat er geupdate moet worden
             .then( results => {
                 res.redirect('/savedmatches')
             })  
+
+            dbObject
+                .collection('users')
+                .find()
+                .toArray()
+                .then((results) => {
+                    res.render('pages/saved_matches', {
+                        data: results,
+                        title: 'Saved matches',
+                    })
+                })
+        })
+
         })
     },
     (err) => {
