@@ -8,7 +8,6 @@ const { ObjectID, MongoClient } = require('mongodb')
 // Database variables
 const db = require('../connection/db')
 const dbName = process.env.DB_NAME
-const collectionName = 'users'
 
 const bcrypt = require('bcrypt')
 const { compare } = require('bcrypt')
@@ -22,12 +21,12 @@ router.get('/login', (req, res) => {
 })
 
 //login
-db.initialize(dbName, collectionName, (dbCollection) => {
+db.initialize(dbName, (dbObject) => {
     router.post('/login', async (req, res) => {
         const Username = req.body.Username
         const Password = req.body.Password
         try {
-            const user = await dbCollection.findOne({
+            const user = await dbObject.collection('users').findOne({
                 Username: req.body.Username,
             })
             if (user == null) {
