@@ -19,6 +19,26 @@
     <article class="chatField">
 
         <section class="messageField">
+
+            <% for (let i = 0;i < messages.length;i++) { %>
+                <% if (messages[i].userId == user._id) { %>
+                  <div class="outgoing">
+                    <div class="metadata">
+                      <span class="author">You at</span>
+                      <span class="date"><%= messages[i].date %></span>
+                    </div>
+                    <p><%= messages[i].message %></p>
+                  </div>            
+                <% } else { %>
+                  <div class="incoming">
+                    <div class="metadata">
+                      <span class="author"><%= otherUser.firstName %> at</span>
+                      <span class="date"><%= messages[i].date %></span>
+                    </div>
+                    <p><%= messages[i].message %></p>
+                  </div>                
+                <% } %>
+              <% } %>
             
 
         </section>

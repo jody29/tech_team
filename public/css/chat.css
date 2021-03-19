@@ -6,6 +6,10 @@ purple: #484692
 green: #52C9C2
  */
 
+ html {
+     overflow: hidden;
+ }
+
 #chatPage header {
     background-color: transparent;
     height: 15vh;
@@ -35,7 +39,7 @@ green: #52C9C2
 }
 
 #chatPage form {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -73,10 +77,10 @@ green: #52C9C2
 .chatField {
     background-color: white;
     box-shadow: 0px 0px 4px gray;
-    height: 85vh;
-    max-height: 85vh;
+    height: 100vh;
     width: 100%;
     margin-bottom: 1em;
     position: relative;
     padding: 2em 1em;
+    scrollbar-color: none;
 }
