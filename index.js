@@ -21,6 +21,8 @@ const mainRoute = require('./routers/mainRoute')
 const savedMatchesRoute = require('./routers/saved_matches')
 const chatRoute = require('./routers/chatRoute')
 
+// require('./websocket')
+
 app.use('/', mainRoute)
 app.use('/', savedMatchesRoute)
 app.use('/', chatRoute)

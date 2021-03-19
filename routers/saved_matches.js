@@ -7,14 +7,13 @@ const session = require('express-session')
 // Database variables
 const db = require('../connection/db')
 const dbName = process.env.DB_NAME
-const collectionName = 'users'
 
 db.initialize(
     dbName,
-    collectionName,
-    (dbCollection) => {
+    (dbObject) => {
         router.get('/savedmatches', (req, res) => {
-            dbCollection
+            dbObject
+                .collection('users')
                 .find()
                 .toArray()
                 .then((results) => {
@@ -27,7 +26,8 @@ db.initialize(
 
         router.delete('/savedmatches', (req, res) => {
             console.log('DELETE1')
-            dbCollection
+            dbObject
+                .collection('users')
                 .deleteOne({ _id: mongo.ObjectId(req.body.userId) })
                 .then(() => {
                     res.redirect('/savedmatch')
