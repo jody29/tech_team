@@ -33,21 +33,14 @@ db.initialize(dbName, collectionName, (dbCollection) => {
             if (user == null) {
                 return res.status(400).send('Username does not exist')
             }
-            console.log('user is:', user) // gives an object with all the data from DB
-
-            console.log('req body username: ', req.body.Username)
-            console.log('const user :', Username)
-            console.log('password: ', req.body.Password)
 
             //const match = await bcrypt.compare(Password, user.Password)
             const isPWcorr = Password == user.Password
-            console.log('req body password: ', req.body.Password)
-
-            console.log('check if correct pw: ', isPWcorr)
 
             //change isPWcorr to match when password is crypted through register
             if (isPWcorr) {
-                //req.session.activeUser = user._id
+                req.session.loggedInUser = user._id
+                console.log(req.session.UserSession)
                 res.render('pages/profile', {
                     title: 'Profile',
                 })
@@ -60,31 +53,6 @@ db.initialize(dbName, collectionName, (dbCollection) => {
             console.log(err)
         }
     })
-    //     router.post('/Login', (req, res) => {
-    //         const Username = req.body.Username
-    //         const Password = req.body.Password
-    //         console.log('Username is: ', Username)
-    //         console.log('Passowrd is: ', Password)
-    //         dbCollection.findOne({ Username: Username }, (err, results) => {
-    //             console.log('the result are: ', results)
-    //             if (err) throw err
-    //             if (results && results.password === Password) {
-    //                 req.session.sessionID = user._id
-    //                 res.render('pages/profile', {
-    //                     data: results,
-    //                     title: 'Profile',
-    //                 })
-    //             } else {
-    //                 res.render('pages/login', {
-    //                     data: results,
-    //                     title: 'Login',
-    //                 })
-    //             }
-    //         })
-    //     })
-    // },
-    // (err) => {
-    //     throw err
 })
 
 module.exports = router

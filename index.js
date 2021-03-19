@@ -5,6 +5,7 @@ dotenvExpand(myEnv)
 
 const express = require('express')
 const app = express()
+const session = require('express-session')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -18,16 +19,30 @@ app.set('views', path.join(__dirname, 'views'))
 // Use static files from public folder
 app.use(express.static(__dirname + '/public'))
 
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+    })
+)
+
 // Set Routers
 const mainRoute = require('./routers/mainRoute')
 const savedMatchesRoute = require('./routers/saved_matches')
 const chatRoute = require('./routers/chatRoute')
 const loginRoute = require('./routers/loginRoute')
+const logOutRoute = require('./routers/logOUtRoute')
+const dislikeRoute = require('./routers/dislikeRoute')
+const likeRoute = require('./routers/LikeRoute')
 
 app.use('/', mainRoute)
 app.use('/', savedMatchesRoute)
 app.use('/', chatRoute)
 app.use('/', loginRoute)
+app.use('/', logOutRoute)
+app.use('/', likeRoute)
+app.use('/', dislikeRoute)
 
 // Error
 app.use((req, res, next) => {
