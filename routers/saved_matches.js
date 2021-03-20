@@ -13,9 +13,12 @@ db.initialize(
     dbName,
     (dbObject) => {
         router.get('/savedmatches', (req, res) => {
+            let loggedUser = req.session.loggedInUser;
+            let loggedIn = loggedUser.toString()
+            console.log(loggedIn);
             dbObject
                 .collection('users')
-                .findOne({ _id: mongo.ObjectId('6050c6bf045c6e48d4785d0f') }) //id van 'ingelogde persoon'
+                .findOne({ _id: mongo.ObjectId(loggedIn)}) //id van 'ingelogde persoon'
                 .then((results) => {
                     let matches = results.LikedProfiles
                     let foundProfiles = []
@@ -33,7 +36,7 @@ db.initialize(
                         // Render saved_matches with filtered array
                         res.render('pages/saved_matches', {
                             data: foundProfiles,
-                            title: 'Saved matches',
+                            title: 'Saved match es',
                         })
                     }
 
@@ -42,11 +45,13 @@ db.initialize(
         })
 
         router.delete('/savedmatches', (req, res) => {
+            let loggedUser = req.session.loggedInUser;
+            let loggedIn = loggedUser.toSting()
             console.log('Delete request')
             dbObject
                 .collection('users')
                 .updateOne(
-                    { _id: mongo.ObjectId('6050c6bf045c6e48d4785d0f') }, //id of 'logged in person'
+                    { _id: mongo.ObjectId(logedIn) }, //id of 'logged in person'
                     { $pull: { LikedProfiles: req.body.userId } }
                 ) // wat er geupdate moet worden
                 .then((results) => {
