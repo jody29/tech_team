@@ -17,11 +17,12 @@ function convertMusic(inputQuery) {
 			if (err) {
 				return console.log(`Error occurred: ${err}`);
 			}
-			const songdata = data.tracks.items[0];
+			let songdata = data.tracks.items[0];
+			console.log("here is all the song data")
 			// console.log(songdata);
-			const songartist = songdata.album.artists[0].name;
+			let songartist = songdata.album.artists[0].name;
 			console.log(songartist);
-			const artistArray = songdata.artists;
+			let artistArray = songdata.artists;
 			// console.log(artistArray);
 
 			if (artistArray.length > 1) {
@@ -65,16 +66,26 @@ function convertMusic(inputQuery) {
  * en verzameld vervolgens trackObjects in een array
  */
 async function inputLoop(inputString) {
-	let songObject = [];
-	for (let i = 0; i < inputString.length; i++) {
-		console.log(i);
-		songObject.push(await convertMusic(inputString[i]));
+	console.log(inputString.length);
+	console.log(Array.isArray(inputString));
+	if (Array.isArray(inputString) == false ) {
+		let songObject = [];
+		songObject.push(await convertMusic(inputString))
+		return songObject;
+	} else {
+		let songObject = [];
+		for (let i = 0; i < inputString.length; i++) {
+			console.log(i);
+			songObject.push(await convertMusic(inputString[i]));
 	}
-	// zodra de functie klaar is geberut het volgende
 	console.log("Ready for export", songObject);
 	return songObject;
 }
+	// zodra de functie klaar is geberut het volgende
+	
+
+}
 // input
-inputLoop(["Toxic Britney Spears", "John 8:7 Ebony"]);
+
 
 module.exports.inputLoop = inputLoop;

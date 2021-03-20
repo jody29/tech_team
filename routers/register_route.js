@@ -9,31 +9,36 @@ const mongo = require("mongodb")
 
 const db = require('../connection/db')
 const dbName = process.env.DB_NAME
-const collectionName = 'users'
 
 const spotAPI = require("../public/scripts/convertMusic");
 
-router.get('/newprofile', (req, res) => {
-    res.render('pages/register.ejs');
-});
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 
-router.post('/newProfileSubmit', (req, res) => {
-console.log(req.body);
-let userProfile = req.body;
-let userSongs = userProfile.FavSongs;
-async function loopSongs(inputQuery) {
-    userProfile.FavSongs = await spotAPI.inputLoop(inputQuery);
-    console.log(userProfile);
-    res.render("newHome.ejs", {data:userProfile});
-}
-loopSongs(userSongs);
-});
+
 
 db.initialize(
     dbName,
-    collectionName,
-    (dbCollection) => {
+    (dbObject) => {
+        router.get('/newprofile', (req, res) => {
+            res.render('pages/register.ejs');
+        });
         
+        router.post("/newProfileSubmit", (req, res) => {
+            let userProfile = req.body;
+            console.log(userProfile);
+        
+            let userSongs = userProfile.FavSongs;
+            
+            const loopSongs = async (inputQuery) => {
+                userProfile.FavSongs = await spotAPI.inputLoop(inputQuery);
+                
+                console.log(userProfile);
+                const p = dbObject.collection("users").insertOne(userProfile);
+                res.render("pages/profile.ejs", {data:userProfile});
+            }
+            loopSongs(userSongs);
+        });
     (err) => {
         throw err
     }
