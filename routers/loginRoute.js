@@ -12,7 +12,6 @@ const dbName = process.env.DB_NAME
 const bcrypt = require('bcrypt')
 const { compare } = require('bcrypt')
 const saltRounds = 10
-
 //Login Page route
 router.get('/login', (req, res) => {
     res.render('pages/login', {
