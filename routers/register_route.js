@@ -30,7 +30,7 @@ db.initialize(
         
             let userSongs = userProfile.FavSongs;
             
-            async function loopSongs(inputQuery) {
+            const loopSongs = async (inputQuery) => {
                 userProfile.FavSongs = await spotAPI.inputLoop(inputQuery);
                 
                 console.log(userProfile);

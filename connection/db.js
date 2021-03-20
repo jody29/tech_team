@@ -14,7 +14,6 @@ const initialize = (
         } else {
             const dbObject = dbInstance.db(dbName)
             console.log('[MongoDB connection] SUCCES')
-
             successCallback(dbObject)
         }
     })
