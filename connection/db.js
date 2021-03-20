@@ -4,7 +4,6 @@ const dbConnectionUrl = process.env.M_URL
 
 const initialize = (
     dbName,
-    dbCollectionName,
     successCallback,
     failureCallback
 ) => {
@@ -14,10 +13,9 @@ const initialize = (
             failureCallback(err)
         } else {
             const dbObject = dbInstance.db(dbName)
-            const dbCollection = dbObject.collection(dbCollectionName)
             console.log('[MongoDB connection] SUCCES')
 
-            successCallback(dbCollection)
+            successCallback(dbObject)
         }
     })
 }

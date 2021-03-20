@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="..//styles" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header></header>
+        <main>
+            <article>
+                <img src="" alt="" />
+                <h1><%= data.Firstname %></h1>
+                <h3><%= data.Gender %></h3>
+                <h2><%= data.Birthday %></h2>
+            </article>
+            <section class="dynamicList">
+                <h4>Favourite Genres</h4>
+                <ul></ul>
+            </section>
+            <section class="dynamicList">
+                <h4>Favourite Music</h4>
+                <ul>
+                    <% for (var i=0; i < data.FavSongs.length; i++) { %>
+                    <li>
+                        <h1>Title: <%= data.FavSongs[i].title %></h1>
+                        <h2>Artist: <%= data.FavSongs[i].artist %></h2>
+                        <img src="<%= data.FavSongs[i].coverURL %>" alt="" />
+                    </li>
+                    <% } %>
+                </ul>
+            </section>
+        </main>
+        <footer></footer>
+    </body>
+</html>
