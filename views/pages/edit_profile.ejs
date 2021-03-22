@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/form.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
+            rel="stylesheet"
+        />
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <h1>Edit profile</h1>
+        </header>
+        <main>
+            <form action="/saveAccount" method="POST">
+                <!-- <input type="file" name="profileImage" id="profileImage" /> -->
+                <label for="Firstname">Your name</label>
+
+                <input
+                    type="text"
+                    placeholder="First name"
+                    id="Firstname"
+                    name="Firstname"
+                    value="<%= data.Firstname %>"
+                />
+                <input
+                    type="text"
+                    placeholder="Last name"
+                    id="Lastname"
+                    name="Lastname"
+                    value="<%= data.Lastname %>"
+                />
+
+                <label for="Username">Current username</label>
+                <input
+                    type="text"
+                    placeholder="Example: Shady Shay"
+                    id="Username"
+                    name="Username"
+                    value="<%= data.Username %>"
+                />
+                <label for="Birthday">Date of birth</label>
+                <input
+                    type="date"
+                    placeholder="dd-mm-jj"
+                    id="Birthday"
+                    name="Birthday"
+                    value="<%= data.Birthday %>"
+                />
+                <label for="myGender">My gender</label>
+                <select name="Gender" id="myGender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="nonBin">Non-binary</option>
+                </select>
+
+                <label for="genreInput">
+                    I want to macth on the following genres</label
+                >
+                <div id="genreContainer" class="dynamicList">
+                    <input
+                        type="text"
+                        id="genreInput"
+                        placeholder="Add your favourite Genre"
+                    />
+                    <button
+                        for="genreInput"
+                        id="genreInputButton"
+                        type="button"
+                    >
+                        +
+                    </button>
+                    <ul id="genreContainer">
+                        <% for (var i=0; i < data.FavGenres.length; i++) { %>
+                        <input
+                            value="<%= data.FavGenres[i] %>"
+                            type="text"
+                            name="FavGenres"
+                            readonly
+                            class="createdGenres"
+                            onclick="remove(this)"
+                        />
+                        <% } %>
+                        <li class="matchGenre"></li>
+                    </ul>
+                </div>
+                <label for="songInput"
+                    >I want to match on the following songs</label
+                >
+                <div id="songContainer" class="dynamicList">
+                    <input
+                        type="text"
+                        id="songInput"
+                        placeholder="Search on artist + title"
+                    />
+                    <button id="songInputButton" type="button">+</button>
+                    <ul id="musicContainer">
+                        <% for (var i=0; i < data.FavSongs.length; i++) { %>
+                        <input
+                            value="<%= data.FavSongs[i].title %> <% if (Array.isArray(data.FavSongs[i].artist) == true) { %> <%= data.FavSongs[i].artist[0] %> <% } else { %> <%= data.FavSongs[i].artist %> <% } %>"
+                            type="text"
+                            name="FavSongs"
+                            readonly
+                            class="createdSongs"
+                            onclick="remove(this)"
+                        />
+                        <% } %>
+                        <li class="matchSong"></li>
+                    </ul>
+                </div>
+                <label for="Email">Change your email here</label>
+                <input
+                    type="email"
+                    name="Email"
+                    id="Email"
+                    placeholder="someone@mailadres.com"
+                    value="<%= data.Email %>"
+                />
+                <label for="userPassword">Set a new password</label>
+                <input
+                    type="password"
+                    name="Password"
+                    id="Password"
+                    placeholder="Enter in your new password here"
+                    value="<%= data.Password %>"
+                />
+                <button type="submit" id="formSubmit">Save changes</button>
+                <button
+                    type="button"
+                    id="deletProfileButton"
+                    onclick="confirmDeletemessage()"
+                >
+                    Delete profile
+                </button>
+            </form>
+        </main>
+        <footer></footer>
+    </body>
+    <script src="./scripts/addGenre.js"></script>
+    <script src="./scripts/addSong.js"></script>
+</html>
