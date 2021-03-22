@@ -1,5 +1,5 @@
 let insertButton = document.querySelector("#genreInputButton");
-let genreSearchInput = document.querySelector("#genreInput");
+let genreGenreInput = document.querySelector("#genreInput");
 
 function insertGenre(){
 	const searchInput = document.querySelector("#genreInput").value;
@@ -25,13 +25,24 @@ function insertGenre(){
 		newFormInput.setAttribute("onclick", "remove(this)");
 		// Het nieuwe element wordt op de juiste plek in de DOM toegevoegd
 		queryList.appendChild(newFormInput);
+		
 	}
 }
 
 insertButton.addEventListener("click", insertGenre);
-genreSearchInput.addEventListener("keydown", function (e) {
+genreGenreInput.addEventListener("keydown", function (e) {
 	if (e.key === "Enter") {
 		e.preventDefault();
 		insertGenre();
 	}
 });
+
+function confirmDeletemessage() {
+	const delBoolean = confirm("Are you sure you want to delete your account? It will be gone forever and be unretrievable")
+	if (delBoolean == true) {
+		console.log("account wordt verwijdert")
+		window.location.href = '/deleteAccount';
+	} else (
+		console.log("toch maar niet")
+	)
+}

@@ -19,7 +19,7 @@ function convertMusic(inputQuery) {
 			}
 			let songdata = data.tracks.items[0];
 			console.log("here is all the song data")
-			// console.log(songdata);
+			console.log(songdata);
 			let songartist = songdata.album.artists[0].name;
 			console.log(songartist);
 			let artistArray = songdata.artists;
@@ -42,6 +42,7 @@ function convertMusic(inputQuery) {
 					artist: allArtists,
 					coverURL: songdata.album.images[0].url,
 					matchID: songdata.album.id,
+					spotURL: songdata.external_urls.spotify,
 				};
 				console.log(trackobject);
 				resolve(trackobject);
@@ -53,6 +54,7 @@ function convertMusic(inputQuery) {
 					artist: songartist,
 					coverURL: songdata.album.images[0].url,
 					matchID: songdata.album.id,
+					spotURL: songdata.external_urls.spotify,
 				};
 				console.log("trackopject:", trackobject);
 				resolve(trackobject);

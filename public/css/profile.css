@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.dynamicList ul {
+    padding: 1em;
+    max-height: 200px;
+    overflow: scroll;
+    display: flex;
+}
+main {
+    position: relative;
+}
+article {
+    margin-top: -2.8em;
+    padding: 1.5em;
+    border-radius: 30px 30px 0 0;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+article #profileCard {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+article #profileCard a {
+    color: #fff;
+    padding: 0.8em 2em;
+    text-decoration: none;
+    background-color: #484692;
+    align-self: center;
+    border-radius: 10px;
+    margin-bottom: 0.6em;
+}
+#profileImage {
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F7%2F7c%2FProfile_avatar_placeholder_large.png&f=1&nofb=1');
+    height: 300px;
+}
+#profileGenreList ul {
+    flex-direction: row;
+    margin-bottom: 0.4em;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+}
+
+#profileGenreList ul li {
+    background-color: #52c9c2;
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    padding: 0.8em 1.2em;
+    border-radius: 30px;
+
+    margin-right: 1em;
+}
+#profileSongList ul {
+    flex-direction: column;
+    max-height: 250px;
+    overflow-y: scroll;
+}
+#profileSongList ul li {
+    background-color: #484692;
+    font-size: 0.8em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.4em;
+    border-radius: 14px;
+    margin-bottom: 0.4em;
+}
+.dynamicList li img {
+    border-radius: 10px;
+    height: 50px;
+    width: 50px;
+    margin-right: 1em;
+}
+.songTitle {
+    font-weight: 400;
+    color: white;
+}
+.songArtist {
+    color: white;
+    font-weight: 200;
+    font-size: 0.9em;
+}
+h3 {
+    display: inline;
+    font-weight: 200;
+}
+#profileCard h1 {
+    font-size: 2em;
+}
+#profileCard h2 {
+    font-size: 1em;
+    font-weight: 400;
+}
