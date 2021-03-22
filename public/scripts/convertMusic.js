@@ -3,7 +3,7 @@ const Spotify = require('node-spotify-api')
 require('dotenv').config()
 
 const spotify = new Spotify({
-    id: 'd5e588b968774c59b1e8b2eebf2a8514',
+    id: 'ae37c903c1ed41439ba773eb8670e39c',
     secret: process.env.APIKEY,
 })
 
