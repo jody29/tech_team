@@ -1,5 +1,6 @@
-let insertButton = document.querySelector('#genreInputButton')
-let genreSearchInput = document.querySelector('#genreInput')
+
+let insertButton = document.querySelector("#genreInputButton");
+let genreGenreInput = document.querySelector("#genreInput");
 
 const insertGenre = () => {
     const searchInput = document.querySelector('#genreInput').value
@@ -18,22 +19,35 @@ const insertGenre = () => {
         )
         const newFormInput = document.createElement('input')
 
-        // nieuw element krijgt atriubuten mee
-        newFormInput.setAttribute('value', searchInput)
-        newFormInput.setAttribute('type', 'text')
-        newFormInput.setAttribute('name', 'FavGenres')
-        newFormInput.setAttribute('readonly', '')
-        newFormInput.setAttribute('class', 'createdGenres')
-        newFormInput.setAttribute('onclick', 'remove(this)')
-        // Het nieuwe element wordt op de juiste plek in de DOM toegevoegd
-        queryList.appendChild(newFormInput)
-    }
+
+		// nieuw element krijgt atriubuten mee
+		newFormInput.setAttribute("value", searchInput);
+		newFormInput.setAttribute("type", "text");
+		newFormInput.setAttribute("name", "FavGenres");
+		newFormInput.setAttribute("readonly", "");
+		newFormInput.setAttribute("class", "createdGenres");
+		newFormInput.setAttribute("onclick", "remove(this)");
+		// Het nieuwe element wordt op de juiste plek in de DOM toegevoegd
+		queryList.appendChild(newFormInput);
+		
+	}
 }
 
-insertButton.addEventListener('click', insertGenre)
-genreSearchInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault()
-        insertGenre()
-    }
-})
+insertButton.addEventListener("click", insertGenre);
+genreGenreInput.addEventListener("keydown", function (e) {
+	if (e.key === "Enter") {
+		e.preventDefault();
+		insertGenre();
+	}
+});
+
+function confirmDeletemessage() {
+	const delBoolean = confirm("Are you sure you want to delete your account? It will be gone forever and be unretrievable")
+	if (delBoolean == true) {
+		console.log("account wordt verwijdert")
+		window.location.href = '/deleteAccount';
+	} else (
+		console.log("toch maar niet")
+	)
+}
+

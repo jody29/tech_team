@@ -18,22 +18,27 @@
             <h1>New profile</h1>
         </header>
         <main>
-            <form action="/newProfileSubmit" method="POST">
+            <form
+                action="/newProfileSubmit"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+                <!-- <input type="file" name="profileImage" id="profileImage" /> -->
                 <label for="Firstname">What's your name?</label>
-                <div class="container">
-                    <input
-                        type="text"
-                        placeholder="First name"
-                        id="Firstname"
-                        name="Firstname"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Last name"
-                        id="Lastname"
-                        name="Lastname"
-                    />
-                </div>
+
+                <input
+                    type="text"
+                    placeholder="First name"
+                    id="Firstname"
+                    name="Firstname"
+                />
+                <input
+                    type="text"
+                    placeholder="Last name"
+                    id="Lastname"
+                    name="Lastname"
+                />
+
                 <label for="Username">Choose a username</label>
                 <input
                     type="text"

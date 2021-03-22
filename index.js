@@ -41,6 +41,7 @@ const loginRoute = require('./routers/loginRoute')
 const logOutRoute = require('./routers/logOUtRoute')
 const dislikeRoute = require('./routers/dislikeRoute')
 const likeRoute = require('./routers/LikeRoute')
+const editProfileRoute = require('./routers/edit_profile')
 
 // require('./websocket')
 
@@ -52,6 +53,7 @@ app.use('/', logOutRoute)
 app.use('/', likeRoute)
 app.use('/', dislikeRoute)
 app.use('/', regRoute)
+app.use('/', editProfileRoute)
 
 // Error
 app.use((req, res, next) => {

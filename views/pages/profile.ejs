@@ -1,36 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%- include('../partials/head') %>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
+            rel="stylesheet"
+        />
+        <title>Document</title>
+        <link href="../css/profile.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <header>
-            <%- include('../partials/header') %> 
-            <%- include('../partials/nav') %>
-        </header>
+        <header></header>
+
         <main>
+            <div id="profileImage"></div>
             <article>
-                <img src="" alt="" />
-                <h1><%= data.Firstname %></h1>
-                <h3><%= data.Gender %></h3>
-                <h2><%= data.Birthday %></h2>
+                <section id="profileCard">
+                    <a href="/editprofile">Edit profile</a>
+                    <div class="container">
+                        <h1><%= data.Firstname %> <%= data.Lastname %></h1>
+                        <h3><%= data.Gender %></h3>
+                    </div>
+                    <h2>Age: <%= data.Age %></h2>
+                </section>
+                <section class="dynamicList" id="profileGenreList">
+                    <h4>Favourite Genres</h4>
+                    <ul>
+                        <% for (var i=0; i < data.FavGenres.length; i++) { %>
+                        <li>
+                            <h1 class="songTitle"><%= data.FavGenres[i] %></h1>
+                        </li>
+                        <% } %>
+                    </ul>
+                </section>
+
+                <section class="dynamicList" id="profileSongList">
+                    <h4>Favourite Music</h4>
+                    <ul>
+                        <% for (var i=0; i < data.FavSongs.length; i++) { %>
+                        <li>
+                            <a
+                                href="<%= data.FavSongs[i].spotURL %>"
+                                target="_blanc"
+                            >
+                                <img
+                                    src="<%= data.FavSongs[i].coverURL %>"
+                                    alt=""
+                                />
+                            </a>
+                            <div class="songContainer">
+                                <h1 class="songTitle">
+                                    <%= data.FavSongs[i].title %>
+                                </h1>
+                                <h2 class="songArtist">
+                                    Artist: <%= data.FavSongs[i].artist %>
+                                </h2>
+                            </div>
+                        </li>
+                        <% } %>
+                    </ul>
+                </section>
             </article>
-            <section class="dynamicList">
-                <h4>Favourite Genres</h4>
-                <ul></ul>
-            </section>
-            <section class="dynamicList">
-                <h4>Favourite Music</h4>
-                <ul>
-                    <% for (var i=0; i < data.FavSongs.length; i++) { %>
-                    <li>
-                        <h1>Title: <%= data.FavSongs[i].title %></h1>
-                        <h2>Artist: <%= data.FavSongs[i].artist %></h2>
-                        <img src="<%= data.FavSongs[i].coverURL %>" alt="" />
-                    </li>
-                    <% } %>
-                </ul>
-            </section>
         </main>
         <footer></footer>
     </body>
