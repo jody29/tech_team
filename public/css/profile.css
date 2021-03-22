@@ -18,7 +18,8 @@
 main {
     position: relative;
 }
-article {
+
+main article {
     margin-top: -2.8em;
     padding: 1.5em;
     border-radius: 30px 30px 0 0;
@@ -26,12 +27,12 @@ article {
     display: flex;
     flex-direction: column;
 }
-article #profileCard {
+main article #profileCard {
     display: flex;
     flex-direction: column;
     margin-bottom: 1em;
 }
-article #profileCard a {
+main article #profileCard a {
     color: #fff;
     padding: 0.8em 2em;
     text-decoration: none;
@@ -40,6 +41,7 @@ article #profileCard a {
     border-radius: 10px;
     margin-bottom: 0.6em;
 }
+
 #profileImage {
     background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F7%2F7c%2FProfile_avatar_placeholder_large.png&f=1&nofb=1');
     height: 300px;

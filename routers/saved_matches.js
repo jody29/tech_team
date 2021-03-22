@@ -39,7 +39,7 @@ db.initialize(
                         // Render saved_matches with filtered array
                         res.render('pages/saved_matches', {
                             data: foundProfiles,
-                            title: 'Saved match es',
+                            title: 'Saved matches',
                         })
                     }
 
