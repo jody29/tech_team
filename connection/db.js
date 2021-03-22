@@ -2,7 +2,11 @@ const MongoClient = require('mongodb').MongoClient
 
 const dbConnectionUrl = process.env.M_URL
 
-const initialize = (dbName, successCallback, failureCallback) => {
+const initialize = (
+    dbName,
+    successCallback,
+    failureCallback
+) => {
     MongoClient.connect(dbConnectionUrl, (err, dbInstance) => {
         if (err) {
             console.log(`[MongoDB connection] ERROR: ${err}`)

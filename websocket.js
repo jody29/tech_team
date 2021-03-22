@@ -4,10 +4,8 @@ const dateFormat = require('dateformat')
 
 const db = require('./connection/db')
 const dbName = process.env.DB_NAME
-const collectionUsers = 'users'
-const collectionChat = 'chat'
 
-db.initialize(dbName, collectionChat, (dbCollection) => {
+db.initialize(dbName, (dbObject) => {
     dateFormat.masks.chatFormat = 'HH:MM - dd/mm'
 
     io.on('connection', (socket) => {
@@ -16,7 +14,7 @@ db.initialize(dbName, collectionChat, (dbCollection) => {
         socket.on('message_send', async (data) => {
             try {
                 if (data.message == '') return
-                await dbCollection.updateOne(
+                await dbObject.collection('chats').updateOne(
                     { chatNumber: parseInt(data.chatId) },
                     {
                         $push: {
