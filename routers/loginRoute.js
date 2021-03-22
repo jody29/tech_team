@@ -38,6 +38,7 @@ db.initialize(dbName, (dbObject) => {
             //change isPWcorr to match when password is crypted through register
             if (isPWcorr) {
                 req.session.loggedInUser = user._id
+                req.session.userName = Username
                 console.log(req.session.UserSession)
                 console.log(req.session.loggedInUser)
                 res.redirect('/savedmatches')

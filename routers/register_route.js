@@ -3,21 +3,20 @@ const router = express.Router()
 const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const mongo = require("mongodb")
+const mongo = require('mongodb')
 const multer  = require('multer')
 const getAge = require("get-age")
 const upload = multer({ dest: 'images/profile' })
+
 // Database variables
 
 const db = require('../connection/db')
 const dbName = process.env.DB_NAME
 
-const spotAPI = require("../public/scripts/convertMusic");
+const spotAPI = require('../public/scripts/convertMusic')
 
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-
-
+router.use(bodyParser.urlencoded({ extended: true }))
+router.use(bodyParser.json())
 
 db.initialize(
     dbName,
@@ -46,11 +45,12 @@ db.initialize(
                 
             }
             
-            loopSongs(userSongs);
-        });
+            loopSongs(userSongs)
+        })
+    },
     (err) => {
         throw err
     }
-});
+)
 
-module.exports = router;
+module.exports = router

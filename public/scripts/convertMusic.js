@@ -1,16 +1,17 @@
 // const { precompile } = require("handlebars");
-const Spotify = require("node-spotify-api");
-require("dotenv").config();
+const Spotify = require('node-spotify-api')
+require('dotenv').config()
 
 const spotify = new Spotify({
-	id: "d5e588b968774c59b1e8b2eebf2a8514",
-	secret: "5c182bd48b7e40b7ab1dbd1e9577d1f1",
-});
+    id: 'd5e588b968774c59b1e8b2eebf2a8514',
+    secret: '5c182bd48b7e40b7ab1dbd1e9577d1f1',
+})
 
 /**
  * Deze functie is async omdat er een promise wordt gereturned. De promise
  * wordt geresolved met een trackObject.
  */
+
 function convertMusic(inputQuery) {
 	return new Promise((resolve, reject) => {
 		spotify.search({ type: "track", query: inputQuery }, function (err, data) {
@@ -68,26 +69,23 @@ function convertMusic(inputQuery) {
  * en verzameld vervolgens trackObjects in een array
  */
 async function inputLoop(inputString) {
-	console.log(inputString.length);
-	console.log(Array.isArray(inputString));
-	if (Array.isArray(inputString) == false ) {
-		let songObject = [];
-		songObject.push(await convertMusic(inputString))
-		return songObject;
-	} else {
-		let songObject = [];
-		for (let i = 0; i < inputString.length; i++) {
-			console.log(i);
-			songObject.push(await convertMusic(inputString[i]));
-	}
-	console.log("Ready for export", songObject);
-	return songObject;
-}
-	// zodra de functie klaar is geberut het volgende
-	
-
+    console.log(inputString.length)
+    console.log(Array.isArray(inputString))
+    if (Array.isArray(inputString) == false) {
+        let songObject = []
+        songObject.push(await convertMusic(inputString))
+        return songObject
+    } else {
+        let songObject = []
+        for (let i = 0; i < inputString.length; i++) {
+            console.log(i)
+            songObject.push(await convertMusic(inputString[i]))
+        }
+        console.log('Ready for export', songObject)
+        return songObject
+    }
+    // zodra de functie klaar is geberut het volgende
 }
 // input
 
-
-module.exports.inputLoop = inputLoop;
+module.exports.inputLoop = inputLoop

@@ -1,20 +1,24 @@
+
 let insertButton = document.querySelector("#genreInputButton");
 let genreGenreInput = document.querySelector("#genreInput");
 
-function insertGenre(){
-	const searchInput = document.querySelector("#genreInput").value;
-	console.log(`er is gezocht op: ${searchInput}`);
-	if (searchInput == "") {
-		//   checkt of het input veld niet leeg is
-		console.log("No search query");
-	} else {
-		// start zodra de waarde in het invoer veld niet "" is
-		// Input veld word leeg gehaald
-		document.querySelector("#genreInput").value = "";
+const insertGenre = () => {
+    const searchInput = document.querySelector('#genreInput').value
+    console.log(`er is gezocht op: ${searchInput}`)
+    if (searchInput == '') {
+        //   checkt of het input veld niet leeg is
+        console.log('No search query')
+    } else {
+        // start zodra de waarde in het invoer veld niet "" is
+        // Input veld word leeg gehaald
+        document.querySelector('#genreInput').value = ''
 
-		// declareren nieuwe variable voor nieuw element
-		const queryList = document.querySelector("#genreContainer > #genreContainer");
-		const newFormInput = document.createElement("input");
+        // declareren nieuwe variable voor nieuw element
+        const queryList = document.querySelector(
+            '#genreContainer > #genreContainer'
+        )
+        const newFormInput = document.createElement('input')
+
 
 		// nieuw element krijgt atriubuten mee
 		newFormInput.setAttribute("value", searchInput);
@@ -46,3 +50,4 @@ function confirmDeletemessage() {
 		console.log("toch maar niet")
 	)
 }
+
