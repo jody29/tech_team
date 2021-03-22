@@ -39,8 +39,6 @@ db.initialize(dbName, (dbObject) => {
             if (isPWcorr) {
                 req.session.loggedInUser = user._id
                 req.session.userName = Username
-                console.log(req.session.UserSession)
-                console.log(req.session.loggedInUser)
                 res.redirect('/savedmatches')
             } else {
                 res.render('pages/login_fail', {

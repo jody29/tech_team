@@ -31,7 +31,7 @@ db.initialize(
                 const pulledProfile = await dbObject
                         .collection('users')
                         .findOne({
-                            Username: "Shady Shay"
+                            _id: mongo.ObjectId(req.session.loggedInUser)
                         })
                 console.log(pulledProfile);
                 // set active user to update properly. This needs to be implimented with the session feature
