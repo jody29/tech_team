@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <head>
 <%- include('../partials/head') %>
-<link href="../css/log_in.css" rel="stylesheet" type="text/css" />
+<link href="../css/login.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="login_page">
   <header>
     <h1>MusicMatch</h1>
 </header>
   <main>
-   <%- include('../partials/login_form') %>
+    <form method="POST" action="/login">
+      <label>Username</label>
+      <input type="text" name="Username" />
+      <label>Password</label>
+      <input type="password" name="Password" />
+      <input type="submit" value="Log in" class="button"/>
+  </form>
   </main>
   <%- include('../partials/footer') %>
 </body>
