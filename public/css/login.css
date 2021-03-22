@@ -60,3 +60,11 @@ main form input[type='submit'] {
   padding:  0.75em 1em;
  
 }
+
+main p{
+  text-align: center;
+}
+
+main a{
+  text-decoration: underline;
+}
