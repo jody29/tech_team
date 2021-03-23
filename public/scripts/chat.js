@@ -3,8 +3,8 @@ const socket = io.connect('/')
 const typing = document.querySelector('#typing')
 const message = document.querySelector('#message')
 const chatId = document.querySelector('#chat').value
-const messages = document.querySelector('#messages .message-container')
-const sendMessage = document.querySelector('#send-button')
+const messages = document.querySelector('.chatField .messageField')
+const sendMessage = document.querySelector('#submit')
 const username = user.firstName
 
 messages.scrollTop = messages.scrollHeight

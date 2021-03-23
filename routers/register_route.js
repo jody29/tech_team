@@ -4,8 +4,8 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const mongo = require('mongodb')
-const multer  = require('multer')
-const getAge = require("get-age")
+const multer = require('multer')
+const getAge = require('get-age')
 const upload = multer({ dest: 'images/profile' })
 
 // Database variables
@@ -22,31 +22,36 @@ db.initialize(
     dbName,
     (dbObject) => {
         router.get('/newprofile', (req, res) => {
-            res.render('pages/register.ejs');
-        });
-        
-        router.post("/newProfileSubmit", upload.single('profileImage'), (req, res) => {
-            // Getting user profile
-            let userProfile = req.body;
-            console.log(userProfile);
-            // calculate age with get age npm package
-            let Age = getAge(userProfile.Birthday);
-            userProfile['Age'] = Age
-            let userSongs = userProfile.FavSongs;
-            // Replace music with renderable spotify objects
-            const loopSongs = async (inputQuery) => {
-                userProfile.FavSongs = await spotAPI.inputLoop(inputQuery);
-                
-                console.log(userProfile);
-                //push data to database
-                const p = dbObject.collection("users").insertOne(userProfile);
-                res.render("pages/profile.ejs", {data:userProfile,
-                    title: 'My profile'});
-                
-            }
-            
-            loopSongs(userSongs)
+            res.render('pages/register.ejs')
         })
+
+        router.post(
+            '/newProfileSubmit',
+            upload.single('profileImage'),
+            (req, res) => {
+                // Getting user profile
+                let userProfile = req.body
+                // calculate age with get age npm package
+                let Age = getAge(userProfile.Birthday)
+                userProfile['Age'] = Age
+                let userSongs = userProfile.FavSongs
+                // Replace music with renderable spotify objects
+                const loopSongs = async (inputQuery) => {
+                    userProfile.FavSongs = await spotAPI.inputLoop(inputQuery)
+
+                    //push data to database
+                    const p = dbObject
+                        .collection('users')
+                        .insertOne(userProfile)
+                    res.render('pages/profile.ejs', {
+                        data: userProfile,
+                        title: 'My profile',
+                    })
+                }
+
+                loopSongs(userSongs)
+            }
+        )
     },
     (err) => {
         throw err
