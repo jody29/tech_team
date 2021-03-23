@@ -29,16 +29,10 @@ db.initialize(dbName, (dbObject) => {
                     })
                     .toArray()
             })
-
             .then((results) => {
-                console.log('logged user is: ', loggedIn)
                 const allUsersfavGenres = results.map((genres) => {
                     return genres.FavGenres
                 })
-
-                // const filterFavG = favG.map(item)
-                console.log('genres logged in user')
-                console.log('all Users fav Genres is: ', allUsersfavGenres)
                 res.render('pages/find_matches', {
                     data: results,
                     title: 'All matches',
@@ -46,67 +40,4 @@ db.initialize(dbName, (dbObject) => {
             })
     })
 })
-
-// async function getGenresProfile(favGenres) {
-//     for (i = 0; i < favGenres.length; i++) {
-//         console.log('dit is mijn itje', i)
-//         const pullProfile = await dbObject
-//             .collection('users')
-//             .findOne({
-//                 FavGenres: favGenres[i],
-//             })
-//         console.log('fac genres itje : ', favGenres[i])
-//         console.log('pull profile: ', pullProfile)
-//         foundGenres.push(pullProfile)
-//         console.log('mijn gevonden genres', foundGenres)
-//     }
-
-// async function getGenresProfile(favGenres) {
-//     for (i = 0; i < favGenres.length; i++) {
-//         console.log('dit is mijn itje', i)
-//         const pullProfile = await dbObject
-//             .collection('users')
-//             .find({}, { FavGenres: foundGenres })
-//         //.find({ FavGenres: favGenres[i] })
-//         console.log('pull profile: ', pullProfile)
-//         //         .toArray((err, res) => {
-//         //             console.log('fac genres itje : ', favGenres[i])
-//         //             console.log('pull profile: ', pullProfile)
-
-//         //             console.log('mijn gevonden genres', foundGenres)
-//         //         })
-//         foundGenres.push(pullProfile)
-//     }
-
-// Render saved_matches with filtered array
-// res.render('pages/find_matches', {
-//     data: foundGenres,
-//     title: 'Find matches',
-// })
-//})
-//}
-//getGenresProfile(favGenres)
-//         })
-// })
-
-//     dbObject
-//         .collection('users')
-//         .find()
-//         .toArray()
-//         .then((results) => {
-//             console.log('logged user is: ', loggedIn)
-
-//             const favG = results.map((genres) => {
-//                 return genres.FavGenres
-//             })
-//             // const filterFavG = favG.map(item)
-//             console.log('favG is: ', favG)
-//             res.render('pages/find_matches', {
-//                 data: results,
-//                 title: 'All matches',
-//             })
-//         })
-//     })
-// })
-
 module.exports = router
