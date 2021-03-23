@@ -33,6 +33,7 @@ app.use(
 )
 
 // Set Routers
+const rateLimitRoute = require('./routers/rateLimitRoute')
 const mainRoute = require('./routers/mainRoute')
 const regRoute = require('./routers/register_route')
 const savedMatchesRoute = require('./routers/saved_matches')
@@ -45,7 +46,7 @@ const editProfileRoute = require('./routers/edit_profile')
 const profileRoute = require('./routers/profileRoute')
 
 // require('./websocket')
-
+app.use('/', rateLimitRoute)
 app.use('/', mainRoute)
 app.use('/', savedMatchesRoute)
 app.use('/', chatRoute)
