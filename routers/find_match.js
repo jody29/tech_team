@@ -18,36 +18,27 @@ db.initialize(dbName, (dbObject) => {
         dbObject
             .collection('users')
             .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
-            .then((results) => {
-                let favGenres = results.FavGenres
+            .then((profile) => {
+                let favGenres = profile.FavGenres
                 let foundGenres = []
-                return favGenres
-                return foundGenres
-                console.log('let favGenres is: ', favGenres)
-                console.log('let found genres is:', foundGenres)
+                return dbObject
+                    .collection('users')
+                    .find({
+                        _id: { $ne: mongo.ObjectId(loggedIn) },
+                        FavGenres: { $in: favGenres },
+                    })
+                    .toArray()
             })
 
-            // dbObject
-            //     .collection('users')
-            .find()
-            .toArray()
             .then((results) => {
                 console.log('logged user is: ', loggedIn)
                 const allUsersfavGenres = results.map((genres) => {
                     return genres.FavGenres
                 })
-                const filterMyGenreWithOtherUsers = allUsersfavGenres.filter(
-                    (el) => favGenres.includes(el)
-                )
-
-                //})
 
                 // const filterFavG = favG.map(item)
+                console.log('genres logged in user')
                 console.log('all Users fav Genres is: ', allUsersfavGenres)
-                console.log(
-                    'filter my genre with others is: ',
-                    filterMyGenreWithOtherUsers
-                )
                 res.render('pages/find_matches', {
                     data: results,
                     title: 'All matches',
