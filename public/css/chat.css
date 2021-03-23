@@ -92,7 +92,7 @@ green: #52C9C2
 
 .messageField {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     margin-top: 7em;
     height: 36em;
 }
