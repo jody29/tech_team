@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const mongo = require('mongodb')
+// const chatService = require('../services/chatService')
 
 // Database variables
 const db = require('../connection/db')
@@ -13,13 +14,12 @@ db.initialize(
     dbName,
     (dbObject) => {
         router.get('/savedmatches', (req, res) => {
-            let loggedUser = req.session.loggedInUser;
+            let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
-            console.log("logged in user:")
-            console.log(loggedIn);
+
             dbObject
                 .collection('users')
-                .findOne({ _id: mongo.ObjectId(loggedIn)}) //id van 'ingelogde persoon'
+                .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
                 .then((results) => {
                     let matches = results.LikedProfiles
                     console.log(results.LikedProfiles)
@@ -32,8 +32,8 @@ db.initialize(
                                 .findOne({
                                     _id: mongo.ObjectId(matches[i]),
                                 })
-                                console.log(pullProfile);
                             foundProfiles.push(pullProfile)
+                            // const chats = chatService.getUserChats
                         }
 
                         // Render saved_matches with filtered array
@@ -48,7 +48,7 @@ db.initialize(
         })
 
         router.delete('/savedmatches', (req, res) => {
-            let loggedUser = req.session.loggedInUser;
+            let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toSting()
             console.log('Delete request')
             dbObject

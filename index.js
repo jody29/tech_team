@@ -12,6 +12,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 const path = require('path')
 const PORT = process.env.PORT || 8000
+const http = require('http')
+const server = http.createServer(app)
+
+module.exports = {
+    server,
+}
 
 // EJS setup
 app.set('view engine', 'ejs')

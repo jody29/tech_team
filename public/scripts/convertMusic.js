@@ -12,7 +12,8 @@ const spotify = new Spotify({
  * wordt geresolved met een trackObject.
  */
 
-function convertMusic(inputQuery) {
+const convertMusic = (inputQuery) => {
+
     return new Promise((resolve, reject) => {
         spotify.search(
             { type: 'track', query: inputQuery },
@@ -70,7 +71,8 @@ function convertMusic(inputQuery) {
  * Deze functie loopt door de verschillende input strings
  * en verzameld vervolgens trackObjects in een array
  */
-async function inputLoop(inputString) {
+
+const inputLoop = async (inputString) => {
     if (Array.isArray(inputString) == false) {
         let songObject = []
         songObject.push(await convertMusic(inputString))
