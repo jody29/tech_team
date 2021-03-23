@@ -13,6 +13,7 @@ const spotify = new Spotify({
  */
 
 const convertMusic = (inputQuery) => {
+
     return new Promise((resolve, reject) => {
         spotify.search(
             { type: 'track', query: inputQuery },
@@ -70,9 +71,8 @@ const convertMusic = (inputQuery) => {
  * Deze functie loopt door de verschillende input strings
  * en verzameld vervolgens trackObjects in een array
  */
+
 const inputLoop = async (inputString) => {
-    console.log(inputString.length)
-    console.log(Array.isArray(inputString))
     if (Array.isArray(inputString) == false) {
         let songObject = []
         songObject.push(await convertMusic(inputString))
@@ -80,10 +80,8 @@ const inputLoop = async (inputString) => {
     } else {
         let songObject = []
         for (let i = 0; i < inputString.length; i++) {
-            console.log(i)
             songObject.push(await convertMusic(inputString[i]))
         }
-        console.log('Ready for export', songObject)
         return songObject
     }
     // zodra de functie klaar is geberut het volgende

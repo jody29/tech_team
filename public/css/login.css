@@ -1,0 +1,77 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Helvetica;
+}
+
+main{
+  padding: 4em 1em 6em 1em;
+}
+
+main > p:first-of-type{
+  width: 90%;
+  height:3em;
+  margin: 17vh auto 1em auto;
+  color: red;
+}
+
+main form{
+  height: 30vh;
+  margin: 0 auto 0 auto;
+}
+
+main form label{
+  display: block;
+  padding-top: 1.5em;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 0.25em;
+}
+
+main form label:first-of-type{
+  padding-top: 0;
+}
+
+main form input[type='text'], main form input[type='password'] {
+  border-width: 0 0 2px 0;
+  border-color: #484692;
+  border-radius: 5px;
+  width: 80%;
+  
+  display: block;
+  height: 30px;
+  outline: none;
+  padding: 1.25em;
+  margin: 0 auto;
+  margin-top: 0.5em;
+  box-shadow: 0px 0px 6px lightgrey;
+}
+
+main form input[type='submit'] {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+  font-size: 1em;
+
+  display: block;
+  width: 50%;
+  margin: 3em auto;
+
+  background-image: linear-gradient(to bottom right, #908ede, #484692);
+  color: #ffffff;
+  border-style: none;
+  outline: none;
+  border-radius: 50px;
+  padding:  0.75em 1em;
+ 
+}
+
+main p{
+  text-align: center;
+}
+
+main a{
+  text-decoration: underline;
+}

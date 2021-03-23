@@ -12,10 +12,12 @@ const dbName = process.env.DB_NAME
 const bcrypt = require('bcrypt')
 const { compare } = require('bcrypt')
 const saltRounds = 10
+
 //Login Page route
 router.get('/', (req, res) => {
     res.render('pages/login', {
         title: 'Login Page',
+        message: '',
     })
 })
 
@@ -41,8 +43,9 @@ db.initialize(dbName, (dbObject) => {
                 req.session.userName = Username
                 res.redirect('/savedmatches')
             } else {
-                res.render('pages/login_fail', {
-                    title: 'Login Fail Page',
+                res.render('pages/login', {
+                    title: 'Login Page',
+                    message: 'Your username or password is wrong... Please try again.',
                 })
             }
         } catch (err) {

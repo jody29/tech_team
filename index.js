@@ -39,6 +39,7 @@ app.use(
 )
 
 // Set Routers
+const rateLimitRoute = require('./routers/rateLimitRoute')
 const mainRoute = require('./routers/mainRoute')
 const regRoute = require('./routers/register_route')
 const savedMatchesRoute = require('./routers/saved_matches')
@@ -49,9 +50,10 @@ const dislikeRoute = require('./routers/dislikeRoute')
 const likeRoute = require('./routers/LikeRoute')
 const editProfileRoute = require('./routers/edit_profile')
 const profileRoute = require('./routers/profileRoute')
+const findMatchRoute = require('./routers/find_match')
 
 // require('./websocket')
-
+app.use('/', rateLimitRoute)
 app.use('/', mainRoute)
 app.use('/', savedMatchesRoute)
 app.use('/', chatRoute)
@@ -62,6 +64,7 @@ app.use('/', dislikeRoute)
 app.use('/', regRoute)
 app.use('/', editProfileRoute)
 app.use('/', profileRoute)
+app.use('/', findMatchRoute)
 
 // Error
 app.use((req, res, next) => {
