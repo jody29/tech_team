@@ -54,7 +54,7 @@ db.initialize(
             dbObject
                 .collection('users')
                 .updateOne(
-                    { _id: mongo.ObjectId(logedIn) }, //id of 'logged in person'
+                    { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
                     { $pull: { LikedProfiles: req.body.userId } }
                 ) // wat er geupdate moet worden
                 .then((results) => {

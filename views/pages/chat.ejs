@@ -49,9 +49,9 @@
         
         <fieldset>
             <input type="hidden" name="userId" value="<%= user._id %>">
-            <input type="hidden" name="chatId" value="<%= id %>">
-            <input type="text" name="message" placeholder="type your message...">
-            <button type="submit">Send</button>
+            <input type="hidden" name="chatId" value="<%= id %>" id="chat">
+            <input type="text" name="message" id="message" placeholder="type your message...">
+            <button type="submit" id="submit">Send</button>
         </fieldset>
     </form>
     </article>

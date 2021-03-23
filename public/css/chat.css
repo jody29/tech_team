@@ -95,6 +95,7 @@ green: #52C9C2
     flex-direction: column;
     margin-top: 7em;
     height: 36em;
+    overflow-y: scroll;
 }
 
 .outgoing {
@@ -110,7 +111,7 @@ green: #52C9C2
     color: white;
     width: fit-content;
     max-width: 50%;
-    margin-top: .5em;
+    margin: .5em 0 1.5em;
     border-radius: 1em 1em 0 1em;
 }
 
@@ -124,7 +125,7 @@ green: #52C9C2
     width: fit-content;
     max-width: 50%;
     padding: 1em;
-    margin-top: .5em;
+    margin: .5em 0 1.5em;
     border-radius: 1em 1em 1em 0;
 
 }
