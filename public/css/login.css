@@ -11,9 +11,16 @@ main{
   padding: 4em 1em 6em 1em;
 }
 
+main > p:first-of-type{
+  width: 90%;
+  height:3em;
+  margin: 17vh auto 1em auto;
+  color: red;
+}
+
 main form{
-  height: 32.5vh;
-  margin: calc(33vh - 5em) auto calc(33vh - 6em) auto;
+  height: 30vh;
+  margin: 0 auto 0 auto;
 }
 
 main form label{
