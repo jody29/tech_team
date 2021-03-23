@@ -11,13 +11,13 @@ const rateLimit = require('express-rate-limit');
 const limiter = rateLimit({
     windowMs: 3 * 60 * 1000, // 3 minutes
     max: 3, // limit is 3, so at the 4th request it will block
-    onLimitReached: function (req, res, options){
+    onLimitReached: (req, res, options) => {
         res.render('pages/login', {
             title: 'Login Page',
             message: 'You have sent too manny wrong requests. Please try again in 3 minutes.',
         })
       },
-    handler: function (req, res, options){
+    handler: (req, res, options) => {
         res.render('pages/login', {
             title: 'Login Page',
             message: 'Please try again in 3 minutes.',
