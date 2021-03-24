@@ -3,19 +3,31 @@
     <head>
         <%- include('../partials/head') %>
         <link href="../css/profile.css" rel="stylesheet" type="text/css" />
-       
     </head>
     <body>
         <header>
-            <%- include('../partials/header') %>
-            <%- include('../partials/nav') %>
+            <%- include('../partials/header') %> <%- include('../partials/nav')
+            %>
         </header>
 
         <main>
             <div id="profileImage"></div>
             <article>
                 <section id="profileCard">
-                    <a href="/editprofile">Edit profile</a>
+                    <form
+                        method="POST"
+                        action="/profile/<%= data._id%>?_method=DELETE"
+                    >
+                        <input
+                            value="<%= data._id%>"
+                            type="hidden"
+                            name="userId"
+                        />
+                        <button type="submit" class="remove">
+                            Remove from matches
+                        </button>
+                    </form>
+
                     <div class="container">
                         <h1><%= data.Firstname %> <%= data.Lastname %></h1>
                         <h3><%= data.Gender %></h3>
@@ -62,5 +74,6 @@
             </article>
         </main>
         <footer></footer>
+        <script src="/scripts/saved_matches_fe.js"></script>
     </body>
 </html>
