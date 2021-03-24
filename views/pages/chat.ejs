@@ -33,7 +33,7 @@
                 <% } else { %>
                   <div class="incoming">
                     <div class="metadata">
-                      <span class="author"><%= otherUser.Username %> at</span>
+                      <span class="author"><%= otherUser.Firstname %> at</span>
                       <span class="date"><%= messages[i].date %></span>
                     </div>
                     <p><%= messages[i].message %></p>
@@ -49,9 +49,9 @@
         
         <fieldset>
             <input type="hidden" name="userId" value="<%= user._id %>">
-            <input type="hidden" name="chatId" value="<%= id %>">
-            <input type="text" name="message" placeholder="type your message...">
-            <button type="submit">Send</button>
+            <input type="hidden" name="chatId" value="<%= id %>" id="chat">
+            <input type="text" name="message" id="message" placeholder="type your message...">
+            <button type="submit" id="submit">Send</button>
         </fieldset>
     </form>
     </article>

@@ -49,12 +49,12 @@ db.initialize(
 
         router.delete('/savedmatches', (req, res) => {
             let loggedUser = req.session.loggedInUser
-            let loggedIn = loggedUser.toSting()
+            let loggedIn = loggedUser.toString()
             console.log('Delete request')
             dbObject
                 .collection('users')
                 .updateOne(
-                    { _id: mongo.ObjectId(logedIn) }, //id of 'logged in person'
+                    { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
                     { $pull: { LikedProfiles: req.body.userId } }
                 ) // wat er geupdate moet worden
                 .then((results) => {
@@ -71,6 +71,34 @@ db.initialize(
                         title: 'Saved matches',
                     })
                 })
+        })
+
+        router.get("/profile/:id", (req, res) => {
+            dbObject.collection('users').findOne({_id: mongo.ObjectId(req.params.id)})
+            .then(results => {
+              console.log(results)
+              res.render("pages/other_profile.ejs", {
+                data: results,
+                title:"My match" 
+              });
+            })
+          });
+
+          router.delete('/profile/:id', (req, res) => {
+            let loggedUser = req.session.loggedInUser
+            console.log(loggedUser);
+            let loggedIn = loggedUser.toString()
+            console.log('Delete request')
+            dbObject
+                .collection('users')
+                .updateOne(
+                    { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
+                    { $pull: { LikedProfiles: req.body.userId } }
+                ) // wat er geupdate moet worden
+                .then(() => {
+                    res.redirect('/savedmatches')
+                })
+
         })
     },
     (err) => {

@@ -46,6 +46,7 @@ db.initialize(
                 // calculate age with get age npm package
                 let Age = getAge(userProfile.Birthday)
                 userProfile['Age'] = Age
+                userProfile['LikedProfiles'] = [];
                 let userSongs = userProfile.FavSongs
                 // Replace music with renderable spotify objects
                 const loopSongs = async (inputQuery) => {

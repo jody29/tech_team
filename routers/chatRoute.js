@@ -46,7 +46,7 @@ db.initialize(dbName, (dbObject) => {
             res.render('pages/chat', {
                 users: chat.users,
                 messages: chat.message,
-                title: otherUser.Username,
+                title: otherUser.Firstname,
                 user,
                 id,
                 otherUser,
