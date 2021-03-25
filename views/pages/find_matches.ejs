@@ -18,6 +18,8 @@
             <h2><%= data[i].Firstname %> <%= data[i].Lastname %></h2>
             <p>Age: <%= data[i].age %></p>
             <p>Fav genres are: <%= data[i].FavGenres %></p>
+            <%- include('../partials/like_form') %>
+           
           </div>
         </a>
       </li>

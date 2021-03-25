@@ -32,14 +32,14 @@ db.initialize(dbName, (dbObject) => {
                 return res.status(400).send('Username does not exist')
             }
 
-            //const match = await bcrypt.compare(Password, user.Password)
-            const isPWcorr = Password == user.Password
+            const match = await bcrypt.compare(Password, user.Password)
+            //const isPWcorr = Password == user.Password
 
             //change isPWcorr to match when password is crypted through register
-            if (isPWcorr) {
+            if (match) {
                 req.session.loggedInUser = user._id
                 req.session.userName = Username
-                res.redirect('/savedmatches')
+                res.redirect('/findmatches')
             } else {
                 res.render('pages/login_fail', {
                     title: 'Login Fail Page',
