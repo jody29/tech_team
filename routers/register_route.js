@@ -26,7 +26,12 @@ db.initialize(
     dbName,
     (dbObject) => {
         router.get('/newprofile', (req, res) => {
-            res.render('pages/register.ejs')
+
+
+            res.render('pages/register.ejs',{
+                title:"Register",
+            })
+
         })
 
         router.post(
@@ -35,21 +40,25 @@ db.initialize(
             (req, res) => {
                 // Getting user profile
                 let userProfile = req.body
+
                 let passwordHash = bcrypt.hashSync(
                     req.body.Password,
                     saltRounds
                 )
                 req.body.Password = passwordHash
                 console.log(userProfile)
+
+
                 // calculate age with get age npm package
                 let Age = getAge(userProfile.Birthday)
                 userProfile['Age'] = Age
+                userProfile['LikedProfiles'] = [];
+
                 let userSongs = userProfile.FavSongs
                 // Replace music with renderable spotify objects
                 const loopSongs = async (inputQuery) => {
                     userProfile.FavSongs = await spotAPI.inputLoop(inputQuery)
 
-                    console.log(userProfile)
                     //push data to database
                     const p = dbObject
                         .collection('users')

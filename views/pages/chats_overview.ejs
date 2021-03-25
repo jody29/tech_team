@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+<%- include('../partials/head') %>
+</head>
+<body>
+  <header>
+<%- include('../partials/nav') %>
+</header>
+  <main id="chatsOverview">
+    <ul>
+        <% if (chats.length < 1) { %>
+            <p>Chats are empty</p>
+        <% } %>
+        <% for (let i=0;i < chats.length;i++) { 
+            
+            const otherUser = user.firstName === chats[i].users[0].firstName ? chats[i].users[1] : chats[i].users[0]; 
+        %> 
+
+        <li>
+            <a href="/chat/"></a>
+        </li>
+
+    </ul>
+  </main>
+  
+</body>
+</html>

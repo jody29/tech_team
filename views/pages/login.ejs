@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <head>
 <%- include('../partials/head') %>
+<link href="../css/login.css" rel="stylesheet" type="text/css" />
 </head>
 <body id="login_page">
-  <header>
-<%- include('../partials/nav') %>
-</header>
+
   <main>
-   <%- include('../partials/login_form') %>
+    <img alt="Logo MusicMatch" src="../images/logoMusicMatch.png"/>
+    <p><%= message %></p>
+    <form method="POST" action="/login">
+      <label>Username</label>
+      <input type="text" name="Username" />
+      <label>Password</label>
+      <input type="password" name="Password" />
+      <input type="submit" value="Log in" class="button"/>
+  </form>
+
+  <p>New to MusicMatch? <a aria-label="go to register page" href="/newprofile">Sign up!</a></p>
   </main>
   <%- include('../partials/footer') %>
 </body>

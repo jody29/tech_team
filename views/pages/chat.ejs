@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <%- include('../partials/head') %>
+    <link href="../css/chat.css" rel="stylesheet" type="text/css" />
 <body id="chatPage">
     <header>
 
@@ -9,7 +10,7 @@
 
         <a href="#">
             <img src="" alt="">
-            <p>User</p>
+            <p><%= title %></p>
         </a>
 
         <a href=""></a>
@@ -32,7 +33,7 @@
                 <% } else { %>
                   <div class="incoming">
                     <div class="metadata">
-                      <span class="author"><%= otherUser.firstName %> at</span>
+                      <span class="author"><%= otherUser.Firstname %> at</span>
                       <span class="date"><%= messages[i].date %></span>
                     </div>
                     <p><%= messages[i].message %></p>
@@ -43,18 +44,19 @@
 
         </section>
         
-    <form action="/message" method="POST">
-        <p id="feedback"></p>
+    <form action="/message" method="POST" autocomplete="off">
+        <p id="typing"></p>
         
         <fieldset>
-            <input type="hidden" name="userId">
-            <input type="hidden" name="chatId">
-            <input type="text" name="message" placeholder="type your message...">
-            <button type="submit">Send</button>
+            <input type="hidden" name="userId" value="<%= user._id %>">
+            <input type="hidden" name="chatId" value="<%= id %>" id="chat">
+            <input type="text" name="message" id="message" placeholder="type your message...">
+            <button type="submit" id="submit">Send</button>
         </fieldset>
     </form>
     </article>
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo=" crossorigin="anonymous"></script>
     <script src="../scripts/chat.js"></script>
 </body>
 </html>

@@ -13,10 +13,6 @@ body{
     overflow-y: hidden;
 }
 
-main{
-    padding: 4em 0 6em 0;
-}
-
 header {
     box-shadow: 0px 0px 6px lightgrey;
     padding: 0.5em 1em;
@@ -25,6 +21,8 @@ header {
     z-index: 100;
     top: 0;
     width: 100%;
+
+    position: relative;
 }
 
 header h1 {
@@ -32,6 +30,23 @@ header h1 {
     text-align: center;
     margin: 0 auto;
     font-size: 1.5em;
+}
+
+header form button{
+    display: flex;
+    flex-direction: column;
+
+    border: none;
+    background-color: transparent;
+
+    position:absolute;
+    right:0.75em;
+    top: 0.35em;
+}
+
+header form button svg{
+    width: 1.5em;
+    margin: 0 auto;
 }
 
 header nav{
@@ -72,4 +87,9 @@ header nav ul li a img{
 header nav ul li a p{
     text-align: center;
     padding-top: 3px;
+}
+
+
+main{
+    padding: 1.5em 0 6em 0;
 }

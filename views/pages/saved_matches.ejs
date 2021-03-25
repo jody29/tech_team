@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 <%- include('../partials/head') %>
+<link href="../css/saved_matches.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
   <header>
@@ -15,19 +16,21 @@
           <img src="<%= data[i].imgSource %>" />
           <div>
             <h2><%= data[i].Firstname %> <%= data[i].Lastname %></h2>
-            <p>Age: <%= data[i].age %></p>
+            <p>Age: <%= data[i].Age %></p>
             <ul>
-              <li><%= data[i].FavGenre1 %></li>
-              <li><%= data[i].FavGenre2 %></li>
-              <li><%= data[i].FavGenre3 %></li>
-            </ul>
+              <% for (var s=0; s < data[i].FavGenres.length; s++) { %> 
+              <li>
+                  <p><%= data[i].FavGenres[s] %></p>
+              </li>
+              <% } %>
+          </ul>
           </div>
         </a>
         <form method="POST" action="/savedmatches?_method=DELETE">
           <input value="<%= data[i]._id%>" type="hidden" name="userId" />
           <button type="submit" class="remove">Remove</button>
         </form>
-        <a href="/chat:id">Chat!</a>
+        <a href="/chat/1">Chat!</a>
       </li>
       <% } %>
     </ul>
