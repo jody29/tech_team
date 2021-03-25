@@ -11,7 +11,7 @@ const spotify = new Spotify({
  * Deze functie is async omdat er een promise wordt gereturned. De promise
  * wordt geresolved met een trackObject.
  */
-=
+
 const convertMusic = (inputQuery) => {
 
 
@@ -40,12 +40,6 @@ const convertMusic = (inputQuery) => {
                     // loopt door alle arteist objecten om hun naam op te halen
                     for (let i = 0; i < artistArray.length; i++) {
                         const artist = artistArray[i].name
-
-                       
-                    }
-                    
-
-
                         allArtists.push(artist)
                     }
 
@@ -58,12 +52,7 @@ const convertMusic = (inputQuery) => {
                         spotURL: songdata.external_urls.spotify,
                     }
 
-                    
-                } else {
                     // als er maar een artiest op een track zit
-                    
-
-
                     resolve(trackobject)
                 } else {
                     // als er maar een artiest op een track zit
