@@ -3,11 +3,11 @@ const socket = io.connect('/')
 const typing = document.querySelector('#typing')
 const message = document.querySelector('#message')
 const chatId = document.querySelector('#chat').value
-const messages = document.querySelector('#messages .message-container')
-const sendMessage = document.querySelector('#send-button')
-const username = user.firstName
+const messages = document.querySelector('.messageField')
+const sendMessage = document.querySelector('#submit')
 
 messages.scrollTop = messages.scrollHeight
+console.log(messageSend.scrollTop)
 
 sendMessage.addEventListener('click', (e) => {
     e.preventDefault()

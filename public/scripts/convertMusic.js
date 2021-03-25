@@ -12,7 +12,9 @@ const spotify = new Spotify({
  * wordt geresolved met een trackObject.
  */
 
-function convertMusic(inputQuery) {
+const convertMusic = (inputQuery) => {
+
+
     return new Promise((resolve, reject) => {
         spotify.search(
             { type: 'track', query: inputQuery },
@@ -22,7 +24,11 @@ function convertMusic(inputQuery) {
                 }
                 let songdata = data.tracks.items[0]
 
+                console.log('here is all the song data')
+                console.log(songdata)
                 let songartist = songdata.album.artists[0].name
+                console.log(songartist)
+
 
                 let artistArray = songdata.artists
                 // console.log(artistArray);
@@ -34,7 +40,6 @@ function convertMusic(inputQuery) {
                     // loopt door alle arteist objecten om hun naam op te halen
                     for (let i = 0; i < artistArray.length; i++) {
                         const artist = artistArray[i].name
-
                         allArtists.push(artist)
                     }
 
@@ -47,9 +52,11 @@ function convertMusic(inputQuery) {
                         spotURL: songdata.external_urls.spotify,
                     }
 
+                    // als er maar een artiest op een track zit
                     resolve(trackobject)
                 } else {
                     // als er maar een artiest op een track zit
+
 
                     const trackobject = {
                         title: songdata.name,
@@ -70,7 +77,8 @@ function convertMusic(inputQuery) {
  * Deze functie loopt door de verschillende input strings
  * en verzameld vervolgens trackObjects in een array
  */
-async function inputLoop(inputString) {
+
+const inputLoop = async (inputString) => {
     if (Array.isArray(inputString) == false) {
         let songObject = []
         songObject.push(await convertMusic(inputString))

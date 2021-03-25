@@ -38,6 +38,11 @@ green: #52C9C2
     width: 3em;
 }
 
+#chatPage header a p {
+    width: 10em;
+    text-align: center;
+}
+
 #chatPage form {
     position: fixed;
     bottom: 0;
@@ -83,4 +88,44 @@ green: #52C9C2
     position: relative;
     padding: 2em 1em;
     scrollbar-color: none;
+}
+
+.messageField {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7em;
+    height: 36em;
+    overflow-y: scroll;
+}
+
+.outgoing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+
+.outgoing p {
+    background-color: #52C9C2;
+    padding: 1em;
+    color: white;
+    width: fit-content;
+    max-width: 50%;
+    margin: .5em 0 1.5em;
+    border-radius: 1em 1em 0 1em;
+}
+
+.outgoing + .outgoing p {
+    margin-bottom: 1em;
+}
+
+.incoming p {
+    background-color: #484692;
+    color: white;
+    width: fit-content;
+    max-width: 50%;
+    padding: 1em;
+    margin: .5em 0 1.5em;
+    border-radius: 1em 1em 1em 0;
+
 }

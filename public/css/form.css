@@ -1,63 +1,75 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Helvetica;
 }
-body {
-    font-family: 'Arial', sans-serif;
+
+main > a#back{
+    color: #ffffff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background-image: linear-gradient(to bottom right, #908ede, #484692);
+    align-self: flex-end;
+    border-radius: 15px;
+    margin-bottom: 0.6em;
+    font-size: 0.85em;
+    margin-left: 1.5em;
 }
-header {
-    text-align: center;
-    padding: 2em;
+
+main form {
+    padding: 0 1.5em;
 }
-main {
-    position: relative;
-}
-form {
-    padding: 0 2em;
-    margin-top: 4em;
-}
-label {
-    font-family: 'Raleway', sans-serif;
+main label {
     display: block;
     margin-top: 1.5em;
     margin-bottom: 0.4em;
     font-style: normal;
+    font-size: 1em;
 }
-input {
+main input {
     border-width: 0 0 2px 0;
     border-color: #484692;
     border-radius: 5px;
     display: block;
-    height: 30px;
+
+    font-size: 0.95em;
+    width:80%;
     outline: none;
-    padding: 0.7em;
-    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
+    padding:  0.5em 1em;
+    box-shadow: 0px 0px 6px lightgrey;
 }
-input:focus {
+main input:focus {
     border: 3px solid #52c9c2;
 }
-select {
+
+main select {
     background-color: #ffffff;
     padding: 0.8em;
-    border: 4px solid #484692;
+    border: 2px solid #484692;
     outline: none;
     border-radius: 10px;
-    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 6px lightgrey;
 }
-input:first-of-type {
+
+main input:first-of-type {
     margin-bottom: 1em;
 }
-input[type='date'] {
+
+main input[type='date'] {
     width: 14em;
 }
-input[type='email'] {
+
+main input[type='email'] {
     width: 18em;
 }
-button[type='submit'] {
+
+main button[type='submit'] {
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
-    margin: 3em 0;
+
     background-color: #484692;
     color: #ffffff;
     border-style: none;
@@ -65,35 +77,37 @@ button[type='submit'] {
     border-radius: 50px;
     padding: 1em;
 }
-input[type='password'] {
+
+main input[type='password'] {
     margin-bottom: 1em;
     width: 20em;
 }
-.container {
+
+main .container {
     display: flex;
     justify-content: space-between;
 }
-.checkboxContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#matchGenderContainer {
+
+main #matchGenderContainer {
     margin: 0 2em;
 }
-#matchAgeContainer {
+
+main #matchAgeContainer {
     margin: 0 1.6em;
     align-items: center;
 }
-#matchAgeContainer label {
+
+main #matchAgeContainer label {
     margin: 0;
 }
-.dynamicList {
+
+main .dynamicList {
     display: flex;
     flex-wrap: wrap;
     margin-top: 1em;
 }
-.dynamicList button {
+
+main .dynamicList button {
     display: flex;
     outline: none;
     justify-content: center;
@@ -106,10 +120,12 @@ input[type='password'] {
     background-color: #484692;
     color: #ffffff;
 }
-.dynamicList > input:first-of-type {
+
+main .dynamicList > input:first-of-type {
     width: 16em;
 }
-ul:first-of-type {
+
+main ul:first-of-type {
     margin-top: 1em;
     display: flex;
     flex-wrap: nowrap;
@@ -117,16 +133,19 @@ ul:first-of-type {
     list-style: none;
     width: 100%;
 }
-ul:last-of-type {
+
+main ul:last-of-type {
     margin-top: 1em;
     overflow-x: scroll;
     list-style: none;
     width: 100%;
 }
-#musicContainer {
+
+main #musicContainer {
     flex-direction: column;
 }
-.createdGenres {
+
+main .createdGenres {
     min-width: 25%;
     max-width: 30%;
     margin-right: 1em;
@@ -138,7 +157,8 @@ ul:last-of-type {
     display: block;
     text-transform: capitalize;
 }
-.createdSongs {
+
+main .createdSongs {
     margin-bottom: 1em;
     width: 100%;
     text-align: center;

@@ -31,18 +31,33 @@ db.initialize(dbName, (dbObject) => {
                 Username: req.body.Username,
             })
             if (user == null) {
-                return res.status(400).send('Username does not exist')
+                return res.render('pages/login', {
+                    message: 'Your username or password is wrong... Please try again.',
+                })
             }
+<<<<<<< HEAD
             const isPWcorr = Password == user.Password
             if (isPWcorr) {
+=======
+
+            const match = await bcrypt.compare(Password, user.Password)
+            //const isPWcorr = Password == user.Password
+
+            //change isPWcorr to match when password is crypted through register
+            if (match) {
+>>>>>>> 51c2528ce6f2c98d18e65209d16363015cc29d6b
                 req.session.loggedInUser = user._id
                 req.session.userName = Username
-                res.redirect('/savedmatches')
+                res.redirect('/findmatches')
             } else {
                 res.render('pages/login', {
+<<<<<<< HEAD
                     title: 'Login Page',
                     message:
                         'Your username or password is wrong... Please try again.',
+=======
+                    message: 'Your username or password is wrong... Please try again.',
+>>>>>>> 51c2528ce6f2c98d18e65209d16363015cc29d6b
                 })
             }
         } catch (err) {

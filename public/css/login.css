@@ -11,10 +11,14 @@ main{
   padding: 4em 1em 6em 1em;
 }
 
+main > img{
+  width: 100%;
+}
+
 main > p:first-of-type{
   width: 90%;
   height:3em;
-  margin: 17vh auto 1em auto;
+  margin: 5vh auto 1em auto;
   color: red;
 }
 
