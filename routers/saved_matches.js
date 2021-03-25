@@ -36,6 +36,10 @@ db.initialize(
                             // const chats = chatService.getUserChats
                         }
 
+                        console.log('hoi1', foundProfiles[0].FavGenres[0]),
+                        console.log('hoi1', foundProfiles[0].FavGenres[1]),
+                        console.log('hoi2',foundProfiles[1].FavGenres[0]),
+                        console.log('hoi3', foundProfiles[0].FavGenres.length)
                         // Render saved_matches with filtered array
                         res.render('pages/saved_matches', {
                             data: foundProfiles,

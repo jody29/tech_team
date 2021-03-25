@@ -35,7 +35,7 @@ db.initialize(dbName, (dbObject) => {
                 })
                 res.render('pages/find_matches', {
                     data: results,
-                    title: 'All matches',
+                    title: 'Find matches',
                 })
             })
     })

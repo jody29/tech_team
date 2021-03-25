@@ -16,24 +16,22 @@
             <article>
                 <section id="profileCard">
                     <a href="/editprofile">Edit profile</a>
-                    <div class="container">
-                        <h1><%= data.Firstname %> <%= data.Lastname %></h1>
-                        <h3><%= data.Gender %></h3>
-                    </div>
-                    <h2>Age: <%= data.Age %></h2>
+                    <h1><%= data.Firstname %> <%= data.Lastname %></h1>
+                    <h2><span>Gender:</span> <%= data.Gender %></h2>
+                    <h2><span>Age:</span> <%= data.Age %></h2>
                 </section>
-                <section class="dynamicList" id="profileGenreList">
+                <section  id="profileGenreList">
                     <h4>Favourite Genres</h4>
                     <ul>
                         <% for (var i=0; i < data.FavGenres.length; i++) { %>
                         <li>
-                            <h1 class="songTitle"><%= data.FavGenres[i] %></h1>
+                            <p><%= data.FavGenres[i] %></p>
                         </li>
                         <% } %>
                     </ul>
                 </section>
 
-                <section class="dynamicList" id="profileSongList">
+                <section id="profileSongList">
                     <h4>Favourite Music</h4>
                     <ul>
                         <% for (var i=0; i < data.FavSongs.length; i++) { %>
@@ -46,15 +44,16 @@
                                     src="<%= data.FavSongs[i].coverURL %>"
                                     alt=""
                                 />
-                            </a>
-                            <div class="songContainer">
-                                <h1 class="songTitle">
+                            
+                            <div>
+                                <h1>
                                     <%= data.FavSongs[i].title %>
                                 </h1>
-                                <h2 class="songArtist">
+                                <h2>
                                     Artist: <%= data.FavSongs[i].artist %>
                                 </h2>
                             </div>
+                        </a>
                         </li>
                         <% } %>
                     </ul>

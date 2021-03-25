@@ -72,9 +72,12 @@ main {
     white-space: nowrap;
     text-align: center;
   
-    color: white;
     background-image: linear-gradient(to bottom right, #71ebe3, #52c9c2);
     border-radius: 1em;
+  }
+
+  main ul li a:first-of-type div ul li p{
+    color: white;
   }
   
   main ul li{
@@ -105,6 +108,7 @@ main {
     bottom: 0.5em;
     left: 5em;
     text-decoration: none;
+    color: #484692;
 
     padding: 0.25em 0.75em ;
     border: 1px solid #484692;

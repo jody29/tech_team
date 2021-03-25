@@ -17,7 +17,13 @@
           <div>
             <h2><%= data[i].Firstname %> <%= data[i].Lastname %></h2>
             <p>Age: <%= data[i].Age %></p>
-           
+            <ul>
+              <% for (var s=0; s < data[i].FavGenres.length; s++) { %> 
+              <li>
+                  <p><%= data[i].FavGenres[s] %></p>
+              </li>
+              <% } %>
+          </ul>
           </div>
         </a>
         <form method="POST" action="/savedmatches?_method=DELETE">

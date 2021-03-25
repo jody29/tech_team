@@ -26,7 +26,9 @@ db.initialize(
     dbName,
     (dbObject) => {
         router.get('/newprofile', (req, res) => {
-            res.render('pages/register.ejs')
+            res.render('pages/register.ejs',{
+                title:"Register",
+            })
         })
 
         router.post(
