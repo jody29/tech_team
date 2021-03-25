@@ -31,7 +31,9 @@ db.initialize(dbName, (dbObject) => {
                 Username: req.body.Username,
             })
             if (user == null) {
-                return res.status(400).send('Username does not exist')
+                return res.render('pages/login', {
+                    message: 'Your username or password is wrong... Please try again.',
+                })
             }
 
             //const match = await bcrypt.compare(Password, user.Password)
@@ -44,7 +46,6 @@ db.initialize(dbName, (dbObject) => {
                 res.redirect('/findmatches')
             } else {
                 res.render('pages/login', {
-                    title: 'Login Page',
                     message: 'Your username or password is wrong... Please try again.',
                 })
             }
