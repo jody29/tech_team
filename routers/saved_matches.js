@@ -13,13 +13,13 @@ db.initialize(
     dbName,
     (dbObject) => {
         router.get('/savedmatches', (req, res) => {
-            let loggedUser = req.session.loggedInUser;
+            let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
-            console.log("logged in user:")
-            console.log(loggedIn);
+            console.log('logged in user:')
+            console.log(loggedIn)
             dbObject
                 .collection('users')
-                .findOne({ _id: mongo.ObjectId(loggedIn)}) //id van 'ingelogde persoon'
+                .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
                 .then((results) => {
                     let matches = results.LikedProfiles
                     console.log(results.LikedProfiles)
@@ -32,7 +32,7 @@ db.initialize(
                                 .findOne({
                                     _id: mongo.ObjectId(matches[i]),
                                 })
-                                console.log(pullProfile);
+                            console.log(pullProfile)
                             foundProfiles.push(pullProfile)
                         }
 
@@ -48,7 +48,7 @@ db.initialize(
         })
 
         router.delete('/savedmatches', (req, res) => {
-            let loggedUser = req.session.loggedInUser;
+            let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toSting()
             console.log('Delete request')
             dbObject
