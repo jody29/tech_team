@@ -33,11 +33,7 @@ db.initialize(dbName, (dbObject) => {
             if (user == null) {
                 return res.status(400).send('Username does not exist')
             }
-
-            //const match = await bcrypt.compare(Password, user.Password)
             const isPWcorr = Password == user.Password
-
-            //change isPWcorr to match when password is crypted through register
             if (isPWcorr) {
                 req.session.loggedInUser = user._id
                 req.session.userName = Username
@@ -45,7 +41,8 @@ db.initialize(dbName, (dbObject) => {
             } else {
                 res.render('pages/login', {
                     title: 'Login Page',
-                    message: 'Your username or password is wrong... Please try again.',
+                    message:
+                        'Your username or password is wrong... Please try again.',
                 })
             }
         } catch (err) {
