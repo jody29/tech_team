@@ -32,6 +32,7 @@ db.initialize(
                                 .findOne({
                                     _id: mongo.ObjectId(matches[i]),
                                 })
+
                             foundProfiles.push(pullProfile)
                             // const chats = chatService.getUserChats
                         }
@@ -53,7 +54,9 @@ db.initialize(
 
         router.delete('/savedmatches', (req, res) => {
             let loggedUser = req.session.loggedInUser
-            let loggedIn = loggedUser.toString()
+
+            let loggedIn = loggedUser.toSting()
+
             console.log('Delete request')
             dbObject
                 .collection('users')
