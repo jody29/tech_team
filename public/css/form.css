@@ -7,11 +7,20 @@
   font-family: Helvetica;
 }
 
-main {
-    position: relative;
+main > a#back{
+    color: #ffffff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background-image: linear-gradient(to bottom right, #908ede, #484692);
+    align-self: flex-end;
+    border-radius: 15px;
+    margin-bottom: 0.6em;
+    font-size: 0.85em;
+    margin-left: 1.5em;
 }
+
 main form {
-    padding: 0 2em;
+    padding: 0 1.5em;
 }
 main label {
     display: block;
@@ -39,10 +48,10 @@ main input:focus {
 main select {
     background-color: #ffffff;
     padding: 0.8em;
-    border: 4px solid #484692;
+    border: 2px solid #484692;
     outline: none;
     border-radius: 10px;
-    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 6px lightgrey;
 }
 
 main input:first-of-type {
@@ -60,7 +69,7 @@ main input[type='email'] {
 main button[type='submit'] {
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
-    margin: 3em 0;
+
     background-color: #484692;
     color: #ffffff;
     border-style: none;
@@ -77,11 +86,6 @@ main input[type='password'] {
 main .container {
     display: flex;
     justify-content: space-between;
-}
-.checkboxContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 main #matchGenderContainer {
