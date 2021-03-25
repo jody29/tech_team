@@ -17,6 +17,7 @@
 }
 main {
     position: relative;
+    padding: 0 0 6em 0;
 }
 
 main article {
