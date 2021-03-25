@@ -19,6 +19,11 @@ main > a#back{
     margin-left: 1.5em;
 }
 
+main {
+    height: 100vh;
+    overflow-y: scroll;
+}
+
 main form {
     padding: 0 1.5em;
 }
