@@ -4,7 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const mongo = require('mongodb')
-// const chatService = require('../services/chatService')
+const chatService = require('../services/chatService')
 
 // Database variables
 const db = require('../connection/db')
@@ -36,13 +36,12 @@ db.initialize(
                             foundProfiles.push(pullProfile)
                             // const chats = chatService.getUserChats
                         }
-
-                        // Render saved_matches with filtered array
-                        res.render('pages/saved_matches', {
-                            data: foundProfiles,
-                            title: 'Saved matches',
-                        })
                     }
+
+                    res.render('pages/saved_matches', {
+                        data: foundProfiles,
+                        title: 'Saved matches',
+                    })
 
                     getLikedProfiles(matches)
                 })
@@ -66,20 +65,22 @@ db.initialize(
             
         })
 
-        router.get("/profile/:id", (req, res) => {
-            dbObject.collection('users').findOne({_id: mongo.ObjectId(req.params.id)})
-            .then(results => {
-              console.log(results)
-              res.render("pages/other_profile.ejs", {
-                data: results,
-                title:"My match" 
-              });
-            })
-          });
+        router.get('/profile/:id', (req, res) => {
+            dbObject
+                .collection('users')
+                .findOne({ _id: mongo.ObjectId(req.params.id) })
+                .then((results) => {
+                    console.log(results)
+                    res.render('pages/other_profile.ejs', {
+                        data: results,
+                        title: 'My match',
+                    })
+                })
+        })
 
-          router.delete('/profile/:id', (req, res) => {
+        router.delete('/profile/:id', (req, res) => {
             let loggedUser = req.session.loggedInUser
-            console.log(loggedUser);
+            console.log(loggedUser)
             let loggedIn = loggedUser.toString()
             console.log('Delete request')
             dbObject
@@ -91,7 +92,6 @@ db.initialize(
                 .then(() => {
                     res.redirect('/savedmatches')
                 })
-
         })
     },
     (err) => {

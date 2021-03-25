@@ -10,7 +10,8 @@
   </header>
   <main>
     <ul>
-      <% for(var i=0; i < data.length; i++) {%>
+      <% for (let i=0; i < data.length; i++) {%>
+        
       <li>
         <a href="/profile/<%= data[i]._id%>">
           <img src="<%= data[i].imgSource %>" />
@@ -30,6 +31,7 @@
           <input value="<%= data[i]._id%>" type="hidden" name="userId" />
           <button type="submit" class="remove">Remove</button>
         </form>
+        
         <a href="/chat/1">Chat!</a>
       </li>
       <% } %>
