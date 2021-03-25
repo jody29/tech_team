@@ -16,6 +16,7 @@ const saltRounds = 10
 router.get('/', (req, res) => {
     res.render('pages/login', {
         title: 'Login Page',
+        message: ''
     })
 })
 
@@ -29,7 +30,10 @@ db.initialize(dbName, (dbObject) => {
                 Username: req.body.Username,
             })
             if (user == null) {
-                return res.status(400).send('Username does not exist')
+                return res.render('pages/login', {
+                    title: 'Login Page',
+                    message: 'Your username or password is wrong. Please try again'
+                })
             }
 
             const match = await bcrypt.compare(Password, user.Password)
@@ -37,10 +41,11 @@ db.initialize(dbName, (dbObject) => {
             if (match) {
                 req.session.loggedInUser = user._id
                 req.session.userName = Username
-                res.redirect('/savedmatches')
+                res.redirect('/findmatches')
             } else {
-                res.render('pages/login_fail', {
-                    title: 'Login Fail Page',
+                res.render('pages/login', {
+                    title: 'Login Page',
+                    message: 'Your username or password is wrong. Please try again'
                 })
             }
         } catch (err) {
