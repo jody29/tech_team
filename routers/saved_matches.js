@@ -37,10 +37,6 @@ db.initialize(
                             // const chats = chatService.getUserChats
                         }
 
-                        console.log('hoi1', foundProfiles[0].FavGenres[0]),
-                        console.log('hoi1', foundProfiles[0].FavGenres[1]),
-                        console.log('hoi2',foundProfiles[1].FavGenres[0]),
-                        console.log('hoi3', foundProfiles[0].FavGenres.length)
                         // Render saved_matches with filtered array
                         res.render('pages/saved_matches', {
                             data: foundProfiles,
@@ -54,8 +50,7 @@ db.initialize(
 
         router.delete('/savedmatches', (req, res) => {
             let loggedUser = req.session.loggedInUser
-
-            let loggedIn = loggedUser.toSting()
+            let loggedIn = loggedUser.toString()
 
             console.log('Delete request')
             dbObject
@@ -68,16 +63,7 @@ db.initialize(
                     res.redirect('/savedmatches')
                 })
 
-            dbObject
-                .collection('users')
-                .find()
-                .toArray()
-                .then((results) => {
-                    res.render('pages/saved_matches', {
-                        data: results,
-                        title: 'Saved matches',
-                    })
-                })
+            
         })
 
         router.get("/profile/:id", (req, res) => {

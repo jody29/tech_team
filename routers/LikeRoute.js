@@ -3,6 +3,7 @@ const router = express.Router()
 const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const mongo = require('mongodb')
 const { ObjectID, MongoClient } = require('mongodb')
 
 // Database variables
@@ -11,20 +12,20 @@ const dbName = process.env.DB_NAME
 
 //liking a profile
 db.initialize(dbName, (dbObject) => {
-    router.post('/like', async (req, res) => {
-        try {
-            const user = await dbObject.collection('users').findOne({
-                _id: ObjectID(req.session.loggedInUser),
-            })
-            await dbObject
+    router.post('/like', (req, res) => {
+        let loggedUser = req.session.loggedInUser
+            let loggedIn = loggedUser.toString()
+
+            console.log('post request')
+            dbObject
                 .collection('users')
-                .findOneAndUpdate(
-                    { _id: ObjectID(req.session.loggedInUser) },
+                .updateOne(
+                    { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
                     { $push: { LikedProfiles: req.body.id } }
-                )
-        } catch (err) {
-            console.log(err)
-        }
+                ) // wat er geupdate moet worden
+                .then((results) => {
+                    res.redirect('/findmatches')
+                })
     })
 })
 

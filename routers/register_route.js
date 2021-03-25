@@ -63,10 +63,7 @@ db.initialize(
                     const p = dbObject
                         .collection('users')
                         .insertOne(userProfile)
-                    res.render('pages/profile.ejs', {
-                        data: userProfile,
-                        title: 'My profile',
-                    })
+                    res.redirect('/')
                 }
 
                 loopSongs(userSongs)

@@ -12,12 +12,11 @@ const dbName = process.env.DB_NAME
 const bcrypt = require('bcrypt')
 const { compare } = require('bcrypt')
 const saltRounds = 10
-
 //Login Page route
 router.get('/', (req, res) => {
     res.render('pages/login', {
         title: 'Login Page',
-        message: '',
+        message: ''
     })
 })
 
@@ -32,21 +31,21 @@ db.initialize(dbName, (dbObject) => {
             })
             if (user == null) {
                 return res.render('pages/login', {
-                    message: 'Your username or password is wrong... Please try again.',
+                    title: 'Login Page',
+                    message: 'Your username or password is wrong. Please try again'
                 })
             }
 
             const match = await bcrypt.compare(Password, user.Password)
-            //const isPWcorr = Password == user.Password
 
-            //change isPWcorr to match when password is crypted through register
             if (match) {
                 req.session.loggedInUser = user._id
                 req.session.userName = Username
                 res.redirect('/findmatches')
             } else {
                 res.render('pages/login', {
-                    message: 'Your username or password is wrong... Please try again.',
+                    title: 'Login Page',
+                    message: 'Your username or password is wrong. Please try again'
                 })
             }
         } catch (err) {
