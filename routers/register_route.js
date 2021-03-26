@@ -26,13 +26,10 @@ db.initialize(
     dbName,
     (dbObject) => {
         router.get('/newprofile', (req, res) => {
-
-
-            res.render('pages/register.ejs',{
-                title:"Register",
-                message: ""
+            res.render('pages/register.ejs', {
+                title: 'Register',
+                message: '',
             })
-
         })
 
         router.post(
@@ -47,36 +44,40 @@ db.initialize(
                 console.log(pass1)
                 console.log(pass2)
                 if (pass1 !== pass2) {
-                    console.log('incorrect password');
-                    res.render('pages/register', { message: "passwords do not match"});
+                    console.log('incorrect password')
+                    res.render('pages/register', {
+                        message: 'passwords do not match',
+                    })
                 } else {
-                delete userProfile.PasswordCheck
-                let passwordHash = bcrypt.hashSync(
-                    req.body.Password,
-                    saltRounds
-                )
-                req.body.Password = passwordHash
-                console.log(userProfile)
+                    delete userProfile.PasswordCheck
+                    let passwordHash = bcrypt.hashSync(
+                        req.body.Password,
+                        saltRounds
+                    )
+                    req.body.Password = passwordHash
+                    console.log(userProfile)
 
+                    // calculate age with get age npm package
+                    let Age = getAge(userProfile.Birthday)
+                    userProfile['Age'] = Age
+                    userProfile['LikedProfiles'] = []
 
-                // calculate age with get age npm package
-                let Age = getAge(userProfile.Birthday)
-                userProfile['Age'] = Age
-                userProfile['LikedProfiles'] = [];
+                    let userSongs = userProfile.FavSongs
+                    // Replace music with renderable spotify objects
+                    const loopSongs = async (inputQuery) => {
+                        userProfile.FavSongs = await spotAPI.inputLoop(
+                            inputQuery
+                        )
+                        //push data to database
+                        const p = dbObject
+                            .collection('users')
+                            .insertOne(userProfile)
+                        res.redirect('/')
+                    }
 
-                let userSongs = userProfile.FavSongs
-                // Replace music with renderable spotify objects
-                const loopSongs = async (inputQuery) => {
-                    userProfile.FavSongs = await spotAPI.inputLoop(inputQuery)
-                    //push data to database
-                    // const p = dbObject
-                    //     .collection('users')
-                    //     .insertOne(userProfile)
-                    res.redirect('/')
+                    loopSongs(userSongs)
                 }
-
-                loopSongs(userSongs)
-            }}
+            }
         )
     },
     (err) => {

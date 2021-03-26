@@ -29,7 +29,11 @@ db.initialize(dbName, (dbObject) => {
                         .collection('users')
                         .updateOne(
                             { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
-                            { $push: { LikedProfiles: req.body.id } }
+                            {
+                                $push: {
+                                    LikedProfiles: mongo.ObjectId(req.body.id),
+                                },
+                            }
                         ) // wat er geupdate moet worden
                         .then((results) => {
                             res.redirect('/findmatches')
