@@ -1,13 +1,13 @@
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: Helvetica;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica;
 }
 
-main > a#back{
+main > a#back {
     color: #ffffff;
     padding: 0.5em 1em;
     text-decoration: none;
@@ -20,7 +20,7 @@ main > a#back{
 }
 
 main {
-    height: 100vh;
+    height: 90vh;
     overflow-y: scroll;
 }
 
@@ -41,9 +41,9 @@ main input {
     display: block;
 
     font-size: 0.95em;
-    width:80%;
+    width: 80%;
     outline: none;
-    padding:  0.5em 1em;
+    padding: 0.5em 1em;
     box-shadow: 0px 0px 6px lightgrey;
 }
 main input:focus {
