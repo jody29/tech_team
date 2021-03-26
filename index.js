@@ -8,15 +8,13 @@ const express = require('express')
 const app = express()
 const session = require('express-session')
 const bodyParser = require('body-parser')
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 const path = require('path')
 const PORT = process.env.PORT || 8000
-const http = require('http')
-const server = http.createServer(app)
+const server = require('http').Server(app)
 
 module.exports = {
     server,
+    PORT,
 }
 
 // EJS setup
@@ -37,6 +35,8 @@ app.use(
         saveUninitialized: false,
     })
 )
+
+require('./websocket.js')
 
 // Set Routers
 const rateLimitRoute = require('./routers/rateLimitRoute')
@@ -74,6 +74,6 @@ app.use((req, res, next) => {
 })
 
 // Express listens to PORT 8000
-app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`)
-})
+// app.listen(PORT, () => {
+//     console.log(`http://localhost:${PORT}`)
+// })

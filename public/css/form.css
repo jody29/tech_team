@@ -6,11 +6,7 @@
     margin: 0;
     font-family: Helvetica;
 }
-/* due to some weird scroling issue, we had to set the body tag on this page */
-body {
-    height: 90vh;
-    overflow-y: scroll;
-}
+
 main > a#back {
     color: #ffffff;
     padding: 0.5em 1em;
@@ -21,6 +17,11 @@ main > a#back {
     margin-bottom: 0.6em;
     font-size: 0.85em;
     margin-left: 1.5em;
+}
+
+main {
+    height: 90vh;
+    overflow-y: scroll;
 }
 
 main form {
