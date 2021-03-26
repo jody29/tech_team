@@ -22,25 +22,58 @@ db.initialize(
                 .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
                 .then((results) => {
                     let matches = results.LikedProfiles
-                    console.log(results.LikedProfiles)
+                    // console.log(results.LikedProfiles)
+                    let user = results
                     let foundProfiles = []
+                    let userChat = []
+                    let chats = []
 
-                    async function getLikedProfiles(matches) {
-                        for (i = 0; i < matches.length; i++) {
+                    const getLikedProfiles = async (data) => {
+                        for (let i = 0; i < data.length; i++) {
                             const pullProfile = await dbObject
                                 .collection('users')
                                 .findOne({
-                                    _id: mongo.ObjectId(matches[i]),
+                                    _id: mongo.ObjectId(data[i]),
                                 })
-                            foundProfiles.push(pullProfile)
-                            // const chats = chatService.getUserChats
-                        }
-                    }
+                            if (pullProfile) {
+                                foundProfiles.push(pullProfile)
+                            }
 
-                    res.render('pages/saved_matches', {
-                        data: foundProfiles,
-                        title: 'Saved matches',
-                    })
+                            // console.log(userChat)
+                        }
+
+                        foundProfiles.forEach(async (profile) => {
+                            userChat.push(
+                                dbObject
+                                    .collection('chats')
+                                    .findOne({
+                                        users: {
+                                            $all: [profile._id, user._id],
+                                        },
+                                    })
+                                    .then((result) => {
+                                        result.users = result.users.map(
+                                            (user) => user.toHexString()
+                                        )
+                                        return result
+                                    })
+                            )
+                            profile._id = profile._id.toHexString()
+                        })
+
+                        const allChats = await Promise.all(userChat)
+
+                        chats = allChats
+
+                        console.log(chats)
+                        console.log(foundProfiles)
+
+                        res.render('pages/saved_matches', {
+                            data: foundProfiles,
+                            title: 'Saved matches',
+                            chats: chats,
+                        })
+                    }
 
                     getLikedProfiles(matches)
                 })
