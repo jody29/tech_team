@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <link href="../css/chat.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="chatPage">
+    <header>
+
+        <a href="/savedmatches">terug</a>
+
+        <a href="/profile/<%= otherUser._id %>">
+            <img src="" alt="">
+            <p><%= title %></p>
+        </a>
+
+        <a href=""></a>
+        
+    </header>
+
+    <article class="chatField">
+
+        <section class="messageField">
+
+            <% for (let i = 0;i < messages.length;i++) { %>
+                <% if (messages[i].userId == user._id) { %>
+                  <div class="outgoing">
+                    <div class="metadata">
+                      <span class="author">You at</span>
+                      <span class="date"><%= messages[i].date %></span>
+                    </div>
+                    <p><%= messages[i].message %></p>
+                  </div>            
+                <% } else { %>
+                  <div class="incoming">
+                    <div class="metadata">
+                      <span class="author"><%= otherUser.Firstname %> at</span>
+                      <span class="date"><%= messages[i].date %></span>
+                    </div>
+                    <p><%= messages[i].message %></p>
+                  </div>                
+                <% } %>
+              <% } %>
+            
+
+        </section>
+        
+    <form action="/message" method="POST" autocomplete="off">
+        <p id="typing"></p>
+        
+        <fieldset>
+            <input type="hidden" name="userId" value="<%= user._id %>">
+            <input type="hidden" name="chatId" value="<%= id %>" id="chat">
+            <input type="text" name="message" id="message" placeholder="type your message...">
+            <button type="submit" id="submit">Send</button>
+        </fieldset>
+    </form>
+    </article>
+    <script>
+      const user = <%- JSON.stringify(user)%>
+      const otherUser = <%- JSON.stringify(otherUser)%>
+    </script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../scripts/chat.js"></script>
+</body>
+</html>

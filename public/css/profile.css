@@ -1,0 +1,153 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Helvetica;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main {
+    position: relative;
+    padding: 0 0 6em 0;
+}
+
+main div#profileImage {
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F7%2F7c%2FProfile_avatar_placeholder_large.png&f=1&nofb=1');
+    height: 300px;
+}
+
+main article {
+    margin-top: -2.8em;
+    padding: 1.5em;
+    border-radius: 30px 30px 0 0;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+/*---------------------------- section 1 ---------------------------*/
+main article section#profileCard {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+main article section#profileCard a {
+    color: #fff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background-image: linear-gradient(to bottom right, #908ede, #484692);
+    align-self: flex-end;
+    border-radius: 10px;
+    margin-bottom: 0.6em;
+    font-size: 0.85em;
+}
+
+main article section#profileCard h1 {
+    font-size: 2em;
+}
+
+main article section#profileCard h2 {
+    font-size: 1.1em;
+    font-weight: 400;
+    margin-top: 0.25em;
+}
+
+main article section#profileCard h2:first-of-type{
+    margin-top: 0.5em;
+}
+
+main article section#profileCard h2 span{
+    font-weight: bolder;
+}
+
+
+/*---------------------------- section 2 ---------------------------*/
+main article section#profileGenreList{
+    margin-top: 1em;
+}
+
+main article section#profileGenreList h4{
+    font-size: 1.2em;
+
+}
+
+main article section#profileGenreList ul {
+    max-height: 200px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.4em;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    margin-top: 0.25em;
+}
+
+main article section#profileGenreList ul li {
+    background-image: linear-gradient(to bottom right, #71ebe3, #52c9c2);
+    display: flex;
+    align-items: center;
+    padding: 0.6em 1.2em;
+    border-radius: 30px;
+
+    margin-right: 1em;
+}
+
+main article section#profileGenreList ul li p {
+    color: white;
+    font-size: 1em;
+}
+
+/*---------------------------- section 3 ---------------------------*/
+main article section#profileSongList h4:first-of-type {
+    font-size: 1.2em;
+    margin-top: 1em;
+}
+
+main article section#profileSongList ul {
+    flex-direction: column;
+    overflow-y: scroll;
+    max-height: 200px;
+    overflow: scroll;
+    display: flex;
+    margin-top: 0.25em;
+}
+
+main article section#profileSongList ul li {
+    background-color: #484692;
+    font-size: 0.8em;
+    flex-direction: row;
+    padding: 0.4em;
+    border-radius: 14px;
+    margin-bottom: 0.4em;
+}
+
+main article section#profileSongList ul li a{
+    display: flex;
+    align-items: center;
+}
+
+main article section#profileSongList ul li a img {
+    border-radius: 10px;
+    height: 50px;
+    width: 50px;
+    margin-right: 1em;
+}
+
+main article section#profileSongList ul li a div h1 {
+    font-weight: 400;
+    color: white;
+}
+
+main article section#profileSongList ul li a div h2 {
+    color: white;
+    font-weight: 200;
+    font-size: 0.9em;
+}

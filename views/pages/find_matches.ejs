@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+<%- include('../partials/head') %>
+<link href="../css/find_matches.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <header>
+    <%- include('../partials/header') %>
+<%- include('../partials/nav') %>
+</header>
+  <main>
+     <ul>
+      <% for(var i=0; i < data.length; i++) {%>
+      <li>
+        <a href="/profile/<%= data[i]._id%>">
+          <img src="<%= data[i].imgSource %>" />
+          <div>
+            <h2><%= data[i].Firstname %> <%= data[i].Lastname %></h2>
+            <p>Age: <%= data[i].age %></p>
+            <p>Fav genres are: <%= data[i].FavGenres %></p>
+            <form method="POST" action="/like">
+              <input type="hidden" name="LikedProfiles" value="<%= data[i].LikedProfiles%>" />
+              <input type="hidden" name="id" value="<%= data[i]._id%>" />
+              <input type="submit" value="Like" />
+          </form>
+           
+          </div>
+        </a>
+      </li>
+      <% } %>
+    </ul>
+    <p>This is the end of the list!</p>
+  </main>
+  <%- include('../partials/footer') %>
+</body>
+</html>
