@@ -43,4 +43,4 @@ db.initialize(dbName, (dbObject) => {
     })
 })
 
-server.listen(8000)
+server.listen(process.env.PORT || 8000)
