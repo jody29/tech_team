@@ -1,10 +1,14 @@
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: Helvetica;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica;
+}
+body {
+    height: 90vh;
+    overflow-y: scroll;
 }
 
 .container {
@@ -25,7 +29,7 @@ main div#profileImage {
 
 main article {
     margin-top: -2.8em;
-    padding: 1.5em;
+    padding: 1.5em 1.5em 2em 1.5em;
     border-radius: 30px 30px 0 0;
     background: #fff;
     display: flex;
@@ -60,23 +64,21 @@ main article section#profileCard h2 {
     margin-top: 0.25em;
 }
 
-main article section#profileCard h2:first-of-type{
+main article section#profileCard h2:first-of-type {
     margin-top: 0.5em;
 }
 
-main article section#profileCard h2 span{
+main article section#profileCard h2 span {
     font-weight: bolder;
 }
 
-
 /*---------------------------- section 2 ---------------------------*/
-main article section#profileGenreList{
+main article section#profileGenreList {
     margin-top: 1em;
 }
 
-main article section#profileGenreList h4{
+main article section#profileGenreList h4 {
     font-size: 1.2em;
-
 }
 
 main article section#profileGenreList ul {
@@ -114,7 +116,6 @@ main article section#profileSongList h4:first-of-type {
 main article section#profileSongList ul {
     flex-direction: column;
     overflow-y: scroll;
-    max-height: 200px;
     overflow: scroll;
     display: flex;
     margin-top: 0.25em;
@@ -129,7 +130,7 @@ main article section#profileSongList ul li {
     margin-bottom: 0.4em;
 }
 
-main article section#profileSongList ul li a{
+main article section#profileSongList ul li a {
     display: flex;
     align-items: center;
 }

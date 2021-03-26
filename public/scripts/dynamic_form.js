@@ -12,7 +12,7 @@ const insertGenre = () => {
         document.querySelector('#genreInput').value = ''
 
         // Declaring the new element with its upcomming parent
-        const queryList = document.querySelector('#genreContainer > #genreContainer')
+        const queryList = document.querySelector('#genreContainer')
         const newFormInput = document.createElement('input')
 
         // setting atributes
