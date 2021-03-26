@@ -49,32 +49,35 @@ db.initialize(
                         message: 'passwords do not match',
                     })
                 } else {
-                delete userProfile.PasswordCheck
-                let passwordHash = bcrypt.hashSync(
-                    req.body.Password,
-                    saltRounds
-                )
-                req.body.Password = passwordHash
-                console.log(userProfile)
+                    delete userProfile.PasswordCheck
+                    let passwordHash = bcrypt.hashSync(
+                        req.body.Password,
+                        saltRounds
+                    )
+                    req.body.Password = passwordHash
+                    console.log(userProfile)
 
+                    // calculate age with get age npm package
+                    let Age = getAge(userProfile.Birthday)
+                    userProfile['Age'] = Age
+                    userProfile['LikedProfiles'] = []
 
-                // calculate age with get age npm package
-                let Age = getAge(userProfile.Birthday)
-                userProfile['Age'] = Age
-                userProfile['LikedProfiles'] = [];
+                    let userSongs = userProfile.FavSongs
+                    // Replace music with renderable spotify objects
+                    const loopSongs = async (inputQuery) => {
+                        userProfile.FavSongs = await spotAPI.inputLoop(
+                            inputQuery
+                        )
 
-                let userSongs = userProfile.FavSongs
-                // Replace music with renderable spotify objects
-                const loopSongs = async (inputQuery) => {
-                    userProfile.FavSongs = await spotAPI.inputLoop(inputQuery)
-                    
-                    const p = dbObject
-                        .collection('users')
-                        .insertOne(userProfile)
-                    res.render('pages/login', {
-                        title: 'Login Page',
-                        message: 'Your account has been created! log in using the form below.'
-                    })
+                        const p = dbObject
+                            .collection('users')
+                            .insertOne(userProfile)
+                        res.render('pages/login', {
+                            title: 'Login Page',
+                            message:
+                                'Your account has been created! log in using the form below.',
+                        })
+                    }
                 }
             }
         )
