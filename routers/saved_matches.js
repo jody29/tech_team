@@ -36,6 +36,7 @@ db.initialize(
                                 })
                             foundProfiles.push(pullProfile)
                         }
+                        
                         res.render('pages/saved_matches', {
                             data: foundProfiles,
                             title: 'Saved matches',
@@ -59,16 +60,6 @@ db.initialize(
                     res.redirect('/savedmatches')
                 })
 
-            dbObject
-                .collection('users')
-                .find()
-                .toArray()
-                .then((results) => {
-                    res.render('pages/saved_matches', {
-                        data: results,
-                        title: 'Saved matches',
-                    })
-                })
         })
 
         router.get('/profile/:id', (req, res) => {
