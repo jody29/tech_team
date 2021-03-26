@@ -19,9 +19,8 @@
             <p>Age: <%= data[i].age %></p>
             <p>Fav genres are: <%= data[i].FavGenres %></p>
             <form method="POST" action="/like">
-              <!-- <input type="hidden" name="ID" value="<%= //data[i]._id %>"> -->
+              <input type="hidden" name="LikedProfiles" value="<%= data[i].LikedProfiles%>" />
               <input type="hidden" name="id" value="<%= data[i]._id%>" />
-              <!-- Binnen in de value van de input met name hidden met het ._id van de gebruiker uit de DB komen te staan-->
               <input type="submit" value="Like" />
           </form>
            

@@ -4,8 +4,8 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const mongo = require('mongodb')
-const multer  = require('multer')
-const getAge = require("get-age")
+const multer = require('multer')
+const getAge = require('get-age')
 const upload = multer({ dest: 'images/profile' })
 
 // Database variables
@@ -22,22 +22,21 @@ db.initialize(
     dbName,
     (dbObject) => {
         router.get('/profile', (req, res) => {
-            let loggedUser = req.session.loggedInUser;
+            let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
-            console.log("logged in user:")
-            console.log(loggedIn);
+            console.log('logged in user:')
+            console.log(loggedIn)
+
             dbObject
                 .collection('users')
-                .findOne({ _id: mongo.ObjectId(loggedIn)}) //id van 'ingelogde persoon'
+                .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
                 .then((results) => {
-                    
-                        res.render('pages/profile', {
-                            data: results,
-                            title: 'Profile',
-                        })
-                    }
-                )
-        }) 
+                    res.render('pages/profile', {
+                        data: results,
+                        title: 'Profile',
+                    })
+                })
+        })
     },
     (err) => {
         throw err
