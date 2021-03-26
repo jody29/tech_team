@@ -6,7 +6,6 @@ const session = require('express-session')
 const mongo = require('mongodb')
 const multer = require('multer')
 const getAge = require('get-age')
-const upload = multer({ dest: 'images/profile' })
 
 // Database variables
 
@@ -32,55 +31,51 @@ db.initialize(
             })
         })
 
-        router.post(
-            '/newProfileSubmit',
-            upload.single('profileImage'),
-            (req, res) => {
-                // Getting user profile
-                let userProfile = req.body
+        router.post('/newProfileSubmit', (req, res) => {
+            // Getting user profile
+            let userProfile = req.body
 
-                let pass1 = userProfile.Password
-                let pass2 = userProfile.PasswordCheck
-                console.log(pass1)
-                console.log(pass2)
-                if (pass1 !== pass2) {
-                    console.log('incorrect password')
-                    res.render('pages/register', {
-                        message: 'passwords do not match',
+            let pass1 = userProfile.Password
+            let pass2 = userProfile.PasswordCheck
+            console.log(pass1)
+            console.log(pass2)
+            if (pass1 !== pass2) {
+                console.log('incorrect password')
+                res.render('pages/register', {
+                    message: 'passwords do not match',
+                })
+            } else {
+                delete userProfile.PasswordCheck
+                let passwordHash = bcrypt.hashSync(
+                    req.body.Password,
+                    saltRounds
+                )
+                req.body.Password = passwordHash
+                console.log(userProfile)
+
+                // calculate age with get age npm package
+                let Age = getAge(userProfile.Birthday)
+                userProfile['Age'] = Age
+                userProfile['LikedProfiles'] = []
+
+                let userSongs = userProfile.FavSongs
+                // Replace music with renderable spotify objects
+                const loopSongs = async (inputQuery) => {
+                    userProfile.FavSongs = await spotAPI.inputLoop(inputQuery)
+
+                    const p = dbObject
+                        .collection('users')
+                        .insertOne(userProfile)
+                    res.render('pages/login', {
+                        title: 'Login Page',
+                        message:
+                            'Your account has been created! log in using the form below.',
                     })
-                } else {
-                    delete userProfile.PasswordCheck
-                    let passwordHash = bcrypt.hashSync(
-                        req.body.Password,
-                        saltRounds
-                    )
-                    req.body.Password = passwordHash
-                    console.log(userProfile)
-
-                    // calculate age with get age npm package
-                    let Age = getAge(userProfile.Birthday)
-                    userProfile['Age'] = Age
-                    userProfile['LikedProfiles'] = []
-
-                    let userSongs = userProfile.FavSongs
-                    // Replace music with renderable spotify objects
-                    const loopSongs = async (inputQuery) => {
-                        userProfile.FavSongs = await spotAPI.inputLoop(
-                            inputQuery
-                        )
-
-                        const p = dbObject
-                            .collection('users')
-                            .insertOne(userProfile)
-                        res.render('pages/login', {
-                            title: 'Login Page',
-                            message:
-                                'Your account has been created! log in using the form below.',
-                        })
-                    }
                 }
+
+                loopSongs(userSongs)
             }
-        )
+        })
     },
     (err) => {
         throw err
