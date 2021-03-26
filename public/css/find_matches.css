@@ -31,8 +31,12 @@ main > ul > li a img {
     height: 272px;
 }
 
+main > ul > li a div > p {
+    margin-top: 0.5em;
+}
+
 main > ul > li a ul {
-    margin: 1em 0;
+    margin: 0.25em 0;
     display: flex;
     width: 100%;
     overflow: scroll;
