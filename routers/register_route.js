@@ -68,11 +68,14 @@ db.initialize(
                 // Replace music with renderable spotify objects
                 const loopSongs = async (inputQuery) => {
                     userProfile.FavSongs = await spotAPI.inputLoop(inputQuery)
-                    //push data to database
-                    // const p = dbObject
-                    //     .collection('users')
-                    //     .insertOne(userProfile)
-                    res.redirect('/')
+                    
+                    const p = dbObject
+                        .collection('users')
+                        .insertOne(userProfile)
+                    res.render('pages/login', {
+                        title: 'Login Page',
+                        message: 'Your account has been created! log in using the form below.'
+                    })
                 }
 
                 loopSongs(userSongs)

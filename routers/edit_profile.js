@@ -44,6 +44,7 @@ db.initialize(
 
         router.get("/deleteAccount", async (req, res) => {
             // Delete account based on the activeuserID
+            
             const p = await dbObject.collection('users').deleteOne({ _id: mongo.ObjectId(activeuserID) });
             console.log("an account is being deleted")
             res.redirect('/')
