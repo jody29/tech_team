@@ -10,7 +10,7 @@ For Blok-Tech we have to create a feauture for a matching-webapp. We learn to wo
 
 
 
-### The feature
+### The Application
 
 
 ## :computer: How to install
