@@ -42,6 +42,18 @@ main article section#profileCard {
     flex-direction: column;
     margin-bottom: 1em;
 }
+main article section#profileCard form button {
+    outline: none;
+    display: block;
+    color: #484692;
+    background-color: white;
+    border-radius: 5px;
+    padding: 0.25em 0.75em;
+    border: 2px solid #484692;
+    width: 70%;
+    margin: 0 auto 0.75em auto;
+    font-size: 1.25em;
+}
 
 main article section#profileCard a {
     color: #fff;
