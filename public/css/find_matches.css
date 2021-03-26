@@ -16,7 +16,7 @@ main > ul {
     list-style-type: none;
 }
 
-main > ul > li a {
+main > ul > li  {
     border-radius: 1em;
     display: block;
     padding: 0.875em;
@@ -25,23 +25,23 @@ main > ul > li a {
     box-shadow: 0px 0px 6px lightgrey;
 }
 
-main > ul > li a img {
+main > ul > li > img {
     background-color: #52c9c2;
     width: 272px;
     height: 272px;
 }
 
-main > ul > li a div > p {
+main > ul > li > div > p {
     margin-top: 0.5em;
 }
 
-main > ul > li a ul {
+main > ul li ul {
     margin: 0.25em 0;
     display: flex;
     width: 100%;
     overflow: scroll;
 }
-main > ul > li a ul li {
+main > ul li ul li {
     list-style: none;
     margin: 0 0.25em;
     padding: 0.5em 1em;
@@ -51,10 +51,10 @@ main > ul > li a ul li {
     background-image: linear-gradient(to bottom right, #71ebe3, #52c9c2);
     border-radius: 1em;
 }
-main > ul > li a ul li p {
+main > ul li ul li p {
     color: #ffffff;
 }
-main > ul > li a form input[type='submit'] {
+main > ul li form input[type='submit'] {
     outline: none;
     font-family: 'Raleway', sans-serif;
     font-weight: 200;
