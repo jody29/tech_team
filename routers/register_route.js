@@ -30,6 +30,7 @@ db.initialize(
 
             res.render('pages/register.ejs',{
                 title:"Register",
+                message: ""
             })
 
         })
@@ -47,8 +48,7 @@ db.initialize(
                 console.log(pass2)
                 if (pass1 !== pass2) {
                     console.log('incorrect password');
-                    res.redirect('/newprofile');
-                    window.Alert("Passwords are not the same! Please try again");
+                    res.render('pages/register', { message: "passwords do not match"});
                 } else {
                 delete userProfile.PasswordCheck
                 let passwordHash = bcrypt.hashSync(
