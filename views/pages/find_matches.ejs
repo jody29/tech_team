@@ -12,12 +12,19 @@
      <ul>
       <% for(var i=0; i < data.length; i++) {%>
       <li>
-        <a href="/profile/<%= data[i]._id%>">
           <img src="<%= data[i].imgSource %>" />
           <div>
             <h2><%= data[i].Firstname %> <%= data[i].Lastname %></h2>
-            <p>Age: <%= data[i].age %></p>
-            <p>Fav genres are: <%= data[i].FavGenres %></p>
+            <p>Age: <%= data[i].Age %></p>
+            <p>Fav genres are:</p>
+            <ul>
+              <% for (var s=0; s < data[i].FavGenres.length; s++) { %> 
+                <li>
+                    <p><%= data[i].FavGenres[s] %></p>
+                </li>
+                <% } %>
+            </ul>
+            
             <form method="POST" action="/like">
               <input type="hidden" name="LikedProfiles" value="<%= data[i].LikedProfiles%>" />
               <input type="hidden" name="id" value="<%= data[i]._id%>" />
@@ -25,7 +32,6 @@
           </form>
            
           </div>
-        </a>
       </li>
       <% } %>
     </ul>

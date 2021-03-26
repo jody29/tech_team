@@ -27,30 +27,30 @@ main {
 main form {
     padding: 0 1.5em;
 }
-main label {
+main form label {
     display: block;
     margin-top: 1.5em;
-    margin-bottom: 0.4em;
+    margin-bottom: 0.65em;
     font-style: normal;
     font-size: 1em;
 }
-main input {
+main form input {
+    margin-bottom: 1em;
     border-width: 0 0 2px 0;
     border-color: #484692;
     border-radius: 5px;
     display: block;
-
     font-size: 0.95em;
     width: 80%;
     outline: none;
     padding: 0.5em 1em;
     box-shadow: 0px 0px 6px lightgrey;
 }
-main input:focus {
+main form input:focus {
     border: 3px solid #52c9c2;
 }
 
-main select {
+main form select {
     background-color: #ffffff;
     padding: 0.8em;
     border: 2px solid #484692;
@@ -59,60 +59,23 @@ main select {
     box-shadow: 0px 0px 6px lightgrey;
 }
 
-main input:first-of-type {
-    margin-bottom: 1em;
-}
-
-main input[type='date'] {
-    width: 14em;
-}
-
-main input[type='email'] {
-    width: 18em;
-}
-
-main button[type='submit'] {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 200;
-
+main form > button {
+    font-weight: 300;
     background-color: #484692;
     color: #ffffff;
     border-style: none;
     outline: none;
     border-radius: 50px;
-    padding: 1em;
+    padding: 1.2em;
 }
 
-main input[type='password'] {
-    margin-bottom: 1em;
-    width: 20em;
-}
-
-main .container {
-    display: flex;
-    justify-content: space-between;
-}
-
-main #matchGenderContainer {
-    margin: 0 2em;
-}
-
-main #matchAgeContainer {
-    margin: 0 1.6em;
-    align-items: center;
-}
-
-main #matchAgeContainer label {
-    margin: 0;
-}
-
-main .dynamicList {
+main form section {
     display: flex;
     flex-wrap: wrap;
     margin-top: 1em;
 }
 
-main .dynamicList button {
+main form section button {
     display: flex;
     outline: none;
     justify-content: center;
@@ -126,12 +89,10 @@ main .dynamicList button {
     color: #ffffff;
 }
 
-main .dynamicList > input:first-of-type {
+main form section > input {
     width: 16em;
 }
-
-main ul:first-of-type {
-    margin-top: 1em;
+main form section ul {
     display: flex;
     flex-wrap: nowrap;
     overflow-y: scroll;
@@ -139,18 +100,11 @@ main ul:first-of-type {
     width: 100%;
 }
 
-main ul:last-of-type {
-    margin-top: 1em;
-    overflow-x: scroll;
-    list-style: none;
-    width: 100%;
-}
-
-main #musicContainer {
+main form section:last-of-type ul {
     flex-direction: column;
 }
 
-main .createdGenres {
+main form section:first-of-type ul input {
     min-width: 25%;
     max-width: 30%;
     margin-right: 1em;
@@ -163,9 +117,9 @@ main .createdGenres {
     text-transform: capitalize;
 }
 
-main .createdSongs {
+main form section:last-of-type ul input {
     margin-bottom: 1em;
-    width: 100%;
+    min-width: 100%;
     text-align: center;
     background-color: #52c9c2;
     color: #ffffff;
@@ -173,4 +127,10 @@ main .createdSongs {
     padding: 1em;
     display: block;
     text-transform: capitalize;
+}
+main form p {
+    color: #ff0000;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    margin-bottom: 0.5em;
 }

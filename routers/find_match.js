@@ -20,12 +20,18 @@ db.initialize(dbName, (dbObject) => {
             .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
             .then((profile) => {
                 let favGenres = profile.FavGenres
+
                 let foundGenres = []
                 return dbObject
                     .collection('users')
                     .find({
-                        _id: { $ne: mongo.ObjectId(loggedIn) },
-                        FavGenres: { $in: favGenres },
+                        $and: [
+                            {
+                                _id: { $nin: profile.LikedProfiles },
+                            },
+                            { _id: { $ne: mongo.ObjectId(loggedIn) } },
+                            { FavGenres: { $in: favGenres } },
+                        ],
                     })
                     .toArray()
             })

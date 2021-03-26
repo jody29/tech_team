@@ -23,13 +23,17 @@ db.initialize(dbName, (dbObject) => {
                 let likedProfiles = loggedInProfile.LikedProfiles
 
                 if (likedProfiles.includes(req.body.id)) {
-                    alert('User is already in your matches')
+                    console.log('User is already in your matches')
                 } else {
                     dbObject
                         .collection('users')
                         .updateOne(
                             { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
-                            { $push: { LikedProfiles: req.body.id } }
+                            {
+                                $push: {
+                                    LikedProfiles: mongo.ObjectId(req.body.id),
+                                },
+                            }
                         ) // wat er geupdate moet worden
                         .then((results) => {
                             res.redirect('/findmatches')

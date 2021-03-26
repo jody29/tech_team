@@ -79,7 +79,7 @@ db.initialize(dbName, (dbObject) => {
             const route = 'chats'
             res.render('pages/chat', {
                 users: chat.users,
-                messages: chat.message,
+                messages: chat.messages,
                 title: otherUser.Firstname,
                 user,
                 id,
