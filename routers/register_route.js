@@ -26,12 +26,10 @@ db.initialize(
     dbName,
     (dbObject) => {
         router.get('/newprofile', (req, res) => {
-
-
-            res.render('pages/register.ejs',{
-                title:"Register",
+            res.render('pages/register.ejs', {
+                title: 'Register',
+                message: '',
             })
-
         })
 
         router.post(
@@ -41,6 +39,17 @@ db.initialize(
                 // Getting user profile
                 let userProfile = req.body
 
+                let pass1 = userProfile.Password
+                let pass2 = userProfile.PasswordCheck
+                console.log(pass1)
+                console.log(pass2)
+                if (pass1 !== pass2) {
+                    console.log('incorrect password')
+                    res.render('pages/register', {
+                        message: 'passwords do not match',
+                    })
+                } else {
+                delete userProfile.PasswordCheck
                 let passwordHash = bcrypt.hashSync(
                     req.body.Password,
                     saltRounds
@@ -58,15 +67,15 @@ db.initialize(
                 // Replace music with renderable spotify objects
                 const loopSongs = async (inputQuery) => {
                     userProfile.FavSongs = await spotAPI.inputLoop(inputQuery)
-
-                    //push data to database
+                    
                     const p = dbObject
                         .collection('users')
                         .insertOne(userProfile)
-                    res.redirect('/')
+                    res.render('pages/login', {
+                        title: 'Login Page',
+                        message: 'Your account has been created! log in using the form below.'
+                    })
                 }
-
-                loopSongs(userSongs)
             }
         )
     },

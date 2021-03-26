@@ -14,18 +14,32 @@ const dbName = process.env.DB_NAME
 db.initialize(dbName, (dbObject) => {
     router.post('/like', (req, res) => {
         let loggedUser = req.session.loggedInUser
-            let loggedIn = loggedUser.toString()
+        let loggedIn = loggedUser.toString()
 
-            console.log('post request')
-            dbObject
-                .collection('users')
-                .updateOne(
-                    { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
-                    { $push: { LikedProfiles: req.body.id } }
-                ) // wat er geupdate moet worden
-                .then((results) => {
-                    res.redirect('/findmatches')
-                })
+        dbObject
+            .collection('users')
+            .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
+            .then((loggedInProfile) => {
+                let likedProfiles = loggedInProfile.LikedProfiles
+
+                if (likedProfiles.includes(req.body.id)) {
+                    console.log('User is already in your matches')
+                } else {
+                    dbObject
+                        .collection('users')
+                        .updateOne(
+                            { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
+                            {
+                                $push: {
+                                    LikedProfiles: mongo.ObjectId(req.body.id),
+                                },
+                            }
+                        ) // wat er geupdate moet worden
+                        .then((results) => {
+                            res.redirect('/findmatches')
+                        })
+                }
+            })
     })
 })
 

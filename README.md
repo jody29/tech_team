@@ -27,10 +27,10 @@ _id: objectId(" "), <-- this one will be there automatically
 
 5. Create a ``.env`` file in the root of the folder. Place the following code in the ``.env`` file
 ```
-DB_NAME = Music_match
-M_URL = mongodb+srv://team_music:Ncfgt3ewF8VnrNXM@musicmatch.pzvvt.mongodb.net/Music_match?retryWrites=true&w=majority
-SESSION_SECRET = PrJ#tTch_B+D+J+S@2021!
-APIKEY = ce4d1ec2ab734c929de053d8e970ea6c
+DB_NAME = <Here comes your databasename>
+M_URL = <Here comes your URL>
+SESSION_SECRET = <here comes you session key>
+APIKEY = <Here comes your API key>
 ```
 
 And then you are good to go! :thumbsup: </br>

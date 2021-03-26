@@ -17,11 +17,18 @@
           <div>
             <h2><%= data[i].Firstname %> <%= data[i].Lastname %></h2>
             <p>Age: <%= data[i].age %></p>
-            <p>Fav genres are: <%= data[i].FavGenres %></p>
+            <p>Fav genres are:</p>
+            <ul>
+              <% for (var s=0; s < data[i].FavGenres.length; s++) { %> 
+                <li>
+                    <p><%= data[i].FavGenres[s] %></p>
+                </li>
+                <% } %>
+            </ul>
+            
             <form method="POST" action="/like">
-              <!-- <input type="hidden" name="ID" value="<%= //data[i]._id %>"> -->
+              <input type="hidden" name="LikedProfiles" value="<%= data[i].LikedProfiles%>" />
               <input type="hidden" name="id" value="<%= data[i]._id%>" />
-              <!-- Binnen in de value van de input met name hidden met het ._id van de gebruiker uit de DB komen te staan-->
               <input type="submit" value="Like" />
           </form>
            

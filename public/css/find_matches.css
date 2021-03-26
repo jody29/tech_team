@@ -2,18 +2,70 @@
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: Helvetica;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica;
+}
+main {
+    height: 90vh;
+    overflow-y: scroll;
 }
 
-main ul{
+main > ul {
     list-style-type: none;
 }
 
-main ul li{
+main > ul > li a {
+    border-radius: 1em;
+    display: block;
+    padding: 0.875em;
     width: 80%;
-    margin:0 auto;
+    margin: 0 auto 1.25em auto;
     box-shadow: 0px 0px 6px lightgrey;
+}
+
+main > ul > li a img {
+    background-color: #52c9c2;
+    width: 272px;
+    height: 272px;
+}
+
+main > ul > li a div > p {
+    margin-top: 0.5em;
+}
+
+main > ul > li a ul {
+    margin: 0.25em 0;
+    display: flex;
+    width: 100%;
+    overflow: scroll;
+}
+main > ul > li a ul li {
+    list-style: none;
+    margin: 0 0.25em;
+    padding: 0.5em 1em;
+    width: auto;
+    white-space: nowrap;
+    text-align: center;
+    background-image: linear-gradient(to bottom right, #71ebe3, #52c9c2);
+    border-radius: 1em;
+}
+main > ul > li a ul li p {
+    color: #ffffff;
+}
+main > ul > li a form input[type='submit'] {
+    outline: none;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    font-size: 1em;
+    display: block;
+    width: 50%;
+    margin: 1em auto 0.26em auto;
+    background-image: linear-gradient(to bottom right, #908ede, #484692);
+    color: #ffffff;
+    border-style: none;
+    outline: none;
+    border-radius: 50px;
+    padding: 0.75em 1em;
 }

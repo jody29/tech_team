@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./css/form.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
-            rel="stylesheet"
-        />
-        <title>Document</title>
+        <%- include('../partials/head') %>
+        <title>Edit profile</title>
+        <link rel="stylesheet" href="./css/form.css" type="text/css" />
     </head>
     <body>
         <header>
             <h1>Edit profile</h1>
         </header>
         <main>
+            <a id="back" href="/profile">Back to my profile</a>
             <form action="/saveAccount" method="POST">
                 <!-- <input type="file" name="profileImage" id="profileImage" /> -->
                 <label for="Firstname">Your name</label>
@@ -28,6 +21,7 @@
                     id="Firstname"
                     name="Firstname"
                     value="<%= data.Firstname %>"
+                    required
                 />
                 <input
                     type="text"
@@ -35,6 +29,7 @@
                     id="Lastname"
                     name="Lastname"
                     value="<%= data.Lastname %>"
+                    required
                 />
 
                 <label for="Username">Current username</label>
@@ -44,6 +39,7 @@
                     id="Username"
                     name="Username"
                     value="<%= data.Username %>"
+                    required
                 />
                 <label for="Birthday">Date of birth</label>
                 <input
@@ -52,6 +48,7 @@
                     id="Birthday"
                     name="Birthday"
                     value="<%= data.Birthday %>"
+                    required
                 />
                 <label for="myGender">My gender</label>
                 <select name="Gender" id="myGender">
@@ -63,7 +60,7 @@
                 <label for="genreInput">
                     I want to macth on the following genres</label
                 >
-                <div id="genreContainer" class="dynamicList">
+                <section>
                     <input
                         type="text"
                         id="genreInput"
@@ -89,11 +86,11 @@
                         <% } %>
                         <li class="matchGenre"></li>
                     </ul>
-                </div>
+                </section>
                 <label for="songInput"
                     >I want to match on the following songs</label
                 >
-                <div id="songContainer" class="dynamicList">
+                <section>
                     <input
                         type="text"
                         id="songInput"
@@ -113,7 +110,7 @@
                         <% } %>
                         <li class="matchSong"></li>
                     </ul>
-                </div>
+                </section>
                 <label for="Email">Change your email here</label>
                 <input
                     type="email"
@@ -121,14 +118,15 @@
                     id="Email"
                     placeholder="someone@mailadres.com"
                     value="<%= data.Email %>"
+                    required
                 />
                 <label for="userPassword">Set a new password</label>
                 <input
                     type="password"
                     name="Password"
                     id="Password"
-                    placeholder="Enter in your new password here"
                     value="<%= data.Password %>"
+                    placeholder="Enter in your new password here"
                 />
                 <button type="submit" id="formSubmit">Save changes</button>
                 <button
@@ -142,6 +140,5 @@
         </main>
         <footer></footer>
     </body>
-    <script src="./scripts/addGenre.js"></script>
-    <script src="./scripts/addSong.js"></script>
+    <script src="./scripts/dynamic_form.js"></script>
 </html>

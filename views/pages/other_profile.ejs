@@ -14,38 +14,30 @@
             <div id="profileImage"></div>
             <article>
                 <section id="profileCard">
-                    <form
-                        method="POST"
-                        action="/profile/<%= data._id%>?_method=DELETE"
-                    >
+                    <form method="POST" action="/savedmatches?_method=DELETE">
                         <input
                             value="<%= data._id%>"
                             type="hidden"
                             name="userId"
                         />
-                        <button type="submit" class="remove">
-                            Remove from matches
-                        </button>
+                        <button type="submit" class="remove">Remove</button>
                     </form>
-
-                    <div class="container">
-                        <h1><%= data.Firstname %> <%= data.Lastname %></h1>
-                        <h3><%= data.Gender %></h3>
-                    </div>
-                    <h2>Age: <%= data.Age %></h2>
+                    <h1><%= data.Firstname %> <%= data.Lastname %></h1>
+                    <h2><span>Gender:</span> <%= data.Gender %></h2>
+                    <h2><span>Age:</span> <%= data.Age %></h2>
                 </section>
-                <section class="dynamicList" id="profileGenreList">
+                <section id="profileGenreList">
                     <h4>Favourite Genres</h4>
                     <ul>
                         <% for (var i=0; i < data.FavGenres.length; i++) { %>
                         <li>
-                            <h1 class="songTitle"><%= data.FavGenres[i] %></h1>
+                            <p><%= data.FavGenres[i] %></p>
                         </li>
                         <% } %>
                     </ul>
                 </section>
 
-                <section class="dynamicList" id="profileSongList">
+                <section id="profileSongList">
                     <h4>Favourite Music</h4>
                     <ul>
                         <% for (var i=0; i < data.FavSongs.length; i++) { %>
@@ -58,15 +50,14 @@
                                     src="<%= data.FavSongs[i].coverURL %>"
                                     alt=""
                                 />
+
+                                <div>
+                                    <h1><%= data.FavSongs[i].title %></h1>
+                                    <h2>
+                                        Artist: <%= data.FavSongs[i].artist %>
+                                    </h2>
+                                </div>
                             </a>
-                            <div class="songContainer">
-                                <h1 class="songTitle">
-                                    <%= data.FavSongs[i].title %>
-                                </h1>
-                                <h2 class="songArtist">
-                                    Artist: <%= data.FavSongs[i].artist %>
-                                </h2>
-                            </div>
                         </li>
                         <% } %>
                     </ul>
