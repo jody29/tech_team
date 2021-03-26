@@ -11,7 +11,7 @@ db.initialize(dbName, (dbObject) => {
     io.on('connection', (socket) => {
         socket.username = 'Anonymous'
 
-        socket.on('message_send', async (data) => {
+        socket.on('new_message', async (data) => {
             try {
                 if (data.message == '') return
                 await dbObject.collection('chats').updateOne(
@@ -27,13 +27,13 @@ db.initialize(dbName, (dbObject) => {
                     }
                 )
 
-                io.sockets.emit('message_send', {
+                io.sockets.emit('new_message', {
                     message: data.message,
                     username: data.username,
                     date: dateFormat(data.date, 'chatFormat'),
                 })
             } catch (err) {
-                console.log(err)
+                console.log('het ging fout!')
             }
         })
 
@@ -42,3 +42,5 @@ db.initialize(dbName, (dbObject) => {
         })
     })
 })
+
+server.listen(8000)

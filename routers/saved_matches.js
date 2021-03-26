@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const mongo = require('mongodb')
+const chatService = require('../services/chatService')
 
 // Database variables
 const db = require('../connection/db')
@@ -13,33 +14,63 @@ db.initialize(
     dbName,
     (dbObject) => {
         router.get('/savedmatches', (req, res) => {
-            let loggedUser = req.session.loggedInUser;
+            let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
-            console.log("logged in user:")
-            console.log(loggedIn);
             dbObject
                 .collection('users')
-                .findOne({ _id: mongo.ObjectId(loggedIn)}) //id van 'ingelogde persoon'
+                .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
                 .then((results) => {
                     let matches = results.LikedProfiles
-                    console.log(results.LikedProfiles)
+                    // console.log(results.LikedProfiles)
+                    let user = results
                     let foundProfiles = []
+                    let userChat = []
+                    let chats = []
 
-                    async function getLikedProfiles(matches) {
-                        for (i = 0; i < matches.length; i++) {
+                    const getLikedProfiles = async (data) => {
+                        for (let i = 0; i < data.length; i++) {
                             const pullProfile = await dbObject
                                 .collection('users')
                                 .findOne({
-                                    _id: mongo.ObjectId(matches[i]),
+                                    _id: mongo.ObjectId(data[i]),
                                 })
-                                console.log(pullProfile);
-                            foundProfiles.push(pullProfile)
+                            if (pullProfile) {
+                                foundProfiles.push(pullProfile)
+                            }
+
+                            // console.log(userChat)
                         }
 
-                        // Render saved_matches with filtered array
+                        foundProfiles.forEach(async (profile) => {
+                            userChat.push(
+                                dbObject
+                                    .collection('chats')
+                                    .findOne({
+                                        users: {
+                                            $all: [profile._id, user._id],
+                                        },
+                                    })
+                                    .then((result) => {
+                                        result.users = result.users.map(
+                                            (user) => user.toHexString()
+                                        )
+                                        return result
+                                    })
+                            )
+                            profile._id = profile._id.toHexString()
+                        })
+
+                        const allChats = await Promise.all(userChat)
+
+                        chats = allChats
+
+                        console.log(chats)
+                        console.log(foundProfiles)
+
                         res.render('pages/saved_matches', {
                             data: foundProfiles,
                             title: 'Saved matches',
+                            chats: chats,
                         })
                     }
 
@@ -48,28 +79,44 @@ db.initialize(
         })
 
         router.delete('/savedmatches', (req, res) => {
-            let loggedUser = req.session.loggedInUser;
-            let loggedIn = loggedUser.toSting()
-            console.log('Delete request')
+            let loggedUser = req.session.loggedInUser
+            let loggedIn = loggedUser.toString()
+
             dbObject
                 .collection('users')
                 .updateOne(
-                    { _id: mongo.ObjectId(logedIn) }, //id of 'logged in person'
+                    { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
                     { $pull: { LikedProfiles: req.body.userId } }
                 ) // wat er geupdate moet worden
                 .then((results) => {
                     res.redirect('/savedmatches')
                 })
+        })
+
+        router.get('/profile/:id', (req, res) => {
+            dbObject
+                .collection('users')
+                .findOne({ _id: mongo.ObjectId(req.params.id) })
+                .then((results) => {
+                    res.render('pages/other_profile.ejs', {
+                        data: results,
+                        title: 'My match',
+                    })
+                })
+        })
+
+        router.delete('/profile/:id', (req, res) => {
+            let loggedUser = req.session.loggedInUser
+            let loggedIn = loggedUser.toString()
 
             dbObject
                 .collection('users')
-                .find()
-                .toArray()
-                .then((results) => {
-                    res.render('pages/saved_matches', {
-                        data: results,
-                        title: 'Saved matches',
-                    })
+                .updateOne(
+                    { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
+                    { $pull: { LikedProfiles: req.body.userId } }
+                )
+                .then(() => {
+                    res.redirect('/savedmatches')
                 })
         })
     },

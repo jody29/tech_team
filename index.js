@@ -8,10 +8,14 @@ const express = require('express')
 const app = express()
 const session = require('express-session')
 const bodyParser = require('body-parser')
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 const path = require('path')
 const PORT = process.env.PORT || 8000
+const server = require('http').Server(app)
+
+module.exports = {
+    server,
+    PORT,
+}
 
 // EJS setup
 app.set('view engine', 'ejs')
@@ -32,7 +36,10 @@ app.use(
     })
 )
 
+require('./websocket.js')
+
 // Set Routers
+const rateLimitRoute = require('./routers/rateLimitRoute')
 const mainRoute = require('./routers/mainRoute')
 const regRoute = require('./routers/register_route')
 const savedMatchesRoute = require('./routers/saved_matches')
@@ -46,7 +53,7 @@ const profileRoute = require('./routers/profileRoute')
 const findMatchRoute = require('./routers/find_match')
 
 // require('./websocket')
-
+app.use('/', rateLimitRoute)
 app.use('/', mainRoute)
 app.use('/', savedMatchesRoute)
 app.use('/', chatRoute)
@@ -67,6 +74,6 @@ app.use((req, res, next) => {
 })
 
 // Express listens to PORT 8000
-app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`)
-})
+// app.listen(PORT, () => {
+//     console.log(`http://localhost:${PORT}`)
+// })

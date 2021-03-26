@@ -44,9 +44,10 @@ db.initialize(
 
         router.get("/deleteAccount", async (req, res) => {
             // Delete account based on the activeuserID
+            
             const p = await dbObject.collection('users').deleteOne({ _id: mongo.ObjectId(activeuserID) });
             console.log("an account is being deleted")
-            res.render("pages/register.ejs")
+            res.redirect('/')
         });
 
         router.post("/saveAccount", (req, res) => {
@@ -82,7 +83,7 @@ db.initialize(
                         _id: mongo.ObjectId(activeuserID) 
                     })
                     console.log(pulledProfile);
-                res.render("pages/profile.ejs", ({ data: pulledProfile}));
+                res.render("pages/profile.ejs", ({ data: pulledProfile, title:'profile'}));
             }
             updateUser(loadingProfile)
         });

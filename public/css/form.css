@@ -1,99 +1,81 @@
-* {
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
+    font-family: Helvetica;
 }
-body {
-    font-family: 'Arial', sans-serif;
+
+main > a#back {
+    color: #ffffff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background-image: linear-gradient(to bottom right, #908ede, #484692);
+    align-self: flex-end;
+    border-radius: 15px;
+    margin-bottom: 0.6em;
+    font-size: 0.85em;
+    margin-left: 1.5em;
 }
-header {
-    text-align: center;
-    padding: 2em;
-}
+
 main {
-    position: relative;
+    height: 90vh;
+    overflow-y: scroll;
 }
-form {
-    padding: 0 2em;
-    margin-top: 4em;
+
+main form {
+    padding: 0 1.5em;
 }
-label {
-    font-family: 'Raleway', sans-serif;
+main form label {
     display: block;
     margin-top: 1.5em;
-    margin-bottom: 0.4em;
+    margin-bottom: 0.65em;
     font-style: normal;
+    font-size: 1em;
 }
-input {
+main form input {
+    margin-bottom: 1em;
     border-width: 0 0 2px 0;
     border-color: #484692;
     border-radius: 5px;
     display: block;
-    height: 30px;
+    font-size: 0.95em;
+    width: 80%;
     outline: none;
-    padding: 0.7em;
-    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
+    padding: 0.5em 1em;
+    box-shadow: 0px 0px 6px lightgrey;
 }
-input:focus {
+main form input:focus {
     border: 3px solid #52c9c2;
 }
-select {
+
+main form select {
     background-color: #ffffff;
     padding: 0.8em;
-    border: 4px solid #484692;
+    border: 2px solid #484692;
     outline: none;
     border-radius: 10px;
-    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 6px lightgrey;
 }
-input:first-of-type {
-    margin-bottom: 1em;
-}
-input[type='date'] {
-    width: 14em;
-}
-input[type='email'] {
-    width: 18em;
-}
-button[type='submit'] {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 200;
-    margin: 3em 0;
+
+main form > button {
+    font-weight: 300;
     background-color: #484692;
     color: #ffffff;
     border-style: none;
     outline: none;
     border-radius: 50px;
-    padding: 1em;
+    padding: 1.2em;
 }
-input[type='password'] {
-    margin-bottom: 1em;
-    width: 20em;
-}
-.container {
-    display: flex;
-    justify-content: space-between;
-}
-.checkboxContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#matchGenderContainer {
-    margin: 0 2em;
-}
-#matchAgeContainer {
-    margin: 0 1.6em;
-    align-items: center;
-}
-#matchAgeContainer label {
-    margin: 0;
-}
-.dynamicList {
+
+main form section {
     display: flex;
     flex-wrap: wrap;
     margin-top: 1em;
 }
-.dynamicList button {
+
+main form section button {
     display: flex;
     outline: none;
     justify-content: center;
@@ -106,27 +88,23 @@ input[type='password'] {
     background-color: #484692;
     color: #ffffff;
 }
-.dynamicList > input:first-of-type {
+
+main form section > input {
     width: 16em;
 }
-ul:first-of-type {
-    margin-top: 1em;
+main form section ul {
     display: flex;
     flex-wrap: nowrap;
     overflow-y: scroll;
     list-style: none;
     width: 100%;
 }
-ul:last-of-type {
-    margin-top: 1em;
-    overflow-x: scroll;
-    list-style: none;
-    width: 100%;
-}
-#musicContainer {
+
+main form section:last-of-type ul {
     flex-direction: column;
 }
-.createdGenres {
+
+main form section:first-of-type ul input {
     min-width: 25%;
     max-width: 30%;
     margin-right: 1em;
@@ -138,9 +116,10 @@ ul:last-of-type {
     display: block;
     text-transform: capitalize;
 }
-.createdSongs {
+
+main form section:last-of-type ul input {
     margin-bottom: 1em;
-    width: 100%;
+    min-width: 100%;
     text-align: center;
     background-color: #52c9c2;
     color: #ffffff;
@@ -148,4 +127,10 @@ ul:last-of-type {
     padding: 1em;
     display: block;
     text-transform: capitalize;
+}
+main form p {
+    color: #ff0000;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    margin-bottom: 0.5em;
 }

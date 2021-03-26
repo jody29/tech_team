@@ -10,21 +10,32 @@
   </header>
   <main>
     <ul>
-      <% for(var i=0; i < data.length; i++) {%>
+      <% for (let i=0; i < data.length; i++) {%>
+        
       <li>
         <a href="/profile/<%= data[i]._id%>">
           <img src="<%= data[i].imgSource %>" />
           <div>
             <h2><%= data[i].Firstname %> <%= data[i].Lastname %></h2>
-            <p>Age: <%= data[i].age %></p>
-           
+            <p>Age: <%= data[i].Age %></p>
+            <ul>
+              <% for (var s=0; s < data[i].FavGenres.length; s++) { %> 
+              <li>
+                  <p><%= data[i].FavGenres[s] %></p>
+              </li>
+              <% } %>
+          </ul>
           </div>
         </a>
         <form method="POST" action="/savedmatches?_method=DELETE">
           <input value="<%= data[i]._id%>" type="hidden" name="userId" />
           <button type="submit" class="remove">Remove</button>
         </form>
-        <a href="/chat:id">Chat!</a>
+        <% for (let j=0; j < chats.length; j++) { %>
+          <% if (chats[j].users.indexOf(data[i]._id) !== -1) { %>
+            <a href="/chat/<%= chats[j].chatNumber %>">Chat!</a>
+          <% } %>
+        <% } %>
       </li>
       <% } %>
     </ul>

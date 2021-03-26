@@ -1,6 +1,6 @@
 // const mongo = require('mongodb')
-// const ObjectId = mongo.ObjectID
-
+// const ObjectID = mongo.ObjectID
+// // Use database connection from server.js
 // const db = require('../connection/db')
 // const dbName = process.env.DB_NAME
 
@@ -37,17 +37,15 @@
 //             }
 //         }
 
-//         // Removes a chat from the chats collection and from the array of chats for the users that are in the chat
 //         const removeChat = async (chat) => {
 //             try {
 //                 const users = chat.users
-//                 // Delete the chat
 //                 await dbObject
 //                     .collection('chats')
 //                     .deleteOne({ chatNumber: chat.chatNumber })
 //                 // Delete chat for the users
 //                 users.forEach(async (user) => {
-//                     await dbObject
+//                     await db
 //                         .collection('users')
 //                         .updateOne(
 //                             { _id: ObjectID(user) },
@@ -59,40 +57,36 @@
 //             }
 //         }
 
-//         const getUserChats = async (user) => {
-//             const chatList = []
-//             user.chats.forEach((chat) => {
-//                 chatList.push(
-//                     dbObject.collection('chats').findOne({ chatNumber: chat })
-//                 )
-//             })
+async function getUserChats(user) {
+    const chatList = []
+    user.chats.forEach((chat) => {
+        chatList.push(db.collection('chats').findOne({ chatNumber: chat }))
+    })
 
-//             const allChats = await Promise.all(chatList)
-//             if (allChats.length > 0) {
-//                 for (let i = 0; i < allChats.length; i++) {
-//                     const userList = []
-//                     allChats[i].users.forEach((user) => {
-//                         userList.push(
-//                             dbObject
-//                                 .collection('users')
-//                                 .findOne({ _id: new ObjectID(user) })
-//                         )
-//                     })
-//                     allChats[i].users = await Promise.all(userList)
-//                 }
-//                 return allChats
-//             } else {
-//                 return []
-//             }
+    const allChats = await Promise.all(chatList)
+    if (allChats.length > 0) {
+        for (let i = 0; i < allChats.length; i++) {
+            const userList = []
+            allChats[i].users.forEach((user) => {
+                userList.push(
+                    db.collection('users').findOne({ _id: new ObjectID(user) })
+                )
+            })
+            allChats[i].users = await Promise.all(userList)
+        }
+        return allChats
+    } else {
+        return []
+    }
+}
+
+//         module.exports = {
+//             removeChat,
+//             createChat,
+//             getUserChats,
 //         }
 //     },
 //     (err) => {
 //         throw err
 //     }
 // )
-
-// module.exports = {
-//     removeChat,
-//     createChat,
-//     getUserChats,
-// }

@@ -1,106 +1,166 @@
-* {
+*,
+*::after,
+*::before {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    margin: 0;
+    font-family: Helvetica;
 }
+body {
+    height: 90vh;
+    overflow-y: scroll;
+}
+
 .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.dynamicList ul {
-    padding: 1em;
-    max-height: 200px;
-    overflow: scroll;
-    display: flex;
-}
+
 main {
     position: relative;
+    padding: 0 0 6em 0;
+}
+
+main div#profileImage {
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F7%2F7c%2FProfile_avatar_placeholder_large.png&f=1&nofb=1');
+    height: 300px;
 }
 
 main article {
     margin-top: -2.8em;
-    padding: 1.5em;
+    padding: 1.5em 1.5em 2em 1.5em;
     border-radius: 30px 30px 0 0;
     background: #fff;
     display: flex;
     flex-direction: column;
 }
-main article #profileCard {
+
+/*---------------------------- section 1 ---------------------------*/
+main article section#profileCard {
     display: flex;
     flex-direction: column;
     margin-bottom: 1em;
 }
-main article #profileCard a {
-    color: #fff;
-    padding: 0.8em 2em;
-    text-decoration: none;
-    background-color: #484692;
-    align-self: center;
-    border-radius: 10px;
-    margin-bottom: 0.6em;
+main article section#profileCard form button {
+    outline: none;
+    display: block;
+    color: #484692;
+    background-color: white;
+    border-radius: 5px;
+    padding: 0.25em 0.75em;
+    border: 2px solid #484692;
+    width: 70%;
+    margin: 0 auto 0.75em auto;
+    font-size: 1.25em;
 }
 
-#profileImage {
-    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F7%2F7c%2FProfile_avatar_placeholder_large.png&f=1&nofb=1');
-    height: 300px;
+main article section#profileCard a {
+    color: #fff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background-image: linear-gradient(to bottom right, #908ede, #484692);
+    align-self: flex-end;
+    border-radius: 10px;
+    margin-bottom: 0.6em;
+    font-size: 0.85em;
 }
-#profileGenreList ul {
+
+main article section#profileCard h1 {
+    font-size: 2em;
+}
+
+main article section#profileCard h2 {
+    font-size: 1.1em;
+    font-weight: 400;
+    margin-top: 0.25em;
+}
+
+main article section#profileCard h2:first-of-type {
+    margin-top: 0.5em;
+}
+
+main article section#profileCard h2 span {
+    font-weight: bolder;
+}
+
+/*---------------------------- section 2 ---------------------------*/
+main article section#profileGenreList {
+    margin-top: 1em;
+}
+
+main article section#profileGenreList h4 {
+    font-size: 1.2em;
+}
+
+main article section#profileGenreList ul {
+    max-height: 200px;
+    overflow: scroll;
+    display: flex;
     flex-direction: row;
     margin-bottom: 0.4em;
     flex-wrap: nowrap;
     overflow-x: scroll;
+    margin-top: 0.25em;
 }
 
-#profileGenreList ul li {
-    background-color: #52c9c2;
-    font-size: 0.8em;
+main article section#profileGenreList ul li {
+    background-image: linear-gradient(to bottom right, #71ebe3, #52c9c2);
     display: flex;
     align-items: center;
-    padding: 0.8em 1.2em;
+    padding: 0.6em 1.2em;
     border-radius: 30px;
 
     margin-right: 1em;
 }
-#profileSongList ul {
-    flex-direction: column;
-    max-height: 250px;
-    overflow-y: scroll;
+
+main article section#profileGenreList ul li p {
+    color: white;
+    font-size: 1em;
 }
-#profileSongList ul li {
+
+/*---------------------------- section 3 ---------------------------*/
+main article section#profileSongList h4:first-of-type {
+    font-size: 1.2em;
+    margin-top: 1em;
+}
+
+main article section#profileSongList ul {
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow: scroll;
+    display: flex;
+    margin-top: 0.25em;
+}
+
+main article section#profileSongList ul li {
     background-color: #484692;
     font-size: 0.8em;
-    display: flex;
     flex-direction: row;
-    align-items: center;
     padding: 0.4em;
     border-radius: 14px;
     margin-bottom: 0.4em;
 }
-.dynamicList li img {
+
+main article section#profileSongList ul li a {
+    display: flex;
+    align-items: center;
+}
+
+main article section#profileSongList ul li a img {
     border-radius: 10px;
     height: 50px;
     width: 50px;
     margin-right: 1em;
 }
-.songTitle {
+
+main article section#profileSongList ul li a div h1 {
     font-weight: 400;
     color: white;
 }
-.songArtist {
+
+main article section#profileSongList ul li a div h2 {
     color: white;
     font-weight: 200;
     font-size: 0.9em;
-}
-h3 {
-    display: inline;
-    font-weight: 200;
-}
-#profileCard h1 {
-    font-size: 2em;
-}
-#profileCard h2 {
-    font-size: 1em;
-    font-weight: 400;
 }
