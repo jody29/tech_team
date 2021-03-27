@@ -25,19 +25,67 @@ db.initialize(dbName, (dbObject) => {
                 if (likedProfiles.includes(req.body.id)) {
                     console.log('User is already in your matches')
                 } else {
-                    dbObject
+                    let otherLiked = []
+                    const otherUser = dbObject
                         .collection('users')
-                        .updateOne(
-                            { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
-                            {
-                                $push: {
-                                    LikedProfiles: mongo.ObjectId(req.body.id),
-                                },
-                            }
-                        ) // wat er geupdate moet worden
-                        .then((results) => {
-                            res.redirect('/findmatches')
+                        .findOne({ _id: mongo.ObjectID(req.body.id) })
+                        .then((result) => {
+                            otherLiked.push(result.likedProfiles)
                         })
+
+                    if (otherLiked.includes(mongo.ObjectID(loggedIn))) {
+                        dbObject
+                            .collection('users')
+                            .updateOne(
+                                { _id: mongo.ObjectID(loggedIn) },
+                                {
+                                    $push: {
+                                        LikedProfiles: mongo.ObjectID(
+                                            req.body.id
+                                        ),
+                                    },
+                                }
+                            )
+                            .then(() => {
+                                res.redirect('/findmatches')
+                            })
+                    } else {
+                        const createChat = async (id, otherId) => {
+                            try {
+                                const lastChat = await dbObject
+                                    .collection('chats')
+                                    .findOne(
+                                        {},
+                                        { sort: { chatNumber: -1 }, limit: 1 }
+                                    )
+                                const chatNumber =
+                                    lastChat === null
+                                        ? 0
+                                        : lastChat.chatNumber + 1
+                                await dbObject.collection('chats').insertOne({
+                                    chatNumber: chatNumber,
+                                    users: [id, otherId],
+                                    messages: [],
+                                })
+                                await dbObject.collection('users').updateOne(
+                                    { _id: ObjectID(id) },
+                                    {
+                                        $push: {
+                                            LikedProfiles: ObjectID(otherId),
+                                        },
+                                    }
+                                )
+                                res.redirect('/findmatches')
+                            } catch (err) {
+                                throw err
+                            }
+                        }
+
+                        createChat(
+                            mongo.ObjectID(loggedIn),
+                            mongo.ObjectID(req.body.id)
+                        )
+                    }
                 }
             })
     })

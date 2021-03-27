@@ -86,11 +86,24 @@ db.initialize(
                 .collection('users')
                 .updateOne(
                     { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
-                    { $pull: { LikedProfiles: req.body.userId } }
+                    {
+                        $pull: {
+                            LikedProfiles: mongo.ObjectID(req.body.userId),
+                        },
+                    }
                 ) // wat er geupdate moet worden
                 .then((results) => {
                     res.redirect('/savedmatches')
                 })
+
+            dbObject.collection('chats').deleteOne({
+                users: {
+                    $all: [
+                        mongo.ObjectID(loggedIn),
+                        mongo.ObjectID(req.body.userId),
+                    ],
+                },
+            })
         })
 
         router.get('/profile/:id', (req, res) => {
