@@ -3,16 +3,21 @@
     <head>
         <%- include('../partials/head') %>
         <link href="../css/profile.css" rel="stylesheet" type="text/css" />
-       
     </head>
     <body>
         <header>
-            <%- include('../partials/header') %>
-            <%- include('../partials/nav') %>
+            <%- include('../partials/header') %> <%- include('../partials/nav')
+            %>
         </header>
 
         <main>
-            <div id="profileImage"></div>
+            <div id="profileImage" style="overflow: hidden">
+                <img
+                    src="data:image/<%=data.image.contentType%>;base64,<%=data.image.image.toString('base64')%>"
+                    alt=""
+                    style="width: 100%"
+                />
+            </div>
             <article>
                 <section id="profileCard">
                     <a href="/editprofile">Edit profile</a>
@@ -20,7 +25,7 @@
                     <h2><span>Gender:</span> <%= data.Gender %></h2>
                     <h2><span>Age:</span> <%= data.Age %></h2>
                 </section>
-                <section  id="profileGenreList">
+                <section id="profileGenreList">
                     <h4>Favourite Genres</h4>
                     <ul>
                         <% for (var i=0; i < data.FavGenres.length; i++) { %>
@@ -44,16 +49,14 @@
                                     src="<%= data.FavSongs[i].coverURL %>"
                                     alt=""
                                 />
-                            
-                            <div>
-                                <h1>
-                                    <%= data.FavSongs[i].title %>
-                                </h1>
-                                <h2>
-                                    Artist: <%= data.FavSongs[i].artist %>
-                                </h2>
-                            </div>
-                        </a>
+
+                                <div>
+                                    <h1><%= data.FavSongs[i].title %></h1>
+                                    <h2>
+                                        Artist: <%= data.FavSongs[i].artist %>
+                                    </h2>
+                                </div>
+                            </a>
                         </li>
                         <% } %>
                     </ul>

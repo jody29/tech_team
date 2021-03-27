@@ -7,6 +7,7 @@ const mongo = require("mongodb")
 const multer  = require('multer')
 const upload = multer({ dest: 'images/profile' })
 const getAge = require('get-age')
+const fs = require('fs')
 // Database variables
 
 const db = require('../connection/db')
@@ -50,10 +51,21 @@ db.initialize(
             res.redirect('/')
         });
 
-        router.post("/saveAccount", (req, res) => {
+        router.post("/saveAccount", upload.single('myfile'), (req, res) => {
             console.log("post recieved")
+
+            let img = fs.readFileSync(req.file.path);
+                let encode_image = img.toString('base64');
+                // Define a JSONobject for the image attributes for saving to database
+  
+                const finalImg = {
+                contentType: req.file.mimetype,
+                image:  new Buffer(encode_image, 'base64')
+                 };
+
             // this var is the newly enterd data
             let loadingProfile = req.body;
+            loadingProfile['image'] = finalImg 
             console.log(loadingProfile);
             // age gets calculated
             let Age = getAge(loadingProfile.Birthday);
