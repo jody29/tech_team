@@ -6,7 +6,7 @@ const session = require('express-session')
 const mongo = require('mongodb')
 const multer = require('multer')
 const getAge = require('get-age')
-const upload = multer({ dest: './public/images/profile' })
+const upload = multer({ dest: './public/images/profile'})
 const fs = require('fs')
 
 // Database variables
@@ -19,6 +19,7 @@ const { compare } = require('bcrypt')
 const saltRounds = 10
 
 const spotAPI = require('../public/scripts/convertMusic')
+const { profile } = require('console')
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json())
@@ -50,27 +51,19 @@ db.initialize(
         
 
         router.post(
-            '/newProfileSubmit', upload.single('myfile'),
+            '/newProfileSubmit', upload.single('myfile'), 
             (req, res) => {
-                // Uploading file
-                let img = fs.readFileSync(req.file.path);
-                let encode_image = img.toString('base64');
-                // Define a JSONobject for the image attributes for saving to database
-  
-                const finalImg = {
-                contentType: req.file.mimetype,
-                image:  new Buffer(encode_image, 'base64')
-                 };
+                 
                 // dbObject.collection('test').insertOne(finalImg, (err, result) => {
                 //      console.log(result)
                 //     if (err) return console.log(err)
                 //     console.log('saved to database')
                 //     res.redirect('/')  
                 //     })
-            
+               
                 // Getting user profile
                 let userProfile = req.body
-                userProfile['image'] = finalImg 
+                
                 let pass1 = userProfile.Password
                 let pass2 = userProfile.PasswordCheck
                 console.log(pass1)
@@ -97,17 +90,42 @@ db.initialize(
                 // Replace music with renderable spotify objects
                 const loopSongs = async (inputQuery) => {
                     userProfile.FavSongs = await spotAPI.inputLoop(inputQuery)
-                    
+                    console.log(userProfile)
                     const p = dbObject
                         .collection('users')
                         .insertOne(userProfile)
+
                     res.render('pages/login', {
                         title: 'Login Page',
                         message: 'Your account has been created! log in using the form below.'
                     })
                 }
-
+                if (req.file == undefined) {
+                    let img = fs.readFileSync('./public/images/profile_placeholder.png');
+                let encode_image = img.toString('base64');
+                
+                // Define a JSONobject for the image attributes for saving to database
+  
+                const finalImg = {
+                contentType: "image/png",
+                image:  new Buffer(encode_image, 'base64')
+                }
+                userProfile['image'] = finalImg
                 loopSongs(userSongs)
+                } else {
+                // Uploading file
+                let img = fs.readFileSync(req.file.path);
+                let encode_image = img.toString('base64');
+                
+                // Define a JSONobject for the image attributes for saving to database
+  
+                const finalImg = {
+                contentType: req.file.mimetype,
+                image:  new Buffer(encode_image, 'base64')
+                 };
+                userProfile['image'] = finalImg
+                loopSongs(userSongs)
+                }
             }}
         )
     },

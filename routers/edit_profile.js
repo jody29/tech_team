@@ -54,18 +54,9 @@ db.initialize(
         router.post("/saveAccount", upload.single('myfile'), (req, res) => {
             console.log("post recieved")
 
-            let img = fs.readFileSync(req.file.path);
-                let encode_image = img.toString('base64');
-                // Define a JSONobject for the image attributes for saving to database
-  
-                const finalImg = {
-                contentType: req.file.mimetype,
-                image:  new Buffer(encode_image, 'base64')
-                 };
 
             // this var is the newly enterd data
             let loadingProfile = req.body;
-            loadingProfile['image'] = finalImg 
             console.log(loadingProfile);
             // age gets calculated
             let Age = getAge(loadingProfile.Birthday);
@@ -97,7 +88,37 @@ db.initialize(
                     console.log(pulledProfile);
                 res.render("pages/profile.ejs", ({ data: pulledProfile, title:'profile'}));
             }
+            if (req.file == undefined) {
+            
+                async function noImageupdate() {
+                    const pulledProfile = await dbObject
+                        .collection('users')
+                        .findOne({
+                            _id: mongo.ObjectId(req.session.loggedInUser)
+                        })
+                    console.log(pulledProfile);
+                // set active user to update properly. This needs to be implimented with the session feature
+                    activeuserImage = pulledProfile.image
+                    loadingProfile.image = activeuserImage
+                    updateUser(loadingProfile)
+                }
+                noImageupdate()
+
+            } else {
+            // Uploading file
+            let img = fs.readFileSync(req.file.path);
+            let encode_image = img.toString('base64');
+            
+            // Define a JSONobject for the image attributes for saving to database
+
+            const finalImg = {
+            contentType: req.file.mimetype,
+            image:  new Buffer(encode_image, 'base64')
+             };
+            loadingProfile.image = finalImg
             updateUser(loadingProfile)
+            }
+            
         });
         
     (err) => {
