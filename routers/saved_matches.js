@@ -141,16 +141,39 @@ db.initialize(
         router.delete('/profile/:id', (req, res) => {
             let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
+            let otherUser = req.body.userId
 
-            dbObject
-                .collection('users')
-                .updateOne(
-                    { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
-                    { $pull: { LikedProfiles: req.body.userId } }
-                )
-                .then(() => {
-                    res.redirect('/savedmatches')
-                })
+            const deleteMatch = async (id, otherId) => {
+                try {
+                    await dbObject.collection('users').updateOne(
+                        { _id: mongo.ObjectId(id) }, //id of 'logged in person'
+                        {
+                            $pull: {
+                                MatchedProfiles: otherId,
+                            },
+                        }
+                    )
+
+                    await dbObject.collection('users').updateOne(
+                        { _id: mongo.ObjectID(otherId) },
+                        {
+                            $pull: {
+                                MatchedProfiles: id,
+                            },
+                        }
+                    )
+
+                    await dbObject.collection('chats').deleteOne({
+                        users: {
+                            $all: [mongo.ObjectID(id), mongo.ObjectID(otherId)],
+                        },
+                    })
+                } catch (err) {
+                    throw err
+                }
+            }
+
+            deleteMatch(loggedIn, otherUser)
         })
     },
     (err) => {
