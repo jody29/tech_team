@@ -7,6 +7,7 @@ const mongo = require('mongodb')
 const multer = require('multer')
 const getAge = require('get-age')
 const upload = multer({ dest: 'images/profile' })
+const auth = require('../authentication/auth')
 
 // Database variables
 
@@ -21,7 +22,7 @@ router.use(bodyParser.json())
 db.initialize(
     dbName,
     (dbObject) => {
-        router.get('/profile', (req, res) => {
+        router.get('/profile', auth, (req, res) => {
             let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
             console.log('logged in user:')

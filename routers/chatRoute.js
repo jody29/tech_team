@@ -4,6 +4,7 @@ const slug = require('slug')
 const mongo = require('mongodb')
 const dateFormat = require('dateformat')
 const ObjectID = mongo.ObjectID
+const auth = require('../authentication/auth')
 
 // Database variables
 const db = require('../connection/db')
@@ -13,7 +14,7 @@ const ObjectId = mongo.ObjectID
 dateFormat.masks.chatFormat = 'HH:MM - dd/mm'
 
 db.initialize(dbName, (dbObject) => {
-    router.get('/chat/:id', async (req, res) => {
+    router.get('/chat/:id', auth, async (req, res) => {
         try {
             const user = await dbObject
                 .collection('users')

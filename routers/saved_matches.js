@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const mongo = require('mongodb')
 const chatService = require('../services/chatService')
+const auth = require('../authentication/auth')
 
 // Database variables
 const db = require('../connection/db')
@@ -13,7 +14,7 @@ const dbName = process.env.DB_NAME
 db.initialize(
     dbName,
     (dbObject) => {
-        router.get('/savedmatches', (req, res) => {
+        router.get('/savedmatches', auth, (req, res) => {
             let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
             dbObject
@@ -82,32 +83,50 @@ db.initialize(
         router.delete('/savedmatches', (req, res) => {
             let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
+            let otherUser = req.body.userId
 
-            dbObject
-                .collection('users')
-                .updateOne(
-                    { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
-                    {
-                        $pull: {
-                            LikedProfiles: mongo.ObjectID(req.body.userId),
+            const deleteMatch = async (loggedIn, otherUser) => {
+                try {
+                    await dbObject
+                        .collection('users')
+                        .updateOne(
+                            { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
+                            {
+                                $pull: {
+                                    MatchedProfiles: mongo.ObjectID(otherUser),
+                                },
+                            }
+                        ) // wat er geupdate moet worden
+                        .then((results) => {
+                            res.redirect('/savedmatches')
+                        })
+
+                    await dbObject.collection('users').updateOne(
+                        { _id: mongo.ObjectID(otherUser) },
+                        {
+                            $pull: {
+                                MatchedProfiles: mongo.ObjectID(loggedIn),
+                            },
+                        }
+                    )
+
+                    await dbObject.collection('chats').deleteOne({
+                        users: {
+                            $all: [
+                                mongo.ObjectID(loggedIn),
+                                mongo.ObjectID(otherUser),
+                            ],
                         },
-                    }
-                ) // wat er geupdate moet worden
-                .then((results) => {
-                    res.redirect('/savedmatches')
-                })
+                    })
+                } catch (err) {
+                    throw err
+                }
+            }
 
-            dbObject.collection('chats').deleteOne({
-                users: {
-                    $all: [
-                        mongo.ObjectID(loggedIn),
-                        mongo.ObjectID(req.body.userId),
-                    ],
-                },
-            })
+            deleteMatch(loggedIn, otherUser)
         })
 
-        router.get('/profile/:id', (req, res) => {
+        router.get('/profile/:id', auth, (req, res) => {
             dbObject
                 .collection('users')
                 .findOne({ _id: mongo.ObjectId(req.params.id) })
