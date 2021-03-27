@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const mongo = require('mongodb')
+const auth = require('../authentication/auth')
 
 //const ObjectID = mongo.ObjectID
 
@@ -12,7 +13,7 @@ const db = require('../connection/db')
 const dbName = process.env.DB_NAME
 
 db.initialize(dbName, (dbObject) => {
-    router.get('/findmatches', (req, res) => {
+    router.get('/findmatches', auth, (req, res) => {
         let loggedUser = req.session.loggedInUser
         let loggedIn = loggedUser.toString()
         dbObject

@@ -16,7 +16,7 @@ const saltRounds = 10
 router.get('/', (req, res) => {
     res.render('pages/login', {
         title: 'Login Page',
-        message: ''
+        message: '',
     })
 })
 
@@ -32,7 +32,8 @@ db.initialize(dbName, (dbObject) => {
             if (user == null) {
                 return res.render('pages/login', {
                     title: 'Login Page',
-                    message: 'Your username or password is wrong. Please try again'
+                    message:
+                        'Your username or password is wrong. Please try again',
                 })
             }
 
@@ -45,7 +46,8 @@ db.initialize(dbName, (dbObject) => {
             } else {
                 res.render('pages/login', {
                     title: 'Login Page',
-                    message: 'Your username or password is wrong. Please try again'
+                    message:
+                        'Your username or password is wrong. Please try again',
                 })
             }
         } catch (err) {
