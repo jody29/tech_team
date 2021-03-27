@@ -11,6 +11,7 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const PORT = process.env.PORT || 8000
 const server = require('http').Server(app)
+const multer = require('multer');
 
 module.exports = {
     server,
@@ -51,6 +52,7 @@ const editProfileRoute = require('./routers/edit_profile')
 const profileRoute = require('./routers/profileRoute')
 const findMatchRoute = require('./routers/find_match')
 
+
 // require('./websocket')
 app.use('/', rateLimitRoute)
 app.use('/', savedMatchesRoute)
@@ -63,6 +65,7 @@ app.use('/', regRoute)
 app.use('/', editProfileRoute)
 app.use('/', profileRoute)
 app.use('/', findMatchRoute)
+
 
 // Error
 app.use((req, res, next) => {

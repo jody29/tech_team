@@ -6,7 +6,8 @@ const session = require('express-session')
 const mongo = require('mongodb')
 const multer = require('multer')
 const getAge = require('get-age')
-const upload = multer({ dest: 'images/profile' })
+const upload = multer({ dest: './public/images/profile'})
+const fs = require('fs')
 
 // Database variables
 
@@ -18,6 +19,7 @@ const { compare } = require('bcrypt')
 const saltRounds = 10
 
 const spotAPI = require('../public/scripts/convertMusic')
+const { profile } = require('console')
 
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(bodyParser.json())
@@ -31,22 +33,71 @@ db.initialize(
                 message: '',
             })
         })
+        router.get('/photo', (req, res) => {
+            var filename = req.params.id;
+             
+            dbObject.collection('test').findOne({_id: mongo.ObjectId('605f655aeacd9e475b660296') }, (err, result) => {
+             
+                if (err) return console.log(err)
+             
+               res.contentType('image/jpeg');
+               res.send(result.image.buffer)
+               
+                
+              })
+            })
+
+        
 
         router.post(
-            '/newProfileSubmit',
-            upload.single('profileImage'),
+            '/newProfileSubmit', upload.single('myfile'), 
             (req, res) => {
+                 
+                // dbObject.collection('test').insertOne(finalImg, (err, result) => {
+                //      console.log(result)
+                //     if (err) return console.log(err)
+                //     console.log('saved to database')
+                //     res.redirect('/')  
+                //     })
+               
                 // Getting user profile
                 let userProfile = req.body
-
+                
                 let pass1 = userProfile.Password
                 let pass2 = userProfile.PasswordCheck
                 console.log(pass1)
                 console.log(pass2)
                 if (pass1 !== pass2) {
-                    console.log('incorrect password')
-                    res.render('pages/register', {
-                        message: 'passwords do not match',
+                    console.log('incorrect password');
+                    res.render('pages/register', { message: "passwords do not match"});
+                } else {
+                delete userProfile.PasswordCheck
+                let passwordHash = bcrypt.hashSync(
+                    req.body.Password,
+                    saltRounds
+                )
+                req.body.Password = passwordHash
+                console.log(userProfile)
+
+
+                // calculate age with get age npm package
+                let Age = getAge(userProfile.Birthday)
+                userProfile['Age'] = Age
+                userProfile['LikedProfiles'] = [];
+
+                let userSongs = userProfile.FavSongs
+                // Replace music with renderable spotify objects
+                const loopSongs = async (inputQuery) => {
+                    userProfile.FavSongs = await spotAPI.inputLoop(inputQuery)
+                    console.log(userProfile)
+                    const p = dbObject
+                        .collection('users')
+                        .insertOne(userProfile)
+
+                    res.render('pages/login', {
+                        title: 'Login Page',
+                        message: 'Your account has been created! log in using the form below.'
+
                     })
                 } else {
                     delete userProfile.PasswordCheck
@@ -79,7 +130,33 @@ db.initialize(
                         })
                     }
                 }
-            }
+                if (req.file == undefined) {
+                    let img = fs.readFileSync('./public/images/profile_placeholder.png');
+                let encode_image = img.toString('base64');
+                
+                // Define a JSONobject for the image attributes for saving to database
+  
+                const finalImg = {
+                contentType: "image/png",
+                image:  new Buffer(encode_image, 'base64')
+                }
+                userProfile['image'] = finalImg
+                loopSongs(userSongs)
+                } else {
+                // Uploading file
+                let img = fs.readFileSync(req.file.path);
+                let encode_image = img.toString('base64');
+                
+                // Define a JSONobject for the image attributes for saving to database
+  
+                const finalImg = {
+                contentType: req.file.mimetype,
+                image:  new Buffer(encode_image, 'base64')
+                 };
+                userProfile['image'] = finalImg
+                loopSongs(userSongs)
+                }
+            }}
         )
     },
     (err) => {

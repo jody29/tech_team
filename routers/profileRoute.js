@@ -6,8 +6,11 @@ const session = require('express-session')
 const mongo = require('mongodb')
 const multer = require('multer')
 const getAge = require('get-age')
-const upload = multer({ dest: 'images/profile' })
+
+const upload = multer({ dest: './public/images/profile' })
+const fs = require('fs')
 const auth = require('../authentication/auth')
+
 
 // Database variables
 
@@ -32,6 +35,9 @@ db.initialize(
                 .collection('users')
                 .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
                 .then((results) => {
+                    // results.image = results.image.image.buffer
+                    console.log(results)
+                    
                     res.render('pages/profile', {
                         data: results,
                         title: 'Profile',

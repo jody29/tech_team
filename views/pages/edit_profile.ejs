@@ -11,7 +11,12 @@
         </header>
         <main>
             <a id="back" href="/profile">Back to my profile</a>
-            <form action="/saveAccount" method="POST">
+            <form
+                action="/saveAccount"
+                method="POST"
+                enctype="multipart/form-data"
+            >
+                <input type="file" name="myfile" />
                 <!-- <input type="file" name="profileImage" id="profileImage" /> -->
                 <label for="Firstname">Your name</label>
 
