@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const mongo = require('mongodb')
+const auth = require('../authentication/auth')
 
 //const ObjectID = mongo.ObjectID
 
@@ -12,7 +13,7 @@ const db = require('../connection/db')
 const dbName = process.env.DB_NAME
 
 db.initialize(dbName, (dbObject) => {
-    router.get('/findmatches', (req, res) => {
+    router.get('/findmatches', auth, (req, res) => {
         let loggedUser = req.session.loggedInUser
         let loggedIn = loggedUser.toString()
         dbObject
@@ -20,12 +21,18 @@ db.initialize(dbName, (dbObject) => {
             .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
             .then((profile) => {
                 let favGenres = profile.FavGenres
+
                 let foundGenres = []
                 return dbObject
                     .collection('users')
                     .find({
-                        _id: { $ne: mongo.ObjectId(loggedIn) },
-                        FavGenres: { $in: favGenres },
+                        $and: [
+                            {
+                                _id: { $nin: profile.LikedProfiles },
+                            },
+                            { _id: { $ne: mongo.ObjectId(loggedIn) } },
+                            { FavGenres: { $in: favGenres } },
+                        ],
                     })
                     .toArray()
             })

@@ -21,7 +21,7 @@
     <article class="chatField">
 
         <section class="messageField">
-
+          <% if (messages) { %>
             <% for (let i = 0;i < messages.length;i++) { %>
                 <% if (messages[i].userId == user._id) { %>
                   <div class="outgoing">
@@ -41,6 +41,9 @@
                   </div>                
                 <% } %>
               <% } %>
+          <% } else { %>
+            <p>No messages so far, start a message!</p>
+            <% } %>    
             
 
         </section>

@@ -41,7 +41,6 @@ require('./websocket.js')
 
 // Set Routers
 const rateLimitRoute = require('./routers/rateLimitRoute')
-const mainRoute = require('./routers/mainRoute')
 const regRoute = require('./routers/register_route')
 const savedMatchesRoute = require('./routers/saved_matches')
 const chatRoute = require('./routers/chatRoute')
@@ -56,7 +55,6 @@ const findMatchRoute = require('./routers/find_match')
 
 // require('./websocket')
 app.use('/', rateLimitRoute)
-app.use('/', mainRoute)
 app.use('/', savedMatchesRoute)
 app.use('/', chatRoute)
 app.use('/', loginRoute)
