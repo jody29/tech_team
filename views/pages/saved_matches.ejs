@@ -10,6 +10,9 @@
   </header>
   <main>
     <ul>
+      <% if (!data) { %>
+        <p>your matches are empty!</p>
+        <% } else { %>
       <% for (let i=0; i < data.length; i++) {%>
         
       <li>
@@ -38,6 +41,7 @@
         <% } %>
       </li>
       <% } %>
+    <% } %>
     </ul>
     <p>This is the end of the list!</p>
   </main>

@@ -20,7 +20,7 @@ db.initialize(
                 .collection('users')
                 .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
                 .then((results) => {
-                    let matches = results.LikedProfiles
+                    let matches = results.MatchedProfiles
                     // console.log(results.LikedProfiles)
                     let user = results
                     let foundProfiles = []
@@ -41,6 +41,7 @@ db.initialize(
                             // console.log(userChat)
                         }
 
+                        // This piece of code was sponsored by Jonah Meijers
                         foundProfiles.forEach(async (profile) => {
                             userChat.push(
                                 dbObject
