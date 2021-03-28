@@ -22,7 +22,7 @@ db.initialize(
                 .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
                 .then((results) => {
                     let matches = results.MatchedProfiles
-                    
+
                     let user = results
                     let foundProfiles = []
                     let userChat = []
@@ -150,6 +150,15 @@ db.initialize(
                         {
                             $pull: {
                                 MatchedProfiles: otherId,
+                            },
+                        }
+                    )
+
+                    await dbObject.collection('users').updateOne(
+                        { _id: mongo.ObjectId(id) }, //id of 'logged in person'
+                        {
+                            $pull: {
+                                LikedProfiles: otherId,
                             },
                         }
                     )

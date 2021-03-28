@@ -18,6 +18,7 @@ db.initialize(
             let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
             let otherId = req.body.id
+            let otherLiked = req.body.LikedProfiles
 
             dbObject
                 .collection('users')
@@ -28,24 +29,29 @@ db.initialize(
                     if (likedProfiles.includes(otherId)) {
                         console.log('User is already in your matches')
                     } else {
-                        let otherLiked = []
-                        const otherUser = dbObject
-                            .collection('users')
-                            .findOne({ _id: mongo.ObjectID(otherId) })
-                            .then((result) => {
-                                otherLiked.push(result.likedProfiles)
-                            })
-
                         if (otherLiked.includes(mongo.ObjectID(loggedIn))) {
                             const createMatch = async (id, otherId) => {
                                 try {
                                     await dbObject
                                         .collection('users')
                                         .updateOne(
-                                            { _id: mongo.ObjectID(loggedIn) },
+                                            { _id: mongo.ObjectID(id) },
                                             {
                                                 $push: {
                                                     MatchedProfiles: mongo.ObjectID(
+                                                        otherId
+                                                    ),
+                                                },
+                                            }
+                                        )
+
+                                    await dbObject
+                                        .collection('users')
+                                        .updateOne(
+                                            { _id: mongo.ObjectId(id) },
+                                            {
+                                                $push: {
+                                                    LikedProfiles: mongo.ObjectID(
                                                         otherId
                                                     ),
                                                 },
@@ -97,6 +103,8 @@ db.initialize(
                                 mongo.ObjectID(loggedIn),
                                 mongo.ObjectID(otherId)
                             )
+
+                            res.redirect('/findmatches')
                         } else {
                             dbObject.collection('users').updateOne(
                                 { _id: mongo.ObjectID(loggedIn) },
