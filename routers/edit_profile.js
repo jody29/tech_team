@@ -61,6 +61,8 @@ db.initialize(dbName, (dbObject) => {
         let Age = getAge(loadingProfile.Birthday);
         loadingProfile.Age = Age
 
+        loadingProfile.FavGenres = loadingProfile.FavGenres.map(name => name.toLowerCase());
+
         async function updateUser(newData) {
 
                 let updatedSongs = loadingProfile.FavSongs

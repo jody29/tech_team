@@ -85,7 +85,7 @@ db.initialize(
                 userProfile['Age'] = Age
                 userProfile['LikedProfiles'] = [];
                 userProfile['MatchedProfiles'] = [];
-
+                userProfile.FavGenres = userProfile.FavGenres.map(name => name.toLowerCase());
                 let userSongs = userProfile.FavSongs
                 // Replace music with renderable spotify objects
                 const loopSongs = async (inputQuery) => {
