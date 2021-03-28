@@ -24,6 +24,20 @@ main {
     padding: 0 0 6em 0;
 }
 
+main > a:first-of-type {
+    width: auto;
+    color: #ffffff;
+    padding: 0.5em 1.25em;
+    text-decoration: none;
+    background-image: linear-gradient(to bottom right, #908ede, #484692);
+    border-radius: 15px;
+    font-size: 0.85em;
+    display: block;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+}
+
 main div#profileImage {
     height: 300px;
     width: 100%;
