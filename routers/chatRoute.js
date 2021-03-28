@@ -30,7 +30,7 @@ db.initialize(dbName, (dbObject) => {
             const showUsername = () => {
                 if (chat.users[0] == req.session.loggedInUser) {
                     otherUserId = chat.users[1] == user._id ? chat.users[0] : chat.users[1]
-                    
+                   
                     console.log("1", otherUserId)
                     return
                 } else {

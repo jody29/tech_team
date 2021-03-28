@@ -41,16 +41,16 @@ require('./websocket.js')
 
 // Set Routers
 const rateLimitRoute = require('./routers/rateLimitRoute')
-const regRoute = require('./routers/register_route')
-const savedMatchesRoute = require('./routers/saved_matches')
+const regRoute = require('./routers/registerRoute')
+const savedMatchesRoute = require('./routers/savedMatchesRoute')
 const chatRoute = require('./routers/chatRoute')
 const loginRoute = require('./routers/loginRoute')
 const logOutRoute = require('./routers/logOUtRoute')
 const dislikeRoute = require('./routers/dislikeRoute')
 const likeRoute = require('./routers/LikeRoute')
-const editProfileRoute = require('./routers/edit_profile')
+const editProfileRoute = require('./routers/editProfileRoute')
 const profileRoute = require('./routers/profileRoute')
-const findMatchRoute = require('./routers/find_match')
+const findMatchRoute = require('./routers/findMatchRoute')
 
 
 // require('./websocket')

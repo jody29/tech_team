@@ -4,7 +4,6 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const mongo = require('mongodb')
-const chatService = require('../services/chatService')
 const auth = require('../authentication/auth')
 
 // Database variables
