@@ -11,7 +11,6 @@ const fs = require('fs')
 const auth = require('../authentication/auth')
 
 // Database variables
-
 const db = require('../connection/db')
 const dbName = process.env.DB_NAME
 
@@ -38,48 +37,45 @@ db.initialize(dbName, (dbObject) => {
 
     router.get('/deleteAccount', auth, async (req, res) => {
         // Delete account based on the activeuserID
-
         const p = await dbObject
             .collection('users')
             .deleteOne({ _id: mongo.ObjectId(activeuserID) })
         res.redirect('/')
     })
 
-
     router.post("/saveAccount", upload.single('myfile'), (req, res) => {
-            // this var is the newly enterd data
-        let loadingProfile = req.body;
-            // age gets calculated
-        let Age = getAge(loadingProfile.Birthday);
+        let loadingProfile = req.body
+
+        // age gets calculated
+        let Age = getAge(loadingProfile.Birthday)
         loadingProfile.Age = Age
-        loadingProfile.FavGenres = loadingProfile.FavGenres.map(name => name.toLowerCase());
+        loadingProfile.FavGenres = loadingProfile.FavGenres.map(name => name.toLowerCase())
 
         async function updateUser(newData) {
-
-                let updatedSongs = loadingProfile.FavSongs
-                // Drag songs through spotify API
-                loadingProfile.FavSongs = await spotAPI.inputLoop(updatedSongs);
+            let updatedSongs = loadingProfile.FavSongs
+            // Drag songs through spotify API
+            loadingProfile.FavSongs = await spotAPI.inputLoop(updatedSongs)
                 
-                // getting the old profile
-                const activeUser = await dbObject
-                        .collection('users')
-                        .findOne({
-                            _id: mongo.ObjectId(activeuserID)
-                        })
-                
-                // Profile will get updated with the new data.
-                const p = await dbObject.collection('users').updateOne({ _id: mongo.ObjectId(activeuserID) }, { $set: newData });
-                // Pulling profile again to check
-                const pulledProfile = await dbObject
+            // getting the old profile
+            const activeUser = await dbObject
                     .collection('users')
                     .findOne({
-                        _id: mongo.ObjectId(activeuserID) 
+                        _id: mongo.ObjectId(activeuserID)
                     })
+                
+            // Profile will get updated with the new data.
+            const p = await dbObject.collection('users').updateOne({ _id: mongo.ObjectId(activeuserID) }, { $set: newData })
+            // Pulling profile again to check
+            const pulledProfile = await dbObject
+                .collection('users')
+                .findOne({
+                    _id: mongo.ObjectId(activeuserID) 
+                })
                     
-                res.render("pages/profile.ejs", ({ data: pulledProfile, title:'profile'}));
+            res.render("pages/profile.ejs", ({ data: pulledProfile, title:'profile'}))
             }
+
         if (req.file == undefined) {
-            
             async function noImageupdate() {
                 const pulledProfile = await dbObject
                     .collection('users')
@@ -87,7 +83,7 @@ db.initialize(dbName, (dbObject) => {
                         _id: mongo.ObjectId(req.session.loggedInUser)
                     })
                     
-                // set active user to update properly. This needs to be implimented with the session feature
+                    // set active user to update properly
                     activeuserImage = pulledProfile.image
                     loadingProfile.image = activeuserImage
                     updateUser(loadingProfile)
@@ -96,11 +92,10 @@ db.initialize(dbName, (dbObject) => {
 
             } else {
             // Uploading file
-            let img = fs.readFileSync(req.file.path);
-            let encode_image = img.toString('base64');
+            let img = fs.readFileSync(req.file.path)
+            let encode_image = img.toString('base64')
             
             // Define a JSONobject for the image attributes for saving to database
-
             const finalImg = {
             contentType: req.file.mimetype,
             image:  new Buffer(encode_image, 'base64')

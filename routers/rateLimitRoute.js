@@ -6,7 +6,7 @@ const session = require('express-session')
 const { ObjectID, MongoClient } = require('mongodb')
 
 
-const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit')
 
 const limiter = rateLimit({
     windowMs: 3 * 60 * 1000, // 3 minutes
@@ -23,9 +23,9 @@ const limiter = rateLimit({
             message: 'Please try again in 3 minutes.',
         })
       },
-  });
+  })
 
 
-  router.use('/login',limiter);
+  router.use('/login',limiter)
 
   module.exports = router

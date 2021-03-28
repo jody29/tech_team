@@ -22,7 +22,7 @@ db.initialize(
 
             dbObject
                 .collection('users')
-                .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
+                .findOne({ _id: mongo.ObjectId(loggedIn) }) 
                 .then((loggedInProfile) => {
                     let likedProfiles = loggedInProfile.LikedProfiles
 

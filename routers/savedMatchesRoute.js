@@ -18,7 +18,7 @@ db.initialize(
             let loggedIn = loggedUser.toString()
             dbObject
                 .collection('users')
-                .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
+                .findOne({ _id: mongo.ObjectId(loggedIn) })
                 .then((results) => {
                     let matches = results.MatchedProfiles
 
@@ -61,7 +61,6 @@ db.initialize(
                         })
 
                         const allChats = await Promise.all(userChat)
-
                         chats = allChats
 
                         res.render('pages/saved_matches', {
@@ -85,13 +84,13 @@ db.initialize(
                     await dbObject
                         .collection('users')
                         .updateOne(
-                            { _id: mongo.ObjectId(loggedIn) }, //id of 'logged in person'
+                            { _id: mongo.ObjectId(loggedIn) }, 
                             {
                                 $pull: {
                                     MatchedProfiles: mongo.ObjectID(otherUser),
                                 },
                             }
-                        ) // wat er geupdate moet worden
+                        ) 
                         .then((results) => {
                             res.redirect('/savedmatches')
                         })
@@ -141,7 +140,7 @@ db.initialize(
             const deleteMatch = async (id, otherId) => {
                 try {
                     await dbObject.collection('users').updateOne(
-                        { _id: mongo.ObjectId(id) }, //id of 'logged in person'
+                        { _id: mongo.ObjectId(id) }, 
                         {
                             $pull: {
                                 MatchedProfiles: otherId,
@@ -150,7 +149,7 @@ db.initialize(
                     )
 
                     await dbObject.collection('users').updateOne(
-                        { _id: mongo.ObjectId(id) }, //id of 'logged in person'
+                        { _id: mongo.ObjectId(id) }, 
                         {
                             $pull: {
                                 LikedProfiles: otherId,

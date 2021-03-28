@@ -18,17 +18,14 @@ db.initialize(dbName, (dbObject) => {
         let loggedIn = loggedUser.toString()
         dbObject
             .collection('users')
-            .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
+            .findOne({ _id: mongo.ObjectId(loggedIn) })
             .then((profile) => {
                 let favGenres = profile.FavGenres
-
                 return dbObject
                     .collection('users')
                     .find({
                         $and: [
-                            {
-                                _id: { $nin: profile.LikedProfiles },
-                            },
+                            { _id: { $nin: profile.LikedProfiles }, },
                             { _id: { $ne: mongo.ObjectId(loggedIn) } },
                             { FavGenres: { $in: favGenres } },
                         ],

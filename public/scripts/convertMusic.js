@@ -11,18 +11,18 @@ const convertMusic = (inputQuery) => {
 	return new Promise((resolve, reject) => {
 		spotify.search({ type: "track", query: inputQuery }, (err, data) => {
 			if (err) {
-				return err + console.log(err);
+				return err + console.log(err)
 			}
-			let songdata = data.tracks.items[0];
-			let songartist = songdata.album.artists[0].name;
-			let artistArray = songdata.artists;
+			let songdata = data.tracks.items[0]
+			let songartist = songdata.album.artists[0].name
+			let artistArray = songdata.artists
 
 			// Checking if there are mulitplile artist, if so, it pushses them into a separate array
 			if (artistArray.length > 1) {
-				const allArtists = [];
+				const allArtists = []
 				for (let i = 0; i < artistArray.length; i++) {
-					const artist = artistArray[i].name;
-					allArtists.push(artist);
+					const artist = artistArray[i].name
+					allArtists.push(artist)
 				}
 				// Creating objects from the fetched data and returning this to the funciton.
 				const trackobject = {
@@ -43,7 +43,7 @@ const convertMusic = (inputQuery) => {
 					matchID: songdata.album.id,
 					spotURL: songdata.external_urls.spotify,
 				}
-				resolve(trackobject);
+				resolve(trackobject)
 			}
 		})
 	})

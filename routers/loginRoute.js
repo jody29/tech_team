@@ -12,16 +12,16 @@ const dbName = process.env.DB_NAME
 const bcrypt = require('bcrypt')
 const { compare } = require('bcrypt')
 const saltRounds = 10
-//Login Page route
-router.get('/', (req, res) => {
-    res.render('pages/login', {
-        title: 'Login Page',
-        message: '',
-    })
-})
 
-//login
+
 db.initialize(dbName, (dbObject) => {
+    router.get('/', (req, res) => {
+        res.render('pages/login', {
+            title: 'Login Page',
+            message: '',
+        })
+    })
+
     router.post('/login', async (req, res) => {
         const Username = req.body.Username
         const Password = req.body.Password
@@ -32,8 +32,7 @@ db.initialize(dbName, (dbObject) => {
             if (user == null) {
                 return res.render('pages/login', {
                     title: 'Login Page',
-                    message:
-                        'Your username or password is wrong. Please try again',
+                    message:'Your username or password is wrong. Please try again',
                 })
             }
 

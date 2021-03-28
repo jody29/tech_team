@@ -30,7 +30,7 @@ db.initialize(
             let loggedIn = loggedUser.toString()
             dbObject
                 .collection('users')
-                .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
+                .findOne({ _id: mongo.ObjectId(loggedIn) })
                 .then((results) => {
                     res.render('pages/profile', {
                         data: results,
