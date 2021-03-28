@@ -25,17 +25,13 @@ db.initialize(dbName, (dbObject) => {
                 .collection('chats')
                 .findOne({ chatNumber: id })
             let otherUserId
-            console.log("jaja, daar is die dan:", chat.users)
-            console.log("Lekker loggen!!", req.session.loggedInUser)
+            
             const showUsername = () => {
                 if (chat.users[0] == req.session.loggedInUser) {
                     otherUserId = chat.users[1] == user._id ? chat.users[0] : chat.users[1]
-                   
-                    console.log("1", otherUserId)
                     return
                 } else {
                     otherUserId = chat.users[0] == user._id ? chat.users[1] : chat.users[0]
-                    console.log("2", otherUserId)
                     return
                 }
                 

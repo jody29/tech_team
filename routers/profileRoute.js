@@ -28,16 +28,10 @@ db.initialize(
         router.get('/profile', auth, (req, res) => {
             let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
-            console.log('logged in user:')
-            console.log(loggedIn)
-
             dbObject
                 .collection('users')
                 .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
                 .then((results) => {
-                    // results.image = results.image.image.buffer
-                    console.log(results)
-                    
                     res.render('pages/profile', {
                         data: results,
                         title: 'Profile',

@@ -38,7 +38,6 @@ db.initialize(
                                 foundProfiles.push(pullProfile)
                             }
 
-                            // console.log(userChat)
                         }
 
                         // This piece of code was sponsored by Jonah Meijers
@@ -64,9 +63,6 @@ db.initialize(
                         const allChats = await Promise.all(userChat)
 
                         chats = allChats
-
-                        console.log(chats)
-                        console.log(foundProfiles)
 
                         res.render('pages/saved_matches', {
                             data: foundProfiles,

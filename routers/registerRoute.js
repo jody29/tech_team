@@ -52,23 +52,12 @@ db.initialize(
         router.post(
             '/newProfileSubmit', upload.single('myfile'), 
             (req, res) => {
-                 
-                // dbObject.collection('test').insertOne(finalImg, (err, result) => {
-                //      console.log(result)
-                //     if (err) return console.log(err)
-                //     console.log('saved to database')
-                //     res.redirect('/')  
-                //     })
-               
-                // Getting user profile
                 let userProfile = req.body
                 
                 let pass1 = userProfile.Password
                 let pass2 = userProfile.PasswordCheck
-                console.log(pass1)
-                console.log(pass2)
+                
                 if (pass1 !== pass2) {
-                    console.log('incorrect password');
                     res.render('pages/register', { message: "passwords do not match"});
                 } else {
                 delete userProfile.PasswordCheck
@@ -77,9 +66,7 @@ db.initialize(
                     saltRounds
                 )
                 req.body.Password = passwordHash
-                console.log(userProfile)
-
-
+                
                 // calculate age with get age npm package
                 let Age = getAge(userProfile.Birthday)
                 userProfile['Age'] = Age
@@ -90,7 +77,7 @@ db.initialize(
                 // Replace music with renderable spotify objects
                 const loopSongs = async (inputQuery) => {
                     userProfile.FavSongs = await spotAPI.inputLoop(inputQuery)
-                    console.log(userProfile)
+                  
                     const p = dbObject
                         .collection('users')
                         .insertOne(userProfile)

@@ -21,7 +21,6 @@ db.initialize(dbName, (dbObject) => {
             .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
             .then((profile) => {
                 let favGenres = profile.FavGenres
-                console.log(profile)
 
                 return dbObject
                     .collection('users')

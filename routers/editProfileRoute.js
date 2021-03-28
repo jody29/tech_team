@@ -25,15 +25,12 @@ let activeuserID
 db.initialize(dbName, (dbObject) => {
     router.get('/editprofile', auth, (req, res) => {
         async function retrieveProfile() {
-            console.log('pulling profile now')
             // function is searching for profiles based on the username of one of the database objects. This needs to be replaced.
             const pulledProfile = await dbObject.collection('users').findOne({
                 _id: mongo.ObjectId(req.session.loggedInUser),
             })
-            console.log(pulledProfile)
             // set active user to update properly. This needs to be implimented with the session feature
             activeuserID = pulledProfile._id
-            console.log(activeuserID)
             res.render('pages/edit_profile.ejs', { data: pulledProfile })
         }
         retrieveProfile()
@@ -45,22 +42,16 @@ db.initialize(dbName, (dbObject) => {
         const p = await dbObject
             .collection('users')
             .deleteOne({ _id: mongo.ObjectId(activeuserID) })
-        console.log('an account is being deleted')
         res.redirect('/')
     })
 
 
     router.post("/saveAccount", upload.single('myfile'), (req, res) => {
-        console.log("post recieved")
-
-        console.log(req.body)
             // this var is the newly enterd data
         let loadingProfile = req.body;
-        console.log(loadingProfile);
             // age gets calculated
         let Age = getAge(loadingProfile.Birthday);
         loadingProfile.Age = Age
-
         loadingProfile.FavGenres = loadingProfile.FavGenres.map(name => name.toLowerCase());
 
         async function updateUser(newData) {
@@ -68,36 +59,34 @@ db.initialize(dbName, (dbObject) => {
                 let updatedSongs = loadingProfile.FavSongs
                 // Drag songs through spotify API
                 loadingProfile.FavSongs = await spotAPI.inputLoop(updatedSongs);
-                console.log(loadingProfile)
+                
                 // getting the old profile
                 const activeUser = await dbObject
                         .collection('users')
                         .findOne({
                             _id: mongo.ObjectId(activeuserID)
                         })
-                console.log(activeUser);
-                console.log("account wordt geupdate");
+                
                 // Profile will get updated with the new data.
                 const p = await dbObject.collection('users').updateOne({ _id: mongo.ObjectId(activeuserID) }, { $set: newData });
-                console.log("pulling profile now")
                 // Pulling profile again to check
                 const pulledProfile = await dbObject
                     .collection('users')
                     .findOne({
                         _id: mongo.ObjectId(activeuserID) 
                     })
-                    console.log(pulledProfile);
+                    
                 res.render("pages/profile.ejs", ({ data: pulledProfile, title:'profile'}));
             }
-            if (req.file == undefined) {
-                console.log('Er is geen nieuwe foto toegevoegd')
-                async function noImageupdate() {
-                    const pulledProfile = await dbObject
-                        .collection('users')
-                        .findOne({
-                            _id: mongo.ObjectId(req.session.loggedInUser)
-                        })
-                    console.log(pulledProfile);
+        if (req.file == undefined) {
+            
+            async function noImageupdate() {
+                const pulledProfile = await dbObject
+                    .collection('users')
+                    .findOne({
+                        _id: mongo.ObjectId(req.session.loggedInUser)
+                    })
+                    
                 // set active user to update properly. This needs to be implimented with the session feature
                     activeuserImage = pulledProfile.image
                     loadingProfile.image = activeuserImage
