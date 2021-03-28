@@ -84,6 +84,7 @@ db.initialize(
                 let Age = getAge(userProfile.Birthday)
                 userProfile['Age'] = Age
                 userProfile['LikedProfiles'] = [];
+                userProfile['MatchedProfiles'] = [];
 
                 let userSongs = userProfile.FavSongs
                 // Replace music with renderable spotify objects

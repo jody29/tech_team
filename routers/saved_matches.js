@@ -22,7 +22,7 @@ db.initialize(
                 .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
                 .then((results) => {
                     let matches = results.MatchedProfiles
-                    // console.log(results.LikedProfiles)
+                    
                     let user = results
                     let foundProfiles = []
                     let userChat = []
