@@ -11,7 +11,12 @@
         </header>
 
         <main>
-            <div id="profileImage"></div>
+            <div id="profileImage">
+                <img
+                    src="data:image/<%=data.image.contentType%>;base64,<%=data.image.image.toString('base64')%>"
+                    alt=""
+                />
+            </div>
             <article>
                 <section id="profileCard">
                     <form method="POST" action="/savedmatches?_method=DELETE">

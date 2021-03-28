@@ -24,10 +24,16 @@ main {
 
 main div#profileImage {
     height: 300px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    z-index: 0;
+}
+main div#profileImage img {
+    object-fit: cover;
+    width: 100%;
 }
 
 main article {
@@ -37,6 +43,7 @@ main article {
     background: #fff;
     display: flex;
     flex-direction: column;
+    z-index: 100;
 }
 
 /*---------------------------- section 1 ---------------------------*/

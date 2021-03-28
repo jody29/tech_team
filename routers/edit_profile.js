@@ -49,28 +49,19 @@ db.initialize(dbName, (dbObject) => {
         res.redirect('/')
     })
 
-    router.post('/saveAccount', (req, res) => {
-        console.log('post recieved')
-        // this var is the newly enterd data
-        let loadingProfile = req.body
-        console.log(loadingProfile)
-        // age gets calculated
-        let Age = getAge(loadingProfile.Birthday)
+
+    router.post("/saveAccount", upload.single('myfile'), (req, res) => {
+        console.log("post recieved")
+
+        console.log(req.body)
+            // this var is the newly enterd data
+        let loadingProfile = req.body;
+        console.log(loadingProfile);
+            // age gets calculated
+        let Age = getAge(loadingProfile.Birthday);
         loadingProfile.Age = Age
 
-
-        router.post("/saveAccount", upload.single('myfile'), (req, res) => {
-            console.log("post recieved")
-
-
-            // this var is the newly enterd data
-            let loadingProfile = req.body;
-            console.log(loadingProfile);
-            // age gets calculated
-            let Age = getAge(loadingProfile.Birthday);
-            loadingProfile.Age = Age
-
-            async function updateUser(newData) {
+        async function updateUser(newData) {
 
                 let updatedSongs = loadingProfile.FavSongs
                 // Drag songs through spotify API
@@ -97,7 +88,7 @@ db.initialize(dbName, (dbObject) => {
                 res.render("pages/profile.ejs", ({ data: pulledProfile, title:'profile'}));
             }
             if (req.file == undefined) {
-            
+                console.log('Er is geen nieuwe foto toegevoegd')
                 async function noImageupdate() {
                     const pulledProfile = await dbObject
                         .collection('users')
@@ -127,11 +118,11 @@ db.initialize(dbName, (dbObject) => {
             updateUser(loadingProfile)
             }
             
-        })
+        }),
         
     (err) => {
         throw err
     }
-})
+    })
 
 module.exports = router
