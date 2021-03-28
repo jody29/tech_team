@@ -18,6 +18,8 @@ body {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
     position: relative;
     padding: 0 0 6em 0;
 }
@@ -29,7 +31,7 @@ main div#profileImage {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    z-index: 0;
+    z-index: -1;
 }
 main div#profileImage img {
     object-fit: cover;
@@ -43,7 +45,6 @@ main article {
     background: #fff;
     display: flex;
     flex-direction: column;
-    z-index: 100;
 }
 
 /*---------------------------- section 1 ---------------------------*/
