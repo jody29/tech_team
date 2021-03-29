@@ -69,3 +69,7 @@ main > ul li form input[type='submit'] {
     border-radius: 50px;
     padding: 0.75em 1em;
 }
+
+main > p {
+    text-align: center;
+}

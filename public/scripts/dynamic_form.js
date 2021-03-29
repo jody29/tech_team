@@ -57,9 +57,9 @@ const confirmDeletemessage = () => {
         'Are you sure you want to delete your account? It will be gone forever and be unretrievable'
     )
     if (delBoolean == true) {
-        console.log('account wordt verwijdert')
+        
         window.location.href = '/deleteAccount'
-    } else console.log('toch maar niet')
+    } else console.log('request canceld')
 }
 
 /* Eventlistners */

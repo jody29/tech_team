@@ -10,11 +10,14 @@
   </header>
   <main>
     <ul>
+
+      
+  
       <% for (let i=0; i < data.length; i++) {%>
         
       <li>
         <a href="/profile/<%= data[i]._id%>">
-          <img src="<%= data[i].imgSource %>" />
+          <img src="data:image/<%=data[i].image.contentType%>;base64,<%=data[i].image.image.toString('base64')%>" />
           <div>
             <h2><%= data[i].Firstname %> <%= data[i].Lastname %></h2>
             <p>Age: <%= data[i].Age %></p>

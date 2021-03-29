@@ -6,13 +6,13 @@ purple: #484692
 green: #52C9C2
  */
 
- html {
-     overflow: hidden;
- }
+html {
+    overflow: hidden;
+}
 
 #chatPage header {
     background-color: transparent;
-    height: 15vh;
+    height: 11.5vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,24 +23,33 @@ green: #52C9C2
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateY(0.5em);
 }
 
 #chatPage header a img {
-    height: 2.5em;
-    width: 2.5em;
+    height: 3.5em;
+    width: 3.5em;
     background-color: gray;
     border-radius: 50%;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.15em;
 }
 
 #chatPage header a {
     width: 3em;
 }
-
+#chatPage header a:first-of-type {
+    width: auto;
+    color: #ffffff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background-image: linear-gradient(to bottom right, #908ede, #484692);
+    border-radius: 15px;
+    font-size: 0.85em;
+}
 #chatPage header a p {
     width: 10em;
     text-align: center;
+    font-weight: 400;
+    font-size: 1.45em;
 }
 
 #chatPage form {
@@ -48,8 +57,8 @@ green: #52C9C2
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 1em 0.5em 2em;
-    background-color: white;
+    padding: 0.5em 0.5em 2em;
+    background-color: #eee;
 }
 
 #chatPage form fieldset {
@@ -86,14 +95,15 @@ green: #52C9C2
     width: 100%;
     margin-bottom: 1em;
     position: relative;
-    padding: 2em 1em;
+    padding: 1em;
     scrollbar-color: none;
+    background-color: #eee;
 }
 
 .messageField {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 74vh;
     overflow-y: scroll;
 }
 
@@ -103,14 +113,13 @@ green: #52C9C2
     align-items: flex-end;
 }
 
-
 .outgoing p {
-    background-color: #52C9C2;
+    background-color: #52c9c2;
     padding: 1em;
     color: white;
     width: fit-content;
     max-width: 50%;
-    margin: .5em 0 1.5em;
+    margin: 0.5em 0 1.5em;
     border-radius: 1em 1em 0 1em;
 }
 
@@ -124,7 +133,6 @@ green: #52C9C2
     width: fit-content;
     max-width: 50%;
     padding: 1em;
-    margin: .5em 0 1.5em;
+    margin: 0.5em 0 1.5em;
     border-radius: 1em 1em 1em 0;
-
 }

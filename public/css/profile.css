@@ -18,13 +18,38 @@ body {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
     position: relative;
     padding: 0 0 6em 0;
 }
 
+main > a:first-of-type {
+    width: auto;
+    color: #ffffff;
+    padding: 0.5em 1.25em;
+    text-decoration: none;
+    background-image: linear-gradient(to bottom right, #908ede, #484692);
+    border-radius: 15px;
+    font-size: 0.85em;
+    display: block;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+}
+
 main div#profileImage {
-    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F7%2F7c%2FProfile_avatar_placeholder_large.png&f=1&nofb=1');
     height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: -1;
+}
+main div#profileImage img {
+    object-fit: cover;
+    width: 100%;
 }
 
 main article {
@@ -50,7 +75,7 @@ main article section#profileCard form button {
     border-radius: 5px;
     padding: 0.25em 0.75em;
     border: 2px solid #484692;
-    width: 70%;
+    width: 75%;
     margin: 0 auto 0.75em auto;
     font-size: 1.25em;
 }

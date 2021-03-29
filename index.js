@@ -11,6 +11,7 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const PORT = process.env.PORT || 8000
 const server = require('http').Server(app)
+const multer = require('multer');
 
 module.exports = {
     server,
@@ -40,21 +41,20 @@ require('./websocket.js')
 
 // Set Routers
 const rateLimitRoute = require('./routers/rateLimitRoute')
-const mainRoute = require('./routers/mainRoute')
-const regRoute = require('./routers/register_route')
-const savedMatchesRoute = require('./routers/saved_matches')
+const regRoute = require('./routers/registerRoute')
+const savedMatchesRoute = require('./routers/savedMatchesRoute')
 const chatRoute = require('./routers/chatRoute')
 const loginRoute = require('./routers/loginRoute')
 const logOutRoute = require('./routers/logOutRoute')
 const dislikeRoute = require('./routers/dislikeRoute')
 const likeRoute = require('./routers/LikeRoute')
-const editProfileRoute = require('./routers/edit_profile')
+const editProfileRoute = require('./routers/editProfileRoute')
 const profileRoute = require('./routers/profileRoute')
-const findMatchRoute = require('./routers/find_match')
+const findMatchRoute = require('./routers/findMatchRoute')
+
 
 // require('./websocket')
 app.use('/', rateLimitRoute)
-app.use('/', mainRoute)
 app.use('/', savedMatchesRoute)
 app.use('/', chatRoute)
 app.use('/', loginRoute)
@@ -65,6 +65,7 @@ app.use('/', regRoute)
 app.use('/', editProfileRoute)
 app.use('/', profileRoute)
 app.use('/', findMatchRoute)
+
 
 // Error
 app.use((req, res, next) => {

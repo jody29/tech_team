@@ -6,7 +6,11 @@ const session = require('express-session')
 const mongo = require('mongodb')
 const multer = require('multer')
 const getAge = require('get-age')
-const upload = multer({ dest: 'images/profile' })
+
+const upload = multer({ dest: './public/images/profile' })
+const fs = require('fs')
+const auth = require('../authentication/auth')
+
 
 // Database variables
 
@@ -21,15 +25,12 @@ router.use(bodyParser.json())
 db.initialize(
     dbName,
     (dbObject) => {
-        router.get('/profile', (req, res) => {
+        router.get('/profile', auth, (req, res) => {
             let loggedUser = req.session.loggedInUser
             let loggedIn = loggedUser.toString()
-            console.log('logged in user:')
-            console.log(loggedIn)
-
             dbObject
                 .collection('users')
-                .findOne({ _id: mongo.ObjectId(loggedIn) }) //id van 'ingelogde persoon'
+                .findOne({ _id: mongo.ObjectId(loggedIn) })
                 .then((results) => {
                     res.render('pages/profile', {
                         data: results,

@@ -11,7 +11,13 @@
         </header>
 
         <main>
-            <div id="profileImage"></div>
+            <a href="/savedmatches">Back</a>
+            <div id="profileImage">
+                <img
+                    src="data:image/<%=data.image.contentType%>;base64,<%=data.image.image.toString('base64')%>"
+                    alt=""
+                />
+            </div>
             <article>
                 <section id="profileCard">
                     <form method="POST" action="/savedmatches?_method=DELETE">
@@ -20,7 +26,9 @@
                             type="hidden"
                             name="userId"
                         />
-                        <button type="submit" class="remove">Remove</button>
+                        <button type="submit" class="remove">
+                            Remove from matches
+                        </button>
                     </form>
                     <h1><%= data.Firstname %> <%= data.Lastname %></h1>
                     <h2><span>Gender:</span> <%= data.Gender %></h2>
