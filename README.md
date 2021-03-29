@@ -11,7 +11,7 @@ For Blok-Tech we have to create a feauture for a matching-webapp. We learn to wo
 
 
 ### The Application
-
+Sometimes your friends do not like the same music as you do. That means they do not enjoy the same concerts/festivals. You want to go to these events, but you know your friends won't have a good time. You do not want to bother your friends, so you are looking for people that will go with you and have a good time!
 
 ## :computer: How to install
 Before you start, make sure you have Git, npm and Node.js installed on your computer.</br>
@@ -26,10 +26,7 @@ $ npm install
 ```
 3. Create a database with MongoDB Atlas. This link will help you do it: https://docs.atlas.mongodb.com/getting-started/ </br>
 4. In your **database collection** you should make documents like this:</br>  
-``` js
-_id: objectId(" "), <-- this one will be there automatically
-<HERE COMES TEH DATABASE STRUCTURE>
-```
+![Mongo_Team_Tekengebied 1](https://user-images.githubusercontent.com/66092262/112736664-af89ca80-8f54-11eb-9edf-84a03b012dbe.png)
 
 5. Create a ``.env`` file in the root of the folder. Place the following code in the ``.env`` file
 ```
@@ -41,11 +38,10 @@ APIKEY = <Here comes your API key>
 
 And then you are good to go! :thumbsup: </br>
 
-![Mongo_Team_Tekengebied 1](https://user-images.githubusercontent.com/66092262/112736664-af89ca80-8f54-11eb-9edf-84a03b012dbe.png)
-
 
 ## 🌐 Deploying   
-
+We deployed our web-application with [Heroku](https://id.heroku.com/login).   
+You can see our result here: [https://music-matches.herokuapp.com/](https://music-matches.herokuapp.com/)
 
 ## :page_facing_up: License
 MIT license - 2021 
