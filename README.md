@@ -1,10 +1,16 @@
+![GitHub](https://img.shields.io/github/license/jody29/tech_team)
+![node-current](https://img.shields.io/node/v/npm)
+![npm](https://img.shields.io/npm/v/npm)
+![GitHub last commit](https://img.shields.io/github/last-commit/jody29/tech_team)
+![GitHub language count](https://img.shields.io/github/languages/count/jody29/tech_team)
+
 # :iphone: Matching-app feature
 ## :musical_note: Description
 For Blok-Tech we have to create a feauture for a matching-webapp. We learn to work with Git/GitHub, Node.js, Express, EJS & Mongodb Atlas.
 
 
 
-### The feature
+### The Application
 
 
 ## :computer: How to install

@@ -4,7 +4,8 @@
   "description": "team 1 blok tech 2021",
   "main": "index.js",
   "scripts": {
-    "test": "node test"
+    "test": "node test",
+    "web": "node index.js"
   },
   "repository": {
     "type": "git",
