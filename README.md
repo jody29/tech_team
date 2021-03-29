@@ -41,6 +41,8 @@ APIKEY = <Here comes your API key>
 
 And then you are good to go! :thumbsup: </br>
 
+![Mongo_Team_Tekengebied 1](https://user-images.githubusercontent.com/66092262/112736664-af89ca80-8f54-11eb-9edf-84a03b012dbe.png)
+
 
 ## 🌐 Deploying   
 
