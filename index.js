@@ -9,7 +9,7 @@ const app = express()
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const path = require('path')
-const PORT = process.env.PORT || 8000
+const PORT = 8000
 const server = require('http').Server(app)
 const multer = require('multer');
 

@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient
 
-const dbConnectionUrl = process.env.M_URL
+const dbConnectionUrl = 'mongodb+srv://team_music:Rt1l4xdsBJqubpi6@musicmatch.pzvvt.mongodb.net/Musicmatch?retryWrites=true&w=majority'
 let connection
 const initialize = (dbName, successCallback, failureCallback) => {
     if (connection) {

@@ -2,8 +2,8 @@ const Spotify = require('node-spotify-api')
 require('dotenv').config()
 // Running this code localy requires the spotify secret to be put in as a sting and NOT as a refrence
 const spotify = new Spotify({
-    id: 'ae37c903c1ed41439ba773eb8670e39c',
-    secret: process.env.APIKEY,
+    id: 'a6f4938fdb1e433a9d81cf11446a94b2',
+    secret: process.env.M_APIKEY,
 })
 
 // Function takes input strings and converts them to objects
